@@ -62,6 +62,16 @@ class RedesignTests(unittest.TestCase):
             self.assertTrue(all('noopener' in a.get('rel', '')
                                 for a in links if a.get('target') == '_blank'))
 
+    def test_tag_manager_installed_once_on_every_page(self):
+        for name in ('index.html', '404.html'):
+            source = (ROOT / name).read_text(encoding='utf-8')
+            head, body = source.split('</head>')
+            self.assertEqual(source.count("'GTM-5KD9B98P'"), 1, name)
+            self.assertIn('<script id="gtm-loader">', head)
+            self.assertIn('track.js" defer></script>', head)
+            self.assertIn('googletagmanager.com/ns.html?id=GTM-5KD9B98P', body)
+        self.assertTrue((ROOT / 'scripts/track.js').is_file())
+
     def test_existing_metadata_and_inline_tracking_scripts_are_preserved(self):
         old_head, new_head = OLD.split('</head>')[0], NEW.split('</head>')[0]
         for tag in ('title',):
@@ -123,6 +133,7 @@ class RedesignTests(unittest.TestCase):
     def test_no_change_outside_scoped_section_head_and_footer(self):
         def normalize(source):
             source = source.replace('นวดรีดเส้น','นวดเน้นเฉพาะจุด')
+            source = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', source, flags=re.S)
             source = re.sub(r'  <section id="menu"[^>]*>.*?  </section>', 'SERVICES', source, flags=re.S)
             source = re.sub(r'  <section id="photos"[^>]*>.*?  </section>', 'PHOTOS', source, flags=re.S)
             source = re.sub(r'  <section id="reviews"[^>]*>.*?  </section>', 'REVIEWS', source, flags=re.S)

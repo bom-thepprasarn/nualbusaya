@@ -49,6 +49,7 @@ class ReviewsTests(unittest.TestCase):
     def test_only_reviews_and_requested_line_asset_changed(self):
         def normalize(s):
             s = s.replace('นวดรีดเส้น','นวดเน้นเฉพาะจุด')
+            s = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', s, flags=re.S)
             s = re.sub(r'  <section id="reviews".*?  </section>', 'REVIEWS', s, flags=re.S)
             s = re.sub(r'<link rel="stylesheet" href="styles/reviews.css">\s*', '', s)
             s = re.sub(r'<script src="scripts/reviews.js" defer></script>\s*', '', s)

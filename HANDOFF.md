@@ -23,6 +23,8 @@ After changing approved review data, run `python tools/render_reviews.py` to upd
 ```powershell
 python -m unittest discover -s tests -p test_*.py -v
 node tests/test_outcall_runtime.cjs
+node tests/test_track_runtime.cjs
+node --check scripts/track.js
 node --check scripts/reviews.js
 node --check scripts/outcall.js
 python -m http.server 8766 --bind 127.0.0.1
@@ -38,5 +40,11 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Google review rating/count require future **manual** re-verification. Update the date honestly; do not call them live/automatically updating.
 - Do not rewrite customer quotes when renaming the site's own service labels.
 - Google Business Profile still showed the older github.io website link when inspected; this task did not change GBP, Google Ads, DNS or billing. Maps listing address/pin was read, not modified.
-- Existing source contains no GA/GTM/Ads tracking tag; no account-side conversion setup was inspected or modified. Core Web Vitals field data has not been measured.
+- Core Web Vitals field data has not been measured.
+
+## Measurement (added 15 Nov 2026)
+
+- Google Tag Manager container **GTM-5KD9B98P** is installed in the `<head>` (`<script id="gtm-loader">`, kept off the plain `<script>` tag so the promotion-script regression test still sees the promotion first) and as a `<noscript>` iframe after `<body>`, on `index.html` and `404.html`.
+- `scripts/track.js` pushes `{event: "contact_click", contact_method, link_url, link_section}` on clicks. Methods: `call` (`tel:`), `line` (`line.me`), `directions` (`/maps/dir/` or a Maps link whose text contains “นำทาง”), `map` (other Maps links such as reviews). No personal data is pushed.
+- All tag logic (GA4 tag, GA4 `contact_click` event, Google Ads conversions for call/LINE/directions, Conversion Linker) lives in GTM, not in this repo. Change tags there and publish a new container version. If you add a new contact link, keep its `href` pattern recognisable by `classify()` or extend `classify()` and `tests/test_track_runtime.cjs`.
 - Historical marketing/account context belongs in the separate marketing repository. Do not copy billing, account or back-office data into this public website source.
