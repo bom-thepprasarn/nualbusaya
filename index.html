@@ -166,6 +166,14 @@ footer a{color:var(--brown)}
 .rv-head small{display:block;color:var(--muted);font-size:.8rem}
 .rv p{margin:0;font-size:.95rem;color:var(--ink);display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
 .rv-attr{color:var(--muted);font-size:.8rem;margin-top:14px}
+
+/* gallery */
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gal-grid figure{margin:0;position:relative;border-radius:12px;overflow:hidden;background:var(--sage-soft);aspect-ratio:1/1}
+.gal-grid img{width:100%;height:100%;object-fit:cover}
+.gal-grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 8px 6px;font-size:.72rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.gal-grid figcaption a{color:#fff;text-decoration:none}
+@media (max-width:720px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -314,6 +322,16 @@ footer a{color:var(--brown)}
     </div>
   </section>
 
+  <section id="gallery" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>บรรยากาศร้าน<span class="en">Photos on Google Maps</span></h2>
+      </div>
+      <div class="gal-grid" id="gal-grid"></div>
+      <p class="rv-attr">รูปจาก Google Maps เครดิตตามชื่อผู้ถ่ายในแต่ละรูป</p>
+    </div>
+  </section>
+
   <section id="location">
     <div class="wrap">
       <div class="section-head">
@@ -384,7 +402,25 @@ footer a{color:var(--brown)}
     try {
       var lib = await google.maps.importLibrary("places");
       var place = new lib.Place({ id: PLACE_ID, requestedLanguage: "th" });
-      await place.fetchFields({ fields: ["rating", "userRatingCount", "reviews", "googleMapsURI"] });
+      await place.fetchFields({ fields: ["rating", "userRatingCount", "reviews", "googleMapsURI", "photos"] });
+
+      var photos = (place.photos || []).slice(0, 6);
+      if (photos.length) {
+        var gal = document.getElementById("gal-grid");
+        photos.forEach(function (p) {
+          var fig = el("figure");
+          fig.appendChild(el("img", { src: p.getURI({ maxWidth: 600 }), alt: "รูปร้านนวลบุษยาจาก Google Maps", loading: "lazy" }));
+          var who = (p.authorAttributions || [])[0];
+          if (who && who.displayName) {
+            var cap = el("figcaption");
+            cap.appendChild(who.uri ? el("a", { href: who.uri, target: "_blank", rel: "noopener" }, "ภาพโดย " + who.displayName)
+                                    : el("span", {}, "ภาพโดย " + who.displayName));
+            fig.appendChild(cap);
+          }
+          gal.appendChild(fig);
+        });
+        document.getElementById("gallery").hidden = false;
+      }
 
       if (place.rating) {
         document.getElementById("rv-score").textContent = place.rating.toFixed(1);
