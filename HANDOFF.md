@@ -1,6 +1,6 @@
 # Nualbusaya — handoff to Claude
 
-Updated 15 November 2026 (Asia/Bangkok). Live site: https://nualbusaya.com/ . Repository: `bom-thepprasarn/nualbusaya`, branch `main`, static GitHub Pages; `.nojekyll` is present. The owner has explicitly authorized pushing these changes and deploying them, and will review the real domain.
+Updated 16 November 2026 (Asia/Bangkok). Live site: https://nualbusaya.com/ . Repository: `bom-thepprasarn/nualbusaya`, branch `main`, static GitHub Pages; `.nojekyll` is present. The owner has explicitly authorized pushing these changes and deploying them, and will review the real domain.
 
 ## Latest requested implementation
 
@@ -48,3 +48,9 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - `scripts/track.js` pushes `{event: "contact_click", contact_method, link_url, link_section}` on clicks. Methods: `call` (`tel:`), `line` (`line.me`), `directions` (`/maps/dir/` or a Maps link whose text contains “นำทาง”), `map` (other Maps links such as reviews). No personal data is pushed.
 - All tag logic (GA4 tag, GA4 `contact_click` event, Google Ads conversions for call/LINE/directions, Conversion Linker) lives in GTM, not in this repo. Change tags there and publish a new container version. If you add a new contact link, keep its `href` pattern recognisable by `classify()` or extend `classify()` and `tests/test_track_runtime.cjs`.
 - Historical marketing/account context belongs in the separate marketing repository. Do not copy billing, account or back-office data into this public website source.
+
+## Data Studio dashboard — continue on another workstation
+
+- Read [docs/dashboard-handoff.md](docs/dashboard-handoff.md) for the saved report links, completed work, exact outstanding steps and verification limits.
+- The native report is saved in Google Data Studio; its editable source is not stored in GitHub. GA4 is connected; Google Ads connection and final design/QA are unfinished.
+- GTM version 2 was published successfully; [docs/measurement-setup.md](docs/measurement-setup.md) records tags, triggers, runtime tests and remaining end-to-end checks.
