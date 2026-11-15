@@ -1,5 +1,5 @@
 /* Scoped wellness design: the site's other sections and tracking remain intact. */
-.wellness-services {
+:root {
   --wellness-ivory: #fbf7f0;
   --wellness-paper: #fffdf8;
   --wellness-plum: #62445d;
@@ -7,6 +7,8 @@
   --wellness-muted: #75656d;
   --wellness-gold: #ad8b55;
   --wellness-border: #e8dcd5;
+}
+.wellness-services {
   padding-block: clamp(40px, 6vw, 80px);
   background: var(--wellness-ivory);
   border-block: 1px solid var(--wellness-border);

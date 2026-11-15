@@ -1,0 +1,67 @@
+/* Google Reviews summary, sharing the service section's wellness palette. */
+.wellness-reviews { background:var(--wellness-ivory);padding-block:clamp(40px,6vw,72px); }
+.review-summary-card { display:grid;grid-template-columns:1.35fr 1fr;align-items:center;gap:48px;padding:clamp(28px,4.5vw,54px);border:1px solid var(--wellness-border);border-radius:24px;background:var(--wellness-paper);box-shadow:0 8px 30px rgb(73 50 69 / 4%); }
+.review-eyebrow { display:flex;align-items:center;gap:12px;margin:0 0 16px;color:var(--wellness-plum);font-size:.7rem;letter-spacing:.15em;font-weight:600; }
+.review-eyebrow::before { content:"";width:28px;height:1px;background:var(--wellness-gold); }
+.review-summary-copy h2 { color:var(--wellness-plum-dark);font-size:clamp(1.65rem,3vw,2.35rem);line-height:1.6; }
+.review-intro { max-width:370px;margin:14px 0 26px;color:var(--wellness-muted);font-size:.95rem;line-height:1.8; }
+.review-google-cta { display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:50px;padding:13px 20px;border:1px solid var(--wellness-plum);border-radius:10px;background:var(--wellness-plum);color:#fff;text-decoration:none;font-size:.9rem;font-weight:500;transition:background 180ms ease,transform 180ms ease; }
+.review-google-cta svg { width:18px;height:18px;flex:none; }
+.review-google-cta:hover { background:var(--wellness-plum-dark); }
+.review-google-cta:focus-visible { outline:3px solid var(--wellness-plum);outline-offset:4px; }
+.review-summary-panel { min-width:0;padding:12px 0 12px 40px;text-align:center;border-left:1px solid var(--wellness-border); }
+.review-score-line { display:flex;align-items:baseline;justify-content:center;gap:10px; }
+.wellness-reviews .rv-score { color:var(--wellness-plum-dark);font:500 clamp(4rem,7vw,5.1rem)/1.2 "Noto Serif Thai",Georgia,serif;font-variant-numeric:tabular-nums;letter-spacing:-.04em; }
+.review-denominator { color:var(--wellness-muted);font-size:1.1rem; }
+.wellness-reviews .review-gold-stars { display:flex;justify-content:center;gap:5px;margin:14px 0 12px;color:#aa8243; }
+.review-gold-stars svg { display:block;width:26px;height:26px;fill:currentColor; }
+.review-star-empty { fill:#e6dcd0; }
+.review-star-fill { fill:#aa8243; }
+.review-count { margin:0 0 4px;color:var(--wellness-plum-dark);font-weight:500;font-size:.95rem; }
+.review-source { margin:0;color:var(--wellness-muted);font-size:.85rem; }
+.review-checked { margin:12px 0 0;color:var(--wellness-muted);font-size:.75rem; }
+.review-neutral svg { width:54px;height:54px;margin:0 auto 12px;color:var(--wellness-gold); }
+.review-neutral p { color:var(--wellness-plum-dark);font-size:1.1rem;margin:0 0 4px; }
+.review-neutral span { color:var(--wellness-muted);font-size:.9rem; }
+.wellness-reviews [hidden] { display:none !important; }
+.wellness-reviews .rv-grid:empty { display:none; }
+.wellness-reviews .rv-grid:not(:empty) { margin-top:24px; }
+.wellness-reviews .curated-review-grid { display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:2px;padding:2px 2px 12px;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#b7a0ae transparent; }
+.wellness-reviews .curated-review-grid:focus-visible { outline:3px solid var(--wellness-plum);outline-offset:4px; }
+.curated-review-grid .curated-review-card { flex:0 0 calc((100% - 20px)/2);scroll-snap-align:start; }
+.review-carousel-controls { display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:26px; }
+.review-carousel-controls p { margin:0;color:var(--wellness-muted);font-size:.83rem; }
+.review-carousel-buttons { display:flex;gap:10px; }
+.review-carousel-buttons button { display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border:1px solid #d6c7cf;border-radius:50%;background:var(--wellness-paper);color:var(--wellness-plum);cursor:pointer; }
+.review-carousel-buttons svg { width:20px;height:20px; }
+.review-carousel-buttons button:hover:not(:disabled) { background:#eee4eb;border-color:var(--wellness-plum); }
+.review-carousel-buttons button:disabled { opacity:.4;cursor:default; }
+.review-carousel-buttons button:focus-visible { outline:3px solid var(--wellness-plum);outline-offset:3px; }
+.curated-review-card { display:flex;flex-direction:column;min-width:0;padding:26px 24px;background:var(--wellness-paper);border:1px solid var(--wellness-border);border-radius:18px;box-shadow:0 3px 16px rgb(73 50 69 / 3%); }
+.curated-review-author { display:flex;align-items:center;gap:12px;min-height:48px; }
+.review-initials { display:flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;border-radius:50%;background:#eee4eb;color:var(--wellness-plum);font-size:.9rem;font-weight:600; }
+.curated-review-author h3 { min-width:0;margin:0;color:var(--wellness-plum-dark);font:600 .9rem/1.6 "Noto Sans Thai",sans-serif;overflow-wrap:anywhere; }
+.review-card-stars { display:flex;gap:3px;margin:18px 0 14px;color:#aa8243; }
+.review-card-stars svg { width:17px;height:17px; }
+.curated-review-card blockquote { margin:0 0 20px;color:#51434d;font-size:.95rem;line-height:1.9; }
+.curated-review-card blockquote p { margin:0; }
+.curated-review-author + blockquote { margin-top:18px; }
+.review-excerpt-note { margin:auto 0 8px;color:var(--wellness-muted);font-size:.75rem; }
+.review-original-link { display:inline-flex;align-items:center;gap:6px;align-self:flex-start;min-height:44px;color:var(--wellness-plum);font-size:.8rem;text-underline-offset:4px; }
+.review-original-link:focus-visible { outline:3px solid var(--wellness-plum);outline-offset:3px; }
+.curated-review-disclosure { margin:20px 0 0;text-align:center;color:var(--wellness-muted);font-size:.78rem;line-height:1.8; }
+@media (max-width:720px) {
+  .wellness-reviews .curated-review-grid { gap:16px; }
+  .curated-review-grid .curated-review-card { flex-basis:96%; }
+  .curated-review-card { padding:24px; }
+  .review-summary-card { grid-template-columns:minmax(0,1fr);gap:28px;padding:28px 22px; }
+  .review-summary-panel { grid-row:2;border-left:0;border-top:1px solid var(--wellness-border);padding:26px 0 0; }
+  .review-summary-copy { text-align:center; }
+  .review-eyebrow { justify-content:center; }
+  .review-intro { margin:12px auto 22px; }
+  .review-google-cta { width:100%; }
+  #reviews { scroll-margin-top:180px; }
+}
+@media (max-width:360px) { .review-summary-card { padding:24px 16px; }.review-google-cta { gap:8px;padding-inline:12px;font-size:.83rem; } }
+@media (prefers-reduced-motion:no-preference) { .review-summary-card.is-entering,.curated-review-card.is-entering { animation:wellness-enter 450ms ease-out both; } }
+@media (prefers-reduced-motion:reduce) { .review-summary-card,.curated-review-card { animation:none; }.review-google-cta { transition:none; } }

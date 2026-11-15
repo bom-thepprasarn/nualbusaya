@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "businessName": "นวลบุษยา Nualbusaya",
+  "googleMapsUrl": "https://maps.google.com/?cid=15830764363691679197",
+  "overallRating": 5,
+  "totalReviewCount": 26,
+  "lastManuallyVerified": "2026-11-15",
+  "timezone": "Asia/Bangkok",
+  "verificationMethod": "Manually read the public Google Maps listing and each review; no API",
+  "approvedByOwner": true,
+  "approvedOn": "2026-11-15",
+  "reviews": [
+    {
+      "id": "nakharin-suksrikaew",
+      "reviewerName": "นครินทร์ สุขศรีแก้ว",
+      "initials": "นส",
+      "rating": 5,
+      "text": "หมอนวดนวดดีมากก สะอาด แจ้งหมอได้เลยต้องการหนักเบา ที่จอดรถสะดวกสบาย",
+      "isExcerpt": true,
+      "originalReviewUrl": null,
+      "sourceUrl": "https://maps.google.com/?cid=15830764363691679197",
+      "originalLinkStatus": "Google Maps share dialog did not expose a retrievable permalink; business profile link used",
+      "lastManuallyVerified": "2026-11-15"
+    },
+    {
+      "id": "bbenjaporn-suntornpatima",
+      "reviewerName": "Bbenjaporn Suntornpatima",
+      "initials": "BS",
+      "rating": 5,
+      "text": "นวดดีมากค่ะ นวดครั้งแรกฟินมากก คุณป้าใจดี ร้านสะอาด❤️😍",
+      "isExcerpt": true,
+      "originalReviewUrl": null,
+      "sourceUrl": "https://maps.google.com/?cid=15830764363691679197",
+      "originalLinkStatus": "Direct review permalink not available in the inspected interface; business profile link used",
+      "lastManuallyVerified": "2026-11-15"
+    },
+    {
+      "id": "athiphat-khongluea",
+      "reviewerName": "อธิภัทร คงเหลือ",
+      "initials": "อค",
+      "rating": 5,
+      "text": "ดีมากครับ นวดไทยรีดเส้น เบาตัวสบายมากครับ",
+      "isExcerpt": false,
+      "originalReviewUrl": null,
+      "sourceUrl": "https://maps.google.com/?cid=15830764363691679197",
+      "originalLinkStatus": "Direct review permalink not available in the inspected interface; business profile link used",
+      "lastManuallyVerified": "2026-11-15"
+    },
+    {
+      "id": "jenkittika-cola",
+      "reviewerName": "Jenkittika ' cola",
+      "initials": "JC",
+      "rating": null,
+      "text": "นวดสบายมากๆ ทุกครั้งที่มาสอบ จะมานวดตลอดเลยค่ะ  แกพูดเพราะบริการดีมากๆค่ะ ราคากันเอฃสุดๆ",
+      "isExcerpt": false,
+      "originalReviewUrl": null,
+      "sourceUrl": "https://maps.google.com/?cid=15830764363691679197",
+      "originalLinkStatus": "Business profile link supplied in the task; no direct review permalink available",
+      "lastManuallyVerified": null,
+      "provenance": "Exact wording and attribution supplied by the owner in chat; independent review search did not return this entry, so no individual star rating is displayed",
+      "approvedByOwner": true,
+      "approvedOn": "2026-11-15"
+    }
+  ]
+}
