@@ -152,6 +152,20 @@ footer a{color:var(--brown)}
 @media (max-width:720px){.dock{display:flex}footer{padding-bottom:110px}}
 @media (min-width:721px){footer{padding-bottom:32px}}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+
+/* reviews */
+.rv-summary{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-bottom:22px}
+.rv-score{font:600 2.6rem/1 "Noto Serif Thai",serif;color:var(--brown)}
+.stars{color:#e0a526;letter-spacing:1px;font-size:1.05rem}
+.rv-count{color:var(--muted);font-size:.92rem}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.rv{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.rv-head{display:flex;align-items:center;gap:10px}
+.rv-head img{width:36px;height:36px;border-radius:50%;flex:none;background:var(--sage-soft)}
+.rv-head a{font-weight:600;text-decoration:none;color:var(--ink)}
+.rv-head small{display:block;color:var(--muted);font-size:.8rem}
+.rv p{margin:0;font-size:.95rem;color:var(--ink);display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.rv-attr{color:var(--muted);font-size:.8rem;margin-top:14px}
 </style>
 </head>
 <body>
@@ -165,6 +179,7 @@ footer a{color:var(--brown)}
     <nav aria-label="เมนูหลัก">
       <a href="#menu">บริการและราคา</a>
       <a href="#about">เกี่ยวกับร้าน</a>
+      <a href="#reviews">รีวิว</a>
       <a href="#location">แผนที่</a>
     </nav>
     <a class="btn btn-primary" href="tel:+66967781585" style="padding:9px 16px;font-size:.95rem">
@@ -281,6 +296,24 @@ footer a{color:var(--brown)}
     </div>
   </section>
 
+  <section id="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>รีวิวจากลูกค้า<span class="en">Google Reviews</span></h2>
+      </div>
+      <div class="rv-summary">
+        <span class="rv-score" id="rv-score">5.0</span>
+        <div>
+          <div class="stars" id="rv-stars" aria-hidden="true">★★★★★</div>
+          <div class="rv-count" id="rv-count">คะแนนรีวิวบน Google</div>
+        </div>
+        <a class="btn btn-ghost" id="rv-link" href="https://maps.google.com/?cid=15830764363691679197" target="_blank" rel="noopener">อ่านรีวิวทั้งหมดบน Google</a>
+      </div>
+      <div class="rv-grid" id="rv-grid" aria-live="polite"></div>
+      <p class="rv-attr" id="rv-attr" hidden>รีวิวและคะแนนจาก Google Maps อัปเดตอัตโนมัติ</p>
+    </div>
+  </section>
+
   <section id="location">
     <div class="wrap">
       <div class="section-head">
@@ -329,5 +362,69 @@ footer a{color:var(--brown)}
   <a class="btn btn-ghost" href="https://maps.google.com/?cid=15830764363691679197" target="_blank" rel="noopener">นำทาง</a>
 </div>
 
+<script src="config.js"></script>
+<script>
+(function () {
+  var PLACE_ID = "ChIJRevO9eJ7HTER3V3BVFAssts";
+  var cfg = window.NUAL_CONFIG || {};
+  if (!cfg.mapsApiKey) return; // no key: keep the static summary and link
+
+  function stars(n) {
+    var r = Math.round(n || 0);
+    return "★★★★★".slice(0, r) + "☆☆☆☆☆".slice(0, 5 - r);
+  }
+  function el(tag, attrs, text) {
+    var e = document.createElement(tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  window.__nualReviews = async function () {
+    try {
+      var lib = await google.maps.importLibrary("places");
+      var place = new lib.Place({ id: PLACE_ID, requestedLanguage: "th" });
+      await place.fetchFields({ fields: ["rating", "userRatingCount", "reviews", "googleMapsURI"] });
+
+      if (place.rating) {
+        document.getElementById("rv-score").textContent = place.rating.toFixed(1);
+        document.getElementById("rv-stars").textContent = stars(place.rating);
+      }
+      if (place.userRatingCount) {
+        document.getElementById("rv-count").textContent = "จาก " + place.userRatingCount + " รีวิวบน Google";
+      }
+      if (place.googleMapsURI) document.getElementById("rv-link").href = place.googleMapsURI;
+
+      var grid = document.getElementById("rv-grid");
+      (place.reviews || []).slice(0, 5).forEach(function (rv) {
+        var text = rv.text || rv.originalText || "";
+        if (!text) return;
+        var a = rv.authorAttribution || {};
+        var card = el("article", { "class": "rv" });
+        var head = el("div", { "class": "rv-head" });
+        if (a.photoURI) head.appendChild(el("img", { src: a.photoURI, alt: "", loading: "lazy", referrerpolicy: "no-referrer" }));
+        var who = el("div");
+        var name = a.uri ? el("a", { href: a.uri, target: "_blank", rel: "noopener" }, a.displayName || "ผู้ใช้ Google")
+                         : el("span", {}, a.displayName || "ผู้ใช้ Google");
+        who.appendChild(name);
+        who.appendChild(el("small", {}, stars(rv.rating) + "  " + (rv.relativePublishTimeDescription || "")));
+        head.appendChild(who);
+        card.appendChild(head);
+        card.appendChild(el("p", {}, text));
+        grid.appendChild(card);
+      });
+      document.getElementById("rv-attr").hidden = false;
+    } catch (e) {
+      console.warn("Google reviews unavailable", e);
+    }
+  };
+
+  var s = document.createElement("script");
+  s.src = "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(cfg.mapsApiKey) +
+          "&v=weekly&loading=async&language=th&region=TH&callback=__nualReviews";
+  s.async = true;
+  document.head.appendChild(s);
+})();
+</script>
 </body>
 </html>
