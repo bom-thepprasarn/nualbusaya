@@ -1,0 +1,266 @@
+/* Scoped wellness design: the site's other sections and tracking remain intact. */
+.wellness-services {
+  --wellness-ivory: #fbf7f0;
+  --wellness-paper: #fffdf8;
+  --wellness-plum: #62445d;
+  --wellness-plum-dark: #493245;
+  --wellness-muted: #75656d;
+  --wellness-gold: #ad8b55;
+  --wellness-border: #e8dcd5;
+  padding-block: clamp(40px, 6vw, 80px);
+  background: var(--wellness-ivory);
+  border-block: 1px solid var(--wellness-border);
+  color: #372d34;
+}
+.wellness-services .services-heading {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+.wellness-services .services-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 14px;
+  color: var(--wellness-plum);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .13em;
+}
+.wellness-services .services-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--wellness-gold);
+}
+.wellness-services h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  color: var(--wellness-plum-dark);
+  line-height: 1.5;
+}
+.wellness-services .services-subtitle {
+  display: block;
+  margin-top: 4px;
+  color: var(--wellness-muted);
+  font: 400 1rem/1.6 "Noto Serif Thai", Georgia, serif;
+}
+.wellness-services .services-intro {
+  margin: 16px 0 0;
+  font-size: .95rem;
+  color: var(--wellness-muted);
+}
+.wellness-services .services-welcome {
+  padding: 24px 26px;
+  border-left: 2px solid var(--wellness-gold);
+  background: #f1e9e7;
+  border-radius: 0 16px 16px 0;
+}
+.wellness-services .services-welcome > p {
+  margin: 12px 0 0;
+  color: #695a63;
+  font-size: .85rem;
+}
+.wellness-services .services-welcome .services-start {
+  margin: 0;
+  color: var(--wellness-plum);
+  font-size: .9rem;
+}
+.wellness-services .services-start strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 2rem;
+  line-height: 1.6;
+  font-weight: 600;
+}
+.wellness-services .services-start strong span {
+  font-size: .9rem;
+  font-weight: 500;
+}
+.wellness-services .services-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 18px;
+}
+.wellness-services .services-contacts a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  font-size: .82rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+.wellness-services .services-contacts svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+.wellness-services .services-contact-line {
+  padding: 10px 16px;
+  background: var(--wellness-plum);
+  color: #fff;
+  border-radius: 9px;
+}
+.wellness-services .services-contact-line:hover { background: var(--wellness-plum-dark); }
+.wellness-services .services-contact-phone { color: var(--wellness-plum-dark); }
+.wellness-services .services-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--wellness-border);
+  margin-bottom: 24px;
+}
+.wellness-services .services-meta p { margin: 0; font-size: .8rem; color: var(--wellness-muted); }
+.wellness-services .services-meta p:first-child { color: var(--wellness-plum-dark); font-weight: 600; }
+.wellness-services .services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.wellness-services .service-card {
+  min-width: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--wellness-border);
+  background: var(--wellness-paper);
+  box-shadow: 0 3px 14px rgb(73 50 69 / 3%);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  scroll-margin-top: 92px;
+}
+.wellness-services .service-card:last-child { grid-column: 2; }
+.wellness-services .service-card:focus-within { border-color: var(--wellness-plum); }
+.wellness-services .service-visual { position: relative; overflow: hidden; background: #eee2dd; }
+.wellness-services .service-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 18 / 11;
+  object-fit: cover;
+}
+.wellness-services .service-number {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  color: var(--wellness-plum);
+  font-size: .7rem;
+  letter-spacing: .1em;
+}
+.wellness-services .service-content { display: flex; flex: 1; flex-direction: column; padding: 22px; }
+.wellness-services .service-card h3 {
+  color: var(--wellness-plum-dark);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.wellness-services .service-card h3 .en {
+  margin-top: 4px;
+  min-height: 36px;
+  color: var(--wellness-muted);
+  font-size: .74rem;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: .01em;
+}
+.wellness-services .service-card .service-description {
+  margin: 12px 0 22px;
+  color: var(--wellness-muted);
+  font-size: .86rem;
+  line-height: 1.7;
+  min-height: 50px;
+}
+.wellness-services .service-prices {
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 0;
+  align-items: end;
+  padding: 16px 0;
+  border-top: 1px solid var(--wellness-border);
+  border-bottom: 1px solid var(--wellness-border);
+  margin-top: auto;
+}
+.wellness-services .service-prices li {
+  padding: 0 4px;
+  text-align: center;
+  border-radius: 0;
+  background: transparent;
+  line-height: 1.6;
+  min-width: 0;
+}
+.wellness-services .service-prices li + li { border-left: 1px solid var(--wellness-border); }
+.wellness-services .service-prices small { color: var(--wellness-muted); font-size: .75rem; }
+.wellness-services .price-amount { display: flex; align-items: baseline; justify-content: center; gap: 3px; white-space: nowrap; }
+.wellness-services .price-amount > span { font-size: .65rem; color: var(--wellness-muted); }
+.wellness-services .service-prices b { color: var(--wellness-plum-dark); font-size: 1.15rem; font-weight: 600; line-height: 1.6; }
+.wellness-services .service-prices .price-start b { color: var(--wellness-plum); font-size: 1.9rem; }
+.wellness-services .price-start small { font-weight: 600; color: var(--wellness-plum); }
+.wellness-services .service-actions { display: grid; grid-template-columns: minmax(0, 1fr) 48px; gap: 10px; margin-top: 20px; }
+.wellness-services .service-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  font-size: .85rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.wellness-services .service-actions svg { width: 18px; height: 18px; flex: none; }
+.wellness-services .service-book { background: var(--wellness-plum); color: #fff; gap: 12px; }
+.wellness-services .service-book:hover { background: var(--wellness-plum-dark); }
+.wellness-services .service-call { color: var(--wellness-plum); border: 1px solid #d4c4cd; background: transparent; }
+.wellness-services .service-call:hover { background: #f1e9ee; }
+.wellness-services a:focus-visible, .wellness-services button:focus-visible { outline: 3px solid var(--wellness-plum); outline-offset: 3px; }
+.wellness-services .services-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--wellness-border); text-align: center; }
+.wellness-services .services-footer .note { margin: 0 0 14px; color: var(--wellness-muted); }
+.wellness-services .services-footer .offer-reopen { color: var(--wellness-plum-dark); border-color: #d7c5b1; background: #f3eade; min-height: 48px; }
+.social-line { color: #087c38; }
+.social-line img { width: 32px; height: 32px; object-fit: contain; }
+@media (hover: hover) and (pointer: fine) {
+  .wellness-services .service-card:hover { transform: translateY(-4px); border-color: #c6acb6; box-shadow: 0 12px 30px rgb(73 50 69 / 9%); }
+}
+@media (max-width: 1000px) {
+  .wellness-services .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wellness-services .service-card:last-child { grid-column: auto; }
+  .wellness-services .services-heading { gap: 28px; }
+}
+@media (max-width: 720px) {
+  #menu, .wellness-services .service-card { scroll-margin-top: 180px; }
+  .wellness-services .services-heading { grid-template-columns: 1fr; gap: 24px; }
+  .wellness-services .services-welcome { padding: 18px 20px; }
+  .wellness-services .services-intro br { display: none; }
+}
+@media (max-width: 600px) {
+  .wellness-services .services-intro { display: none; }
+  .wellness-services .services-heading { gap: 18px; margin-bottom: 20px; }
+  .wellness-services .services-welcome { padding: 14px 16px; }
+  .wellness-services .services-welcome > p { margin-top: 8px; font-size: .8rem; }
+  .wellness-services .services-start strong { display: inline; font-size: 1.8rem; }
+  .wellness-services .services-contacts { gap: 8px 12px; margin-top: 12px; }
+  .wellness-services .services-contacts a { font-size: .76rem; }
+  .wellness-services .services-contact-line { padding-inline: 12px; }
+  .wellness-services .services-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .wellness-services .service-visual img { aspect-ratio: 2 / 1; }
+  .wellness-services .service-content { padding: 20px; }
+  .wellness-services .service-card h3 .en { min-height: 0; }
+  .wellness-services .service-card .service-description { min-height: 0; margin: 12px 0 20px; }
+  .wellness-services .services-meta { align-items: flex-start; flex-direction: column; }
+  .wellness-services .service-prices b { font-size: 1.25rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wellness-services .service-card.is-entering { animation: wellness-enter 450ms ease-out both; }
+  @keyframes wellness-enter { from { opacity: .35; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wellness-services .service-card { transition: none; animation: none; }
+  .wellness-services .service-card:hover { transform: none; }
+}
