@@ -43,12 +43,11 @@ class ReviewsTests(unittest.TestCase):
         self.assertNotIn('fetchFields', HTML)
         self.assertNotIn('photoURI', HTML)
         schema = r'<script type="application/ld\+json">(.*?)</script>'
-        self.assertEqual(re.search(schema, HTML, re.S)[1], re.search(schema, BASE, re.S)[1].replace('นวดรีดเส้น','นวดเน้นเฉพาะจุด'))
+        self.assertEqual(re.search(schema, HTML, re.S)[1], re.search(schema, BASE, re.S)[1])
         self.assertNotIn('aggregateRating', re.search(schema, HTML, re.S)[1])
 
     def test_only_reviews_and_requested_line_asset_changed(self):
         def normalize(s):
-            s = s.replace('นวดรีดเส้น','นวดเน้นเฉพาะจุด')
             s = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', s, flags=re.S)
             s = re.sub(r'  <section id="reviews".*?  </section>', 'REVIEWS', s, flags=re.S)
             s = re.sub(r'<link rel="stylesheet" href="styles/reviews.css">\s*', '', s)

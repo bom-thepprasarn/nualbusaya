@@ -38,7 +38,6 @@ class RedesignTests(unittest.TestCase):
         for key, prices in EXPECTED.items():
             self.assertEqual(re.findall(r'<b>([\d,]+)</b>', after[key]), prices)
             desc = re.search(r'<p>(.*?)</p>', before[key], re.S)[1]
-            desc = desc.replace('นวดรีดเส้น', 'นวดเน้นเฉพาะจุด')
             self.assertIn('<p class="service-description">' + desc + '</p>', after[key])
             for minutes in (60, 90, 120):
                 self.assertIn(str(minutes) + ' นาที', after[key])
@@ -87,7 +86,7 @@ class RedesignTests(unittest.TestCase):
             if tag == 'script' and 'src' in attrs and attrs['src'] != 'config.js':
                 self.assertIn((tag, attrs), Elements(NEW).elements)
         schema_pattern = r'<script type="application/ld\+json">(.*?)</script>'
-        self.assertEqual(json.loads(re.search(schema_pattern, OLD, re.S)[1].replace('นวดรีดเส้น','นวดเน้นเฉพาะจุด')),
+        self.assertEqual(json.loads(re.search(schema_pattern, OLD, re.S)[1]),
                          json.loads(re.search(schema_pattern, NEW, re.S)[1]))
         old_links = [a for t, a in Elements(old_head).elements if t == 'link']
         new_links = [a for t, a in Elements(new_head).elements if t == 'link']
@@ -112,7 +111,7 @@ class RedesignTests(unittest.TestCase):
         for tag, attrs in Elements(NEW).elements:
             src = attrs.get('src') or (attrs.get('href') if tag == 'link' else None)
             if src and not src.startswith(('http:', 'https:', 'tel:', '#', 'data:')):
-                self.assertTrue((ROOT / src).is_file(), src)
+                self.assertTrue((ROOT / src.lstrip('/')).is_file(), src)
         for key in EXPECTED:
             path = ROOT / 'img/services' / (key + '.svg')
             tree = ET.parse(path)
@@ -132,7 +131,6 @@ class RedesignTests(unittest.TestCase):
 
     def test_no_change_outside_scoped_section_head_and_footer(self):
         def normalize(source):
-            source = source.replace('นวดรีดเส้น','นวดเน้นเฉพาะจุด')
             source = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', source, flags=re.S)
             source = re.sub(r'  <section id="menu"[^>]*>.*?  </section>', 'SERVICES', source, flags=re.S)
             source = re.sub(r'  <section id="photos"[^>]*>.*?  </section>', 'PHOTOS', source, flags=re.S)

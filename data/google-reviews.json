@@ -39,12 +39,13 @@
       "reviewerName": "อธิภัทร คงเหลือ",
       "initials": "อค",
       "rating": 5,
-      "text": "ดีมากครับ นวดไทยรีดเส้น เบาตัวสบายมากครับ",
-      "isExcerpt": false,
+      "text": "ดีมากครับ … เบาตัวสบายมากครับ",
+      "isExcerpt": true,
       "originalReviewUrl": null,
       "sourceUrl": "https://maps.google.com/?cid=15830764363691679197",
       "originalLinkStatus": "Direct review permalink not available in the inspected interface; business profile link used",
-      "lastManuallyVerified": "2026-11-15"
+      "lastManuallyVerified": "2026-11-15",
+      "excerptNote": "Owner instruction 2026-11-16: the term for the former service name must not appear on the site; the phrase was omitted with an ellipsis, remaining wording is verbatim"
     },
     {
       "id": "jenkittika-cola",

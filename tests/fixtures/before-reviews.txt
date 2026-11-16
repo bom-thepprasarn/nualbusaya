@@ -7,8 +7,8 @@
 <meta name="description" content="นวลบุษยา ร้านนวดลำลูกกา บึงคำพร้อย ในโรงแรม Luka House นวดไทยเริ่ม 300 บาท/60 นาที หมอนวดมีใบรับรอง เปิดทุกวัน 10:00–21:00 น. จอดรถฟรี โทร 096-778-1585">
 <link rel="canonical" href="https://nualbusaya.com/">
 <meta property="og:url" content="https://nualbusaya.com/">
-<link rel="icon" type="image/png" href="img/icon.png">
-<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/favicon.png">
+<link rel="apple-touch-icon" sizes="256x256" href="/favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="นวลบุษยา ร้านนวดลำลูกกา | นวดไทยเริ่ม 300 บาท/60 นาที">
 <meta property="og:description" content="นวดไทย นวดเท้า นวดน้ำมัน และนวดอโรม่า ที่ Luka House บึงคำพร้อย เปิดทุกวัน 10:00–21:00 น. ไม่มีวันหยุดประจำสัปดาห์ มีที่จอดรถฟรี">
@@ -246,7 +246,7 @@
           },
           {
             "@type": "OfferCatalog",
-            "name": "นวดรีดเส้น",
+            "name": "นวดเน้นเฉพาะจุด",
             "url": "https://nualbusaya.com/#deep-tissue",
             "itemListElement": [
               {
@@ -256,9 +256,9 @@
                 "url": "https://nualbusaya.com/#deep-tissue",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "นวดรีดเส้น 60 นาที",
+                  "name": "นวดเน้นเฉพาะจุด 60 นาที",
                   "alternateName": "Deep Tissue Massage",
-                  "serviceType": "นวดรีดเส้น",
+                  "serviceType": "นวดเน้นเฉพาะจุด",
                   "provider": {
                     "@id": "https://nualbusaya.com/#business"
                   }
@@ -271,9 +271,9 @@
                 "url": "https://nualbusaya.com/#deep-tissue",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "นวดรีดเส้น 90 นาที",
+                  "name": "นวดเน้นเฉพาะจุด 90 นาที",
                   "alternateName": "Deep Tissue Massage",
-                  "serviceType": "นวดรีดเส้น",
+                  "serviceType": "นวดเน้นเฉพาะจุด",
                   "provider": {
                     "@id": "https://nualbusaya.com/#business"
                   }
@@ -286,9 +286,9 @@
                 "url": "https://nualbusaya.com/#deep-tissue",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "นวดรีดเส้น 120 นาที",
+                  "name": "นวดเน้นเฉพาะจุด 120 นาที",
                   "alternateName": "Deep Tissue Massage",
-                  "serviceType": "นวดรีดเส้น",
+                  "serviceType": "นวดเน้นเฉพาะจุด",
                   "provider": {
                     "@id": "https://nualbusaya.com/#business"
                   }
@@ -581,7 +581,11 @@ footer a{color:var(--brown)}
 
 /* mobile action bar */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,253,249,.96);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
-.dock a{flex:1;justify-content:center;padding:12px 8px;font-size:.95rem}
+.dock a{flex:1;min-width:0;justify-content:center;padding:12px 8px;font-size:.95rem;min-height:48px}
+.dock a:first-child{flex:1.7}
+.visit-hours{color:var(--sage);margin:12px 0 6px}
+.visit-arrival{font-size:.9rem;color:var(--muted);margin:14px 0 0}
+.visit-arrival a{text-underline-offset:3px}
 @media (max-width:720px){.dock{display:flex}footer{padding-bottom:110px}}
 @media (min-width:721px){footer{padding-bottom:32px}}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
@@ -666,9 +670,8 @@ footer a{color:var(--brown)}
       <a href="#faq">คำถามที่พบบ่อย</a>
       <a href="#location">แผนที่</a>
     </nav>
-    <a class="btn btn-primary" href="tel:+66967781585" style="padding:9px 16px;font-size:.95rem">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
-      โทร
+    <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.9320524,100.7484876" target="_blank" rel="noopener" style="padding:9px 16px;font-size:.95rem" aria-label="นำทางมาร้านนวลบุษยาใน Google Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>นำทางมาร้าน
     </a>
   </div>
 </header>
@@ -681,9 +684,11 @@ footer a{color:var(--brown)}
         <h1>นวลบุษยา<span class="hero-service">ร้านนวดลำลูกกา บึงคำพร้อย</span><span class="en" style="font-size:.36em;margin-top:6px">NUALBUSAYA · The Best Relaxation</span></h1>
         <p class="lead">พักผ่อนกับนวดไทย นวดเท้า นวดน้ำมัน และนวดอโรม่า ที่นวลบุษยา ภายในโรงแรมลูก้าเฮาส์ (Luka House) ลำลูกกา</p>
         <p class="parking-callout"><strong>ขับรถเข้ามาจอดภายในโรงแรมลูก้าเฮาส์ได้เลย</strong><br>จอดฟรีสำหรับลูกค้าร้านนวลบุษยา</p>
+        <p class="visit-hours"><strong>เปิดทุกวัน 10:00–21:00 น.</strong> · ไม่มีวันหยุดประจำสัปดาห์</p>
         <p class="starting-price">นวดไทยเริ่มต้น 300 บาท / 60 นาที</p>
         <div class="btns">
-          <a class="btn btn-primary" href="tel:+66967781585">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.9320524,100.7484876" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>นำทางมาร้าน</a>
+          <a class="btn btn-ghost" href="tel:+66967781585">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
             โทร 096-778-1585
           </a>
@@ -691,11 +696,8 @@ footer a{color:var(--brown)}
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-5.9C21.4 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
             สอบถามคิวทาง LINE
           </a>
-          <a class="btn btn-ghost" href="https://maps.google.com/?cid=15830764363691679197" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            นำทาง
-          </a>
         </div>
+        <p class="visit-arrival"><a href="#photos">ดูรูปทางเข้าและจุดสังเกตร้าน</a> · สังเกตป้าย Luka House แล้วขับเข้ามาจอดได้เลย</p>
         <p class="trust-note">นวดเพื่อสุขภาพได้มาตรฐาน · ร้านมีใบอนุญาตจากกระทรวงสาธารณสุข · หมอนวดมีใบรับรอง</p>
       </div>
       <div class="hero-photo">
@@ -790,20 +792,20 @@ footer a{color:var(--brown)}
         </article>
         <article class="item service-card" id="deep-tissue" aria-labelledby="deep-tissue-title">
           <div class="service-visual">
-            <img src="img/services/deep-tissue.svg" alt="ภาพประกอบนวดรีดเส้น" width="720" height="440" loading="lazy" decoding="async">
+            <img src="img/services/deep-tissue.svg" alt="ภาพประกอบนวดเน้นเฉพาะจุด" width="720" height="440" loading="lazy" decoding="async">
             <span class="service-number" aria-hidden="true">04</span>
           </div>
           <div class="service-content">
-            <h3 id="deep-tissue-title">นวดรีดเส้น<span class="en" lang="en">Deep Tissue Massage</span></h3>
-            <p class="service-description">นวดรีดเส้นเพื่อความผ่อนคลาย</p>
-            <ul class="prices service-prices" aria-label="ราคานวดรีดเส้นต่อท่าน หน่วยบาท">
+            <h3 id="deep-tissue-title">นวดเน้นเฉพาะจุด<span class="en" lang="en">Deep Tissue Massage</span></h3>
+            <p class="service-description">นวดเน้นเฉพาะจุดเพื่อความผ่อนคลาย</p>
+            <ul class="prices service-prices" aria-label="ราคานวดเน้นเฉพาะจุดต่อท่าน หน่วยบาท">
               <li class="price-start"><small>60 นาที</small><span class="price-amount"><b>400</b><span>บาท</span></span></li>
               <li><small>90 นาที</small><span class="price-amount"><b>650</b><span>บาท</span></span></li>
               <li><small>120 นาที</small><span class="price-amount"><b>750</b><span>บาท</span></span></li>
             </ul>
             <div class="service-actions">
-              <a class="service-book" href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener" aria-label="สอบถามและจองคิวนวดรีดเส้นทาง LINE">จองคิวทาง LINE<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
-              <a class="service-call" href="tel:+66967781585" aria-label="โทรสอบถามนวดรีดเส้น 096-778-1585" title="โทร 096-778-1585"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></a>
+              <a class="service-book" href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener" aria-label="สอบถามและจองคิวนวดเน้นเฉพาะจุดทาง LINE">จองคิวทาง LINE<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+              <a class="service-call" href="tel:+66967781585" aria-label="โทรสอบถามนวดเน้นเฉพาะจุด 096-778-1585" title="โทร 096-778-1585"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></a>
             </div>
           </div>
         </article>
@@ -964,6 +966,7 @@ footer a{color:var(--brown)}
         <h2>แผนที่และการเดินทาง<span class="en">Location</span></h2>
         <p>ร้านอยู่ภายในโรงแรมลูก้าเฮาส์ (Luka House) ริมซอยเทศบาลลำลูกกา 6</p>
         <p><strong>ขับรถเข้ามาจอดภายในโรงแรมได้เลย จอดฟรีสำหรับลูกค้าร้านนวลบุษยา</strong></p>
+        <p>สังเกตป้าย Luka House ที่ทางเข้า หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา <a href="#photos">ดูรูปทางเข้า</a></p>
       </div>
       <div class="loc-grid">
         <div class="card">
@@ -1001,10 +1004,10 @@ footer a{color:var(--brown)}
   </div>
 </footer>
 
-<div class="dock" aria-label="ติดต่อร้าน">
-  <a class="btn btn-primary" href="tel:+66967781585">โทร</a>
+<div class="dock" aria-label="นำทางและติดต่อร้าน">
+  <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.9320524,100.7484876" target="_blank" rel="noopener">นำทางมาร้าน</a>
+  <a class="btn btn-ghost" href="tel:+66967781585">โทร</a>
   <a class="btn btn-line" href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener">LINE</a>
-  <a class="btn btn-ghost" href="https://maps.google.com/?cid=15830764363691679197" target="_blank" rel="noopener">นำทาง</a>
 </div>
 
 <dialog class="offer-dialog" id="website-offer" aria-labelledby="offer-title" aria-describedby="offer-instruction">
