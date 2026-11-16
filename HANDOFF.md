@@ -61,3 +61,9 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Names, descriptions and prices are read from the service cards in `index.html`. After changing a price or the homepage CSS, rerun the build; `tests/test_pages.py` fails if generated pages are stale or prices disagree.
 - Page copy lives in `COPY` inside `tools/build_pages.py`: relaxation wording only, no health/treatment claims, and never the banned former service term.
 - Homepage links: “ดูรายละเอียด…” in each service card, outcall card link, header “English”, footer service links, and hreflang th/en/x-default.
+
+## Header language dropdown and photos (16 Nov 2026)
+
+- Header language switch is a `<details class="lang-menu">` dropdown with SVG flags (`img/flag-th.svg`, `img/flag-gb.svg`) always paired with a text label (ภาษาไทย / English). Emoji flags are not used because they do not render on Windows. Markup comes from `lang_menu()` in `tools/build_pages.py`; styles live in `styles/services.css` (copied into `styles/site.css` on build); `scripts/lang-menu.js` only closes it on outside click / Escape.
+- `img/luka-house-entrance-sign.jpg` was replaced with the owner's new photo (orange Luka House sign + arrow + shop standee), 900×1200.
+- **Pending:** the photo for “หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา” (`img/shop-entrance-luka-house.jpg`) stays as is. A proposed replacement was declined because its door text showed the banned former service term and its text looked AI-generated (garbled words). Use only a **real** photo of the shop front from the car park; do not publish generated images as real storefront photos.
