@@ -54,3 +54,10 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Read [docs/dashboard-handoff.md](docs/dashboard-handoff.md) for the saved report links, completed work, exact outstanding steps and verification limits.
 - The native report is saved in Google Data Studio; its editable source is not stored in GitHub. GA4 is connected; Google Ads connection and final design/QA are unfinished.
 - GTM version 2 was published successfully; [docs/measurement-setup.md](docs/measurement-setup.md) records tags, triggers, runtime tests and remaining end-to-end checks.
+
+## Service pages and English page (added 16 Nov 2026)
+
+- `/thai-massage/`, `/foot-massage/`, `/head-neck-shoulder/`, `/deep-tissue/`, `/oil-massage/`, `/thai-oil/`, `/aromatherapy/`, `/outcall/` and `/en/` are **generated** by `python tools/build_pages.py`, together with `styles/site.css` (copied from the inline CSS in `index.html`) and `sitemap.xml`. Never hand-edit them.
+- Names, descriptions and prices are read from the service cards in `index.html`. After changing a price or the homepage CSS, rerun the build; `tests/test_pages.py` fails if generated pages are stale or prices disagree.
+- Page copy lives in `COPY` inside `tools/build_pages.py`: relaxation wording only, no health/treatment claims, and never the banned former service term.
+- Homepage links: “ดูรายละเอียด…” in each service card, outcall card link, header “English”, footer service links, and hreflang th/en/x-default.

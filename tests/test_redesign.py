@@ -56,7 +56,9 @@ class RedesignTests(unittest.TestCase):
             self.assertTrue(int(image['width']) > 0 and int(image['height']) > 0)
             links = [a for t, a in elements if t == 'a']
             self.assertEqual({a['href'] for a in links}, {
-                'https://line.me/R/ti/p/@288ojpuq', 'tel:+66967781585'})
+                'https://line.me/R/ti/p/@288ojpuq', 'tel:+66967781585', '/' + key + '/'})
+            self.assertTrue((ROOT / key / 'index.html').is_file(), key)
+            links = [a for a in links if a.get('class') != 'service-more']
             self.assertTrue(all(a.get('aria-label') for a in links))
             self.assertTrue(all('noopener' in a.get('rel', '')
                                 for a in links if a.get('target') == '_blank'))

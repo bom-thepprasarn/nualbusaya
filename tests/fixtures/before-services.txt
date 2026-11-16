@@ -6,6 +6,9 @@
 <title>ร้านนวดลำลูกกา นวลบุษยา | นวดไทยเริ่ม 300 บาท · Luka House</title>
 <meta name="description" content="นวลบุษยา ร้านนวดลำลูกกา บึงคำพร้อย ในโรงแรม Luka House นวดไทยเริ่ม 300 บาท/60 นาที หมอนวดมีใบรับรอง เปิดทุกวัน 10:00–21:00 น. จอดรถฟรี โทร 096-778-1585">
 <link rel="canonical" href="https://nualbusaya.com/">
+<link rel="alternate" hreflang="th" href="https://nualbusaya.com/">
+<link rel="alternate" hreflang="en" href="https://nualbusaya.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://nualbusaya.com/">
 <meta property="og:url" content="https://nualbusaya.com/">
 <link rel="icon" type="image/png" sizes="256x256" href="/favicon.png">
 <link rel="apple-touch-icon" sizes="256x256" href="/favicon.png">
@@ -667,6 +670,7 @@ footer a{color:var(--brown)}
       <a href="#reviews">รีวิว</a>
       <a href="#faq">คำถามที่พบบ่อย</a>
       <a href="#location">แผนที่</a>
+      <a href="/en/" lang="en" hreflang="en">English</a>
     </nav>
     <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.9320524,100.7484876" target="_blank" rel="noopener" style="padding:9px 16px;font-size:.95rem" aria-label="นำทางมาร้านนวลบุษยาใน Google Maps">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>นำทางมาร้าน
@@ -876,6 +880,7 @@ footer a{color:var(--brown)}
 </main>
 
 <footer>
+  <nav class="wrap footer-links" aria-label="บริการทั้งหมด"><a href="/thai-massage/">นวดไทย</a><a href="/foot-massage/">นวดเท้า</a><a href="/head-neck-shoulder/">นวดศีรษะ คอ บ่า ไหล่</a><a href="/deep-tissue/">นวดเน้นเฉพาะจุด</a><a href="/oil-massage/">นวดน้ำมัน</a><a href="/thai-oil/">นวดไทยออย</a><a href="/aromatherapy/">นวดอโรม่า</a><a href="/outcall/">รับนวดนอกสถานที่</a><a href="/en/" lang="en" hreflang="en">English</a></nav>
   <div class="wrap row">
     <div style="display:flex;align-items:center;gap:10px">
       <img src="img/icon.png" alt="" width="32" height="32">

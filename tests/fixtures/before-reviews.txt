@@ -6,6 +6,9 @@
 <title>ร้านนวดลำลูกกา นวลบุษยา | นวดไทยเริ่ม 300 บาท · Luka House</title>
 <meta name="description" content="นวลบุษยา ร้านนวดลำลูกกา บึงคำพร้อย ในโรงแรม Luka House นวดไทยเริ่ม 300 บาท/60 นาที หมอนวดมีใบรับรอง เปิดทุกวัน 10:00–21:00 น. จอดรถฟรี โทร 096-778-1585">
 <link rel="canonical" href="https://nualbusaya.com/">
+<link rel="alternate" hreflang="th" href="https://nualbusaya.com/">
+<link rel="alternate" hreflang="en" href="https://nualbusaya.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://nualbusaya.com/">
 <meta property="og:url" content="https://nualbusaya.com/">
 <link rel="icon" type="image/png" sizes="256x256" href="/favicon.png">
 <link rel="apple-touch-icon" sizes="256x256" href="/favicon.png">
@@ -669,6 +672,7 @@ footer a{color:var(--brown)}
       <a href="#reviews">รีวิว</a>
       <a href="#faq">คำถามที่พบบ่อย</a>
       <a href="#location">แผนที่</a>
+      <a href="/en/" lang="en" hreflang="en">English</a>
     </nav>
     <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.9320524,100.7484876" target="_blank" rel="noopener" style="padding:9px 16px;font-size:.95rem" aria-label="นำทางมาร้านนวลบุษยาใน Google Maps">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>นำทางมาร้าน
@@ -741,6 +745,7 @@ footer a{color:var(--brown)}
           <div class="service-content">
             <h3 id="thai-massage-title">นวดไทย<span class="en" lang="en">Traditional Thai Massage</span></h3>
             <p class="service-description">นวดไทยเพื่อความผ่อนคลาย</p>
+            <a class="service-more" href="/thai-massage/">ดูรายละเอียดนวดไทย</a>
             <ul class="prices service-prices" aria-label="ราคานวดไทยต่อท่าน หน่วยบาท">
               <li class="price-start"><small>60 นาที</small><span class="price-amount"><b>300</b><span>บาท</span></span></li>
               <li><small>90 นาที</small><span class="price-amount"><b>450</b><span>บาท</span></span></li>
@@ -760,6 +765,7 @@ footer a{color:var(--brown)}
           <div class="service-content">
             <h3 id="foot-massage-title">นวดเท้า<span class="en" lang="en">Foot Massage</span></h3>
             <p class="service-description">นวดเท้าเพื่อความผ่อนคลาย</p>
+            <a class="service-more" href="/foot-massage/">ดูรายละเอียดนวดเท้า</a>
             <ul class="prices service-prices" aria-label="ราคานวดเท้าต่อท่าน หน่วยบาท">
               <li class="price-start"><small>60 นาที</small><span class="price-amount"><b>350</b><span>บาท</span></span></li>
               <li><small>90 นาที</small><span class="price-amount"><b>550</b><span>บาท</span></span></li>
@@ -779,6 +785,7 @@ footer a{color:var(--brown)}
           <div class="service-content">
             <h3 id="head-neck-shoulder-title">นวดศีรษะ คอ บ่า ไหล่<span class="en" lang="en">Head, Neck &amp; Shoulder Massage</span></h3>
             <p class="service-description">นวดบริเวณศีรษะ คอ บ่า และไหล่ เพื่อความผ่อนคลาย</p>
+            <a class="service-more" href="/head-neck-shoulder/">ดูรายละเอียดนวดศีรษะ คอ บ่า ไหล่</a>
             <ul class="prices service-prices" aria-label="ราคานวดศีรษะ คอ บ่า ไหล่ต่อท่าน หน่วยบาท">
               <li class="price-start"><small>60 นาที</small><span class="price-amount"><b>400</b><span>บาท</span></span></li>
               <li><small>90 นาที</small><span class="price-amount"><b>650</b><span>บาท</span></span></li>
@@ -798,6 +805,7 @@ footer a{color:var(--brown)}
           <div class="service-content">
             <h3 id="deep-tissue-title">นวดเน้นเฉพาะจุด<span class="en" lang="en">Deep Tissue Massage</span></h3>
             <p class="service-description">นวดเน้นเฉพาะจุดเพื่อความผ่อนคลาย</p>
+            <a class="service-more" href="/deep-tissue/">ดูรายละเอียดนวดเน้นเฉพาะจุด</a>
             <ul class="prices service-prices" aria-label="ราคานวดเน้นเฉพาะจุดต่อท่าน หน่วยบาท">
               <li class="price-start"><small>60 นาที</small><span class="price-amount"><b>400</b><span>บาท</span></span></li>
               <li><small>90 นาที</small><span class="price-amount"><b>650</b><span>บาท</span></span></li>
@@ -817,6 +825,7 @@ footer a{color:var(--brown)}
           <div class="service-content">
             <h3 id="oil-massage-title">นวดน้ำมัน<span class="en" lang="en">Oil Massage</span></h3>
             <p class="service-description">นวดน้ำมันด้วยเทคนิคการนวดแบบสากล</p>
+            <a class="service-more" href="/oil-massage/">ดูรายละเอียดนวดน้ำมัน</a>
             <ul class="prices service-prices" aria-label="ราคานวดน้ำมันต่อท่าน หน่วยบาท">
               <li class="price-start"><small>60 นาที</small><span class="price-amount"><b>400</b><span>บาท</span></span></li>
               <li><small>90 นาที</small><span class="price-amount"><b>650</b><span>บาท</span></span></li>
@@ -836,6 +845,7 @@ footer a{color:var(--brown)}
           <div class="service-content">
             <h3 id="thai-oil-title">นวดไทยออย<span class="en" lang="en">Thai Oil Massage</span></h3>
             <p class="service-description">นวดด้วยน้ำมัน ผสมผสานเทคนิคการนวดสไตล์ไทย</p>
+            <a class="service-more" href="/thai-oil/">ดูรายละเอียดนวดไทยออย</a>
             <ul class="prices service-prices" aria-label="ราคานวดไทยออยต่อท่าน หน่วยบาท">
               <li class="price-start"><small>60 นาที</small><span class="price-amount"><b>400</b><span>บาท</span></span></li>
               <li><small>90 นาที</small><span class="price-amount"><b>650</b><span>บาท</span></span></li>
@@ -855,6 +865,7 @@ footer a{color:var(--brown)}
           <div class="service-content">
             <h3 id="aromatherapy-title">นวดอโรม่า<span class="en" lang="en">Aromatherapy Massage</span></h3>
             <p class="service-description">นวดด้วยน้ำมันอโรม่า เพื่อความผ่อนคลาย</p>
+            <a class="service-more" href="/aromatherapy/">ดูรายละเอียดนวดอโรม่า</a>
             <ul class="prices service-prices" aria-label="ราคานวดอโรม่าต่อท่าน หน่วยบาท">
               <li class="price-start"><small>60 นาที</small><span class="price-amount"><b>500</b><span>บาท</span></span></li>
               <li><small>90 นาที</small><span class="price-amount"><b>750</b><span>บาท</span></span></li>
@@ -990,6 +1001,7 @@ footer a{color:var(--brown)}
 </main>
 
 <footer>
+  <nav class="wrap footer-links" aria-label="บริการทั้งหมด"><a href="/thai-massage/">นวดไทย</a><a href="/foot-massage/">นวดเท้า</a><a href="/head-neck-shoulder/">นวดศีรษะ คอ บ่า ไหล่</a><a href="/deep-tissue/">นวดเน้นเฉพาะจุด</a><a href="/oil-massage/">นวดน้ำมัน</a><a href="/thai-oil/">นวดไทยออย</a><a href="/aromatherapy/">นวดอโรม่า</a><a href="/outcall/">รับนวดนอกสถานที่</a><a href="/en/" lang="en" hreflang="en">English</a></nav>
   <div class="wrap row">
     <div style="display:flex;align-items:center;gap:10px">
       <img src="img/icon.png" alt="" width="32" height="32">

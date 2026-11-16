@@ -266,3 +266,8 @@
   .wellness-services .service-card { transition: none; animation: none; }
   .wellness-services .service-card:hover { transform: none; }
 }
+
+/* links to per-service pages (tools/build_pages.py) */
+.service-more{display:inline-block;margin:-4px 0 12px;font-size:.9rem;color:var(--sage);text-underline-offset:3px}
+.footer-links{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.9rem;padding-bottom:14px}
+.footer-links a{color:var(--muted)}

@@ -8,6 +8,8 @@ Read `HANDOFF.md` before continuing work. Approved, manually curated Google revi
 
 Local preview: `python -m http.server 8766 --bind 127.0.0.1`.
 
+Service pages and `/en/` are generated: run `python tools/build_pages.py` after editing prices or homepage CSS.
+
 Checks:
 
 ```powershell
