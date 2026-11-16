@@ -663,6 +663,7 @@ footer a{color:var(--brown)}
 </style>
 <link rel="stylesheet" href="styles/services.css">
 <script src="scripts/services.js" defer></script>
+<script src="scripts/lang-menu.js" defer></script>
 <link rel="stylesheet" href="styles/reviews.css">
 <script src="scripts/reviews.js" defer></script>
 <link rel="stylesheet" href="styles/outcall.css">
@@ -687,11 +688,19 @@ footer a{color:var(--brown)}
       <a href="#reviews">รีวิว</a>
       <a href="#faq">คำถามที่พบบ่อย</a>
       <a href="#location">แผนที่</a>
-      <a href="/en/" lang="en" hreflang="en">English</a>
     </nav>
+    <div class="header-actions">
+    <details class="lang-menu">
+      <summary aria-label="เปลี่ยนภาษา / Change language"><img src="img/flag-th.svg" alt="" width="20" height="14"><span>TH</span><svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <ul>
+        <li><a href="/" lang="th" hreflang="th" aria-current="true"><img src="img/flag-th.svg" alt="" width="20" height="14">ภาษาไทย</a></li>
+        <li><a href="/en/" lang="en" hreflang="en"><img src="img/flag-gb.svg" alt="" width="20" height="14">English</a></li>
+      </ul>
+    </details>
     <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=13.9320524,100.7484876" target="_blank" rel="noopener" style="padding:9px 16px;font-size:.95rem" aria-label="นำทางมาร้านนวลบุษยาใน Google Maps">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>นำทางมาร้าน
     </a>
+    </div>
   </div>
 </header>
 

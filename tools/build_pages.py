@@ -132,7 +132,26 @@ def site_css():
 .footer-links a{color:var(--muted)}
 .lang-switch{font-size:.9rem;color:var(--muted)}
 """
+    services_css = (ROOT / "styles/services.css").read_text(encoding="utf-8")
+    extra += services_css[services_css.index("/* language dropdown"):]
     (ROOT / "styles/site.css").write_text("/* Generated from index.html by tools/build_pages.py; do not edit by hand. */\n" + css + extra, encoding="utf-8")
+
+
+CARET = '<svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
+
+
+def lang_menu(lang, th_href="/", en_href="/en/", root=""):
+    """Flag + label dropdown; also used for index.html (root="" keeps relative img paths there)."""
+    cur_flag, cur_code = ("th", "TH") if lang == "th" else ("gb", "EN")
+    th_cur = ' aria-current="true"' if lang == "th" else ""
+    en_cur = ' aria-current="true"' if lang == "en" else ""
+    return (f'<details class="lang-menu">\n'
+            f'      <summary aria-label="เปลี่ยนภาษา / Change language"><img src="{root}img/flag-{cur_flag}.svg" alt="" width="20" height="14"><span>{cur_code}</span>{CARET}</summary>\n'
+            f'      <ul>\n'
+            f'        <li><a href="{th_href}" lang="th" hreflang="th"{th_cur}><img src="{root}img/flag-th.svg" alt="" width="20" height="14">ภาษาไทย</a></li>\n'
+            f'        <li><a href="{en_href}" lang="en" hreflang="en"{en_cur}><img src="{root}img/flag-gb.svg" alt="" width="20" height="14">English</a></li>\n'
+            f'      </ul>\n'
+            f'    </details>')
 
 
 ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>'
@@ -156,6 +175,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }})(window,document,'script','dataLayer','{GTM}');</script>
 <script src="/scripts/track.js" defer></script>
 <!-- End Google Tag Manager -->
+<script src="/scripts/lang-menu.js" defer></script>
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{url}">
@@ -185,14 +205,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 """
 
 
-def header(lang):
+def header(lang, path="/"):
     if lang == "th":
-        nav = [("/#menu", "บริการและราคา"), ("/#reviews", "รีวิว"), ("/#faq", "คำถามที่พบบ่อย"), ("/#location", "แผนที่"), ("/en/", "English")]
+        nav = [("/#menu", "บริการและราคา"), ("/#reviews", "รีวิว"), ("/#faq", "คำถามที่พบบ่อย"), ("/#location", "แผนที่")]
         cta, home = "นำทางมาร้าน", "นวลบุษยา หน้าแรก"
+        menu = lang_menu("th", th_href=path, root="/")
     else:
-        nav = [("#services", "Services &amp; prices"), ("#visit", "Visit"), ("#faq", "FAQ"), ("/", "ภาษาไทย")]
+        nav = [("#services", "Services &amp; prices"), ("#visit", "Visit"), ("#faq", "FAQ")]
         cta, home = "Directions", "Nualbusaya home"
-    links = "\n      ".join(f'<a href="{h}"{" lang=\"en\" hreflang=\"en\"" if h == "/en/" else (" lang=\"th\" hreflang=\"th\"" if h == "/" and lang == "en" else "")}>{t}</a>' for h, t in nav)
+        menu = lang_menu("en", root="/")
+    links = "\n      ".join(f'<a href="{h}">{t}</a>' for h, t in nav)
     return f"""<header>
   <div class="wrap bar">
     <a class="brand" href="{'/' if lang == 'th' else '/en/'}" aria-label="{home}">
@@ -202,7 +224,10 @@ def header(lang):
     <nav aria-label="{'เมนูหลัก' if lang == 'th' else 'Main menu'}">
       {links}
     </nav>
+    <div class="header-actions">
+    {menu}
     <a class="btn btn-primary" href="{DIRECTIONS}" target="_blank" rel="noopener" style="padding:9px 16px;font-size:.95rem">{ICON_PIN}{cta}</a>
+    </div>
   </div>
 </header>
 """
@@ -283,7 +308,7 @@ def service_page(s, svc):
              if s["promo"] else "")
     others = "".join(f'<li><a href="/{o["slug"]}/">{o["th"]}</a></li>' for o in svc if o["key"] != s["key"]) + '<li><a href="/outcall/">รับนวดนอกสถานที่</a></li>'
     body = f"""<a class="skip-link" href="#top">ข้ามไปเนื้อหาหลัก</a>
-{header('th')}
+{header('th', path)}
 <main id="top">
   <div class="wrap crumbs"><a href="/">หน้าแรก</a> › <a href="/#menu">บริการและราคา</a> › {s['th']}</div>
   <section class="page-hero">
@@ -348,7 +373,7 @@ def outcall_page(svc):
     ]}
     menu = "".join(f'<li><a href="/{o["slug"]}/">{o["th"]}</a></li>' for o in svc)
     body = f"""<a class="skip-link" href="#top">ข้ามไปเนื้อหาหลัก</a>
-{header('th')}
+{header('th', path)}
 <main id="top">
   <div class="wrap crumbs"><a href="/">หน้าแรก</a> › รับนวดนอกสถานที่</div>
   <section class="page-hero">

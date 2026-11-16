@@ -146,6 +146,7 @@ class RedesignTests(unittest.TestCase):
             source = re.sub(r'\n      // Notify the summary only after an actual Places API response\.\n      window\.NUAL_REVIEW_DATA = .*?;\n      window\.dispatchEvent\(new CustomEvent\("nual:reviews-updated", \{ detail: window\.NUAL_REVIEW_DATA \}\)\);', '', source)
             source = re.sub(r'<link rel="stylesheet" href="styles/services.css">\s*', '', source)
             source = re.sub(r'<script src="scripts/services.js" defer></script>\s*', '', source)
+            source = re.sub(r'<script src="scripts/lang-menu.js" defer></script>\s*', '', source)
             source = re.sub(r'<a class="social-icon social-line".*?</a>',
                 '<a href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener">LINE</a>', source)
             return re.sub(r'\s+', ' ', source).strip()
