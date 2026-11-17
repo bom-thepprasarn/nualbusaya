@@ -194,6 +194,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600&family=Noto+Serif+Thai:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles/site.css">
+<link rel="stylesheet" href="/styles/theme.css">
 <script type="application/ld+json">
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 </script>
@@ -276,9 +277,9 @@ def contact_buttons(lang="th"):
 
 
 VISIT_TH = """<ul class="ticks">
-            <li>ร้านอยู่ภายในโรงแรม Luka House เลขที่ 63/19 ต.บึงคำพร้อย อ.ลำลูกกา ริมซอยเทศบาลลำลูกกา 6</li>
+            <li>ร้านอยู่ภายในโรงแรม Luka House เลขที่ 63/19 ต.บึงคำพร้อย อ.ลำลูกกา</li>
             <li>ขับรถเข้ามาจอดภายในโรงแรมได้เลย จอดฟรีสำหรับลูกค้า</li>
-            <li>เปิดทุกวัน 10:00–21:00 น. ไม่มีวันหยุดประจำสัปดาห์</li>
+            <li>เปิดทุกวัน 10:00–21:00 น.</li>
             <li>หมอนวดประจำร้าน 2 ท่าน แนะนำให้โทรหรือทัก LINE สอบถามคิวก่อนเดินทาง</li>
             <li>ร้านมีใบอนุญาตจากกระทรวงสาธารณสุข หมอนวดมีใบรับรอง</li>
             <li>ชำระเงินด้วยเงินสด โอน หรือพร้อมเพย์</li>
@@ -453,9 +454,9 @@ def english_page(svc):
       <div class="panel">
         <h2>Visit us</h2>
         <ul class="ticks">
-          <li>63/19 inside Luka House Hotel, Bueng Kham Phroi, Lam Luk Ka, Pathum Thani 12150 (Soi Thetsaban Lam Luk Ka 6)</li>
+          <li>63/19 inside Luka House Hotel, Bueng Kham Phroi, Lam Luk Ka, Pathum Thani 12150</li>
           <li>Drive in and park inside the hotel. Parking is free for our customers.</li>
-          <li>Open daily 10:00–21:00, no weekly holiday</li>
+          <li>Open daily 10:00–21:00</li>
           <li>Licensed by the Ministry of Public Health; our therapists are certified</li>
           <li>Payment: cash, bank transfer or PromptPay</li>
         </ul>

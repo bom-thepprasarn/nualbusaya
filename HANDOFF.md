@@ -67,3 +67,10 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Header language switch is a `<details class="lang-menu">` dropdown with SVG flags (`img/flag-th.svg`, `img/flag-gb.svg`) always paired with a text label (ภาษาไทย / English). Emoji flags are not used because they do not render on Windows. Markup comes from `lang_menu()` in `tools/build_pages.py`; styles live in `styles/services.css` (copied into `styles/site.css` on build); `scripts/lang-menu.js` only closes it on outside click / Escape.
 - `img/luka-house-entrance-sign.jpg` was replaced with the owner's new photo (orange Luka House sign + arrow + shop standee), 900×1200.
 - **Pending:** the photo for “หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา” (`img/shop-entrance-luka-house.jpg`) stays as is. A proposed replacement was declined because its door text showed the banned former service term and its text looked AI-generated (garbled words). Use only a **real** photo of the shop front from the car park; do not publish generated images as real storefront photos.
+
+## 17 Nov 2026 — Canva cream / light-blue theme
+- Look follows the owner's Canva template "Spa Website in Cream Light Blue Beige". All visual changes live in `styles/theme.css`, loaded last on every page (homepage `<head>` and `tools/build_pages.py` `head()`). Remove that link to roll back the look. HTML structure, links, prices and tracking hooks are unchanged.
+- The free-parking callout is Luka House orange with a gentle shine/glow; the motion is off under `prefers-reduced-motion`.
+- Copy tidy-up on the owner's request: hero subtitle "ร้านนวดแถวลำลูกกา ต.บึงคำพร้อย", location heading "แผนที่สำหรับเดินทางมาร้าน", soi name removed everywhere (TH + EN), repeated "ไม่มีวันหยุดประจำสัปดาห์" kept only in the FAQ answer about holidays. Customer review text is untouched (verbatim).
+- Not adopted from the template: booking form (no booking system behind it), stock model photos, placeholder text.
+- Service illustration SVGs still carry the old lavender background.

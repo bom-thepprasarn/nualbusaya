@@ -141,6 +141,7 @@ class RedesignTests(unittest.TestCase):
             source = re.sub(r'<link rel="stylesheet" href="styles/reviews.css">\s*', '', source)
             source = re.sub(r'<script src="scripts/reviews.js" defer></script>\s*', '', source)
             source = re.sub(r'<link rel="stylesheet" href="styles/outcall.css">\s*', '', source)
+            source = re.sub(r'<link rel="stylesheet" href="styles/theme.css">\s*', '', source)
             source = re.sub(r'<script src="scripts/outcall.js" defer></script>\s*', '', source)
             source = re.sub(r'<dialog class="offer-dialog" id="outcall-dialog".*?</dialog>', '', source, flags=re.S)
             source = re.sub(r'\n      // Notify the summary only after an actual Places API response\.\n      window\.NUAL_REVIEW_DATA = .*?;\n      window\.dispatchEvent\(new CustomEvent\("nual:reviews-updated", \{ detail: window\.NUAL_REVIEW_DATA \}\)\);', '', source)

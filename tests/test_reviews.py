@@ -53,6 +53,7 @@ class ReviewsTests(unittest.TestCase):
             s = re.sub(r'<link rel="stylesheet" href="styles/reviews.css">\s*', '', s)
             s = re.sub(r'<script src="scripts/reviews.js" defer></script>\s*', '', s)
             s = re.sub(r'<link rel="stylesheet" href="styles/outcall.css">\s*', '', s)
+            s = re.sub(r'<link rel="stylesheet" href="styles/theme.css">\s*', '', s)
             s = re.sub(r'<script src="scripts/outcall.js" defer></script>\s*', '', s)
             s = re.sub(r'<dialog class="offer-dialog" id="outcall-dialog".*?</dialog>', '', s, flags=re.S)
             s = re.sub(r'<aside class="outcall-service".*?</aside>', '', s, flags=re.S)

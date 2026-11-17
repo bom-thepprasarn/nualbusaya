@@ -1,0 +1,124 @@
+/* Theme: cream / light blue / olive, after the owner's Canva template (Nov 2026).
+   Loaded LAST on every page. Visual only: no content, links or tracking hooks change here.
+   Remove the <link> to this file to return to the previous look. */
+:root{
+  --cream:#fdf9ee; --sand:#f2ecdf; --paper:#fffcf5;
+  --charcoal:#3b3732; --charcoal-dark:#2a2723;
+  --olive:#7a6e52; --olive-ink:#fdf9ee;
+  --sky:#add0dc; --sky-soft:#e4eff3; --sky-deep:#9cc3d1;
+
+  /* base site tokens */
+  --bg:var(--cream); --surface:var(--paper); --ink:#3b3732; --muted:#5f584f;
+  --brown:#3b3732; --gold:var(--olive); --sage:var(--charcoal); --sage-soft:var(--sky-soft);
+  --line:#e3dacb; --radius:4px; --shadow:none;
+
+  /* services / reviews tokens */
+  --wellness-ivory:var(--cream); --wellness-paper:var(--paper);
+  --wellness-plum:var(--charcoal); --wellness-plum-dark:var(--charcoal-dark);
+  --wellness-muted:#5f584f; --wellness-gold:var(--olive); --wellness-border:#e3dacb;
+}
+
+body{background:var(--cream);color:var(--ink)}
+h1,h2,h3{font-weight:500;color:var(--charcoal);letter-spacing:-.01em}
+h2{font-size:clamp(1.9rem,3.6vw,2.8rem)}
+.en{color:var(--muted)}
+
+/* header */
+header{background:rgba(253,249,238,.94);border-bottom-color:var(--line)}
+.brand b{color:var(--charcoal)}
+nav a:hover{color:var(--charcoal)}
+
+/* buttons: dark pill like the template's BOOKINGS button; LINE keeps its brand green */
+.btn-primary{background:var(--charcoal);color:var(--cream)}
+.btn-primary:hover{background:var(--charcoal-dark)}
+.btn-ghost{background:transparent;border-color:var(--charcoal);color:var(--charcoal)}
+.btn:hover{box-shadow:none}
+
+/* hero: photo on the left, copy on the right */
+.hero{padding:40px 0 48px}
+.hero-photo{border-radius:0;box-shadow:none;aspect-ratio:4/5}
+@media (min-width:821px){.hero-grid{grid-template-columns:1fr 1.05fr;gap:56px}.hero-grid>.hero-photo{order:-1}}
+.eyebrow{color:var(--olive);letter-spacing:.04em}
+/* free-parking callout: Luka House orange, gentle shine + glow (no fast flashing) */
+.parking-callout{position:relative;overflow:hidden;background:#c9501a;border-left:0;border-radius:4px;color:#fff;padding:14px 18px;font-size:1.02rem}
+.parking-callout strong{color:#fff;font-size:1.08em}
+.parking-callout::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-100%);pointer-events:none}
+@media (prefers-reduced-motion:no-preference){
+  .parking-callout{animation:luka-glow 2.4s ease-in-out infinite}
+  .parking-callout::before{animation:luka-shine 3.2s ease-in-out infinite}
+}
+@keyframes luka-glow{0%,100%{box-shadow:0 0 0 0 rgba(232,105,46,.55)}50%{box-shadow:0 0 0 8px rgba(232,105,46,0)}}
+@keyframes luka-shine{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+.starting-price{background:var(--sand);color:var(--charcoal);border-radius:2px}
+.visit-hours,.trust-note{color:var(--olive)}
+.fact{background:var(--sand);border-color:transparent;border-radius:2px}
+
+/* services: light-blue band, cream cards, table-like price rows */
+.wellness-services{background:var(--sky);border-block:0;color:var(--charcoal)}
+.wellness-services .services-eyebrow{color:var(--charcoal)}
+.wellness-services .services-eyebrow::before{background:var(--charcoal)}
+.wellness-services h2{color:var(--charcoal)}
+.wellness-services .services-subtitle,.wellness-services .services-intro{color:#3f4a4e}
+.wellness-services .services-welcome{background:var(--cream);border-left:0;border-radius:2px}
+.wellness-services .services-welcome>p{color:var(--muted)}
+.wellness-services .services-meta{border-bottom-color:rgba(59,55,50,.25);color:var(--charcoal)}
+.wellness-services .services-contact-line{border-radius:999px}
+.service-card,.wellness-services .item{background:var(--cream);border:0;border-radius:2px;box-shadow:none}
+.service-visual,.service-visual img{border-radius:0}
+.wellness-services .prices li,.service-prices li{background:transparent;border:1px solid var(--line);border-radius:0}
+.wellness-services .prices small,.service-prices small{color:var(--muted)}
+.service-book{border-radius:999px}
+.wellness-services .note{color:#3f4a4e}
+.outcall-service{background:var(--cream);border:0;border-radius:2px}
+.outcall-service-actions .services-contact-line{border-radius:999px}
+.offer-reopen{background:var(--cream);border-color:var(--charcoal);color:var(--charcoal);border-radius:999px}
+
+/* shop photos: olive band ("Spa moments") */
+#photos{background:var(--olive);color:var(--olive-ink)}
+#photos h2,#photos .en,#photos .section-head p,#photos .note,#photos .note a{color:var(--olive-ink)}
+#photos .shop-photos figure{background:transparent;border:0;border-radius:0}
+#photos .shop-photos figcaption{color:var(--olive-ink);padding-inline:0}
+
+/* about: cream, photo on the right */
+.about{background:var(--cream);border:0}
+.about-photo{border-radius:0;box-shadow:none}
+@media (min-width:821px){.about-grid{grid-template-columns:1.1fr 1fr}.about-grid>.about-photo{order:2}}
+.checks svg{color:var(--olive)}
+
+/* reviews: "From our guests" sand cards */
+.wellness-reviews{background:var(--cream)}
+.review-summary-card{background:var(--sand);border:0;border-radius:2px;box-shadow:none}
+.review-summary-panel{border-left-color:rgba(59,55,50,.18)}
+.review-google-cta{border-radius:999px}
+.curated-review-card{background:var(--sand);border:0;border-radius:2px;box-shadow:none}
+.review-initials{background:var(--sky-soft);color:var(--charcoal)}
+.wellness-reviews .review-gold-stars,.review-card-stars{color:var(--charcoal)}
+.review-star-fill{fill:var(--charcoal)}
+.review-carousel-buttons button{border-color:var(--charcoal);color:var(--charcoal);background:transparent}
+.review-carousel-buttons button:hover:not(:disabled){background:var(--sand)}
+.curated-review-card blockquote{color:var(--charcoal)}
+.wellness-reviews .curated-review-grid{scrollbar-color:#b9ad95 transparent}
+
+/* faq + location */
+.faq-list details,.card,.panel{background:var(--sand);border-color:transparent;border-radius:2px}
+.faq-list summary{color:var(--charcoal)}
+.map{border-radius:0;border:0}
+
+/* generated service pages */
+.price-table th{background:var(--sky-deep);color:var(--charcoal);font-weight:500;padding-inline:12px}
+.price-table td{padding-inline:12px;border-bottom-color:var(--charcoal)}
+.price-table td:last-child,.price-table th:last-child{color:var(--charcoal)}
+.promo-note{background:var(--sky-soft);border-radius:2px}
+.other-services a{background:transparent;border-color:var(--charcoal);color:var(--charcoal)}
+.lang-menu summary{background:transparent;color:var(--charcoal)}
+.lang-menu ul{border-radius:4px}
+
+/* dialogs, footer, dock */
+.offer-dialog{background:var(--cream);border-radius:4px}
+.offer-close{background:var(--sand);color:var(--charcoal)}
+.offer-kicker,.offer-discount{color:var(--olive)}
+footer{background:var(--sand);border-top:0}
+footer a,.footer-links a{color:var(--charcoal)}
+.dock{background:rgba(253,249,238,.97)}
+.social-icon{background:transparent;border-color:var(--charcoal)}
+:focus-visible{outline-color:var(--charcoal)}
