@@ -73,7 +73,7 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - The free-parking callout is Luka House orange with a gentle shine/glow; the motion is off under `prefers-reduced-motion`.
 - Copy tidy-up on the owner's request: hero subtitle "ร้านนวดแถวลำลูกกา ต.บึงคำพร้อย", location heading "แผนที่สำหรับเดินทางมาร้าน", soi name removed everywhere (TH + EN), repeated "ไม่มีวันหยุดประจำสัปดาห์" kept only in the FAQ answer about holidays. Customer review text is untouched (verbatim).
 - Not adopted from the template: booking form (no booking system behind it), stock model photos, placeholder text.
-- Service illustration SVGs still carry the old lavender background.
+- Service illustration SVGs recoloured to the cream / light-blue / olive palette (17 Nov 2026).
 
 ## 17 Nov 2026 — minimal pass + language separation
 - Homepage trimmed: removed repeated hours/parking/price blocks (facts row, services welcome box, hero trust line/tagline), section English subtitles, and filler intros. Prices, contact buttons, reviews and the parking callout are unchanged.
