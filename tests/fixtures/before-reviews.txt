@@ -694,7 +694,7 @@ footer a{color:var(--brown)}
     <div class="wrap hero-grid">
       <div>
         <div class="eyebrow">ร้านนวด ลำลูกกา · ภายในโรงแรม Luka House</div>
-        <h1>นวลบุษยา<span class="hero-service">ร้านนวดแถวลำลูกกา ต.บึงคำพร้อย</span><span class="en" style="font-size:.36em;margin-top:6px">NUALBUSAYA · The Best Relaxation</span></h1>
+        <h1>นวลบุษยา<span class="hero-service">ร้านนวดแถวลำลูกกา ต.บึงคำพร้อย</span></h1>
         <p class="lead">นวดไทย นวดเท้า นวดน้ำมัน และนวดอโรม่า ในห้องนวดสะอาด บรรยากาศสงบ</p>
         <p class="parking-callout"><strong>ขับรถเข้ามาจอดภายในโรงแรมลูก้าเฮาส์ได้เลย</strong><br>จอดฟรีสำหรับลูกค้าร้านนวลบุษยา</p>
         <p class="visit-hours"><strong>เปิดทุกวัน 10:00–21:00 น.</strong></p>
@@ -710,19 +710,9 @@ footer a{color:var(--brown)}
             สอบถามคิวทาง LINE
           </a>
         </div>
-        <p class="visit-arrival"><a href="#photos">ดูรูปทางเข้าก่อนมา จะหาร้านง่ายขึ้น</a></p>
-        <p class="trust-note">นวดเพื่อสุขภาพได้มาตรฐาน · ร้านมีใบอนุญาตจากกระทรวงสาธารณสุข · หมอนวดมีใบรับรอง</p>
       </div>
       <div class="hero-photo">
         <img src="img/shop-thai-massage.jpg" alt="หมอนวดของร้านนวลบุษยากำลังนวดไทยให้ลูกค้าในห้องนวด" width="1178" height="692" fetchpriority="high">
-      </div>
-    </div>
-    <div class="wrap">
-      <div class="facts" role="list">
-        <div class="fact" role="listitem"><small>เวลาเปิด</small><strong>ทุกวัน 10:00–21:00 น.</strong></div>
-        <div class="fact" role="listitem"><small>ที่ตั้ง</small><strong>ในโรงแรม Luka House</strong></div>
-        <div class="fact" role="listitem"><small>ที่จอดรถ</small><strong>จอดฟรีในโรงแรม</strong></div>
-        <div class="fact" role="listitem"><small>ชำระเงิน</small><strong>เงินสด · โอน · พร้อมเพย์</strong></div>
       </div>
     </div>
   </section>
@@ -731,17 +721,8 @@ footer a{color:var(--brown)}
     <div class="wrap">
       <div class="services-heading">
         <div>
-          <p class="services-eyebrow">NUALBUSAYA · WELLNESS RITUALS</p>
-          <h2 id="services-title">บริการและราคา<span lang="en" class="services-subtitle">Services &amp; Prices</span></h2>
+          <h2 id="services-title">บริการและราคา</h2>
           <p class="services-intro">นวด 7 แบบ เลือกได้ 60, 90 หรือ 120 นาที</p>
-        </div>
-        <div class="services-welcome">
-          <p class="services-start">นวดไทยเริ่มต้น <strong>300 <span>บาท / 60 นาที</span></strong></p>
-          <p>เปิดทุกวัน 10:00–21:00 น. · จอดรถฟรี</p>
-          <div class="services-contacts">
-            <a class="services-contact-line" href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-5.9C21.4 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>สอบถามคิวทาง LINE</a>
-            <a class="services-contact-phone" href="tel:+66967781585" aria-label="โทรสอบถาม 096-778-1585" title="โทร 096-778-1585"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>โทรสอบถาม</a>
-          </div>
         </div>
       </div>
       <div class="services-meta"><p>ราคาต่อท่าน (บาท)</p></div>
@@ -752,7 +733,7 @@ footer a{color:var(--brown)}
             <span class="service-number" aria-hidden="true">01</span>
           </div>
           <div class="service-content">
-            <h3 id="thai-massage-title">นวดไทย<span class="en" lang="en">Traditional Thai Massage</span></h3>
+            <h3 id="thai-massage-title" data-en="Traditional Thai Massage">นวดไทย</h3>
             <p class="service-description">นวดไทยเพื่อความผ่อนคลาย</p>
             <a class="service-more" href="/thai-massage/">ดูรายละเอียดนวดไทย</a>
             <ul class="prices service-prices" aria-label="ราคานวดไทยต่อท่าน หน่วยบาท">
@@ -772,7 +753,7 @@ footer a{color:var(--brown)}
             <span class="service-number" aria-hidden="true">02</span>
           </div>
           <div class="service-content">
-            <h3 id="foot-massage-title">นวดเท้า<span class="en" lang="en">Foot Massage</span></h3>
+            <h3 id="foot-massage-title" data-en="Foot Massage">นวดเท้า</h3>
             <p class="service-description">นวดเท้าเพื่อความผ่อนคลาย</p>
             <a class="service-more" href="/foot-massage/">ดูรายละเอียดนวดเท้า</a>
             <ul class="prices service-prices" aria-label="ราคานวดเท้าต่อท่าน หน่วยบาท">
@@ -792,7 +773,7 @@ footer a{color:var(--brown)}
             <span class="service-number" aria-hidden="true">03</span>
           </div>
           <div class="service-content">
-            <h3 id="head-neck-shoulder-title">นวดศีรษะ คอ บ่า ไหล่<span class="en" lang="en">Head, Neck &amp; Shoulder Massage</span></h3>
+            <h3 id="head-neck-shoulder-title" data-en="Head, Neck &amp; Shoulder Massage">นวดศีรษะ คอ บ่า ไหล่</h3>
             <p class="service-description">นวดบริเวณศีรษะ คอ บ่า และไหล่ เพื่อความผ่อนคลาย</p>
             <a class="service-more" href="/head-neck-shoulder/">ดูรายละเอียดนวดศีรษะ คอ บ่า ไหล่</a>
             <ul class="prices service-prices" aria-label="ราคานวดศีรษะ คอ บ่า ไหล่ต่อท่าน หน่วยบาท">
@@ -812,7 +793,7 @@ footer a{color:var(--brown)}
             <span class="service-number" aria-hidden="true">04</span>
           </div>
           <div class="service-content">
-            <h3 id="deep-tissue-title">นวดเน้นเฉพาะจุด<span class="en" lang="en">Deep Tissue Massage</span></h3>
+            <h3 id="deep-tissue-title" data-en="Deep Tissue Massage">นวดเน้นเฉพาะจุด</h3>
             <p class="service-description">นวดเน้นเฉพาะจุดเพื่อความผ่อนคลาย</p>
             <a class="service-more" href="/deep-tissue/">ดูรายละเอียดนวดเน้นเฉพาะจุด</a>
             <ul class="prices service-prices" aria-label="ราคานวดเน้นเฉพาะจุดต่อท่าน หน่วยบาท">
@@ -832,7 +813,7 @@ footer a{color:var(--brown)}
             <span class="service-number" aria-hidden="true">05</span>
           </div>
           <div class="service-content">
-            <h3 id="oil-massage-title">นวดน้ำมัน<span class="en" lang="en">Oil Massage</span></h3>
+            <h3 id="oil-massage-title" data-en="Oil Massage">นวดน้ำมัน</h3>
             <p class="service-description">นวดน้ำมันด้วยเทคนิคการนวดแบบสากล</p>
             <a class="service-more" href="/oil-massage/">ดูรายละเอียดนวดน้ำมัน</a>
             <ul class="prices service-prices" aria-label="ราคานวดน้ำมันต่อท่าน หน่วยบาท">
@@ -852,7 +833,7 @@ footer a{color:var(--brown)}
             <span class="service-number" aria-hidden="true">06</span>
           </div>
           <div class="service-content">
-            <h3 id="thai-oil-title">นวดไทยออย<span class="en" lang="en">Thai Oil Massage</span></h3>
+            <h3 id="thai-oil-title" data-en="Thai Oil Massage">นวดไทยออย</h3>
             <p class="service-description">นวดด้วยน้ำมัน ผสมผสานเทคนิคการนวดสไตล์ไทย</p>
             <a class="service-more" href="/thai-oil/">ดูรายละเอียดนวดไทยออย</a>
             <ul class="prices service-prices" aria-label="ราคานวดไทยออยต่อท่าน หน่วยบาท">
@@ -872,7 +853,7 @@ footer a{color:var(--brown)}
             <span class="service-number" aria-hidden="true">07</span>
           </div>
           <div class="service-content">
-            <h3 id="aromatherapy-title">นวดอโรม่า<span class="en" lang="en">Aromatherapy Massage</span></h3>
+            <h3 id="aromatherapy-title" data-en="Aromatherapy Massage">นวดอโรม่า</h3>
             <p class="service-description">นวดด้วยน้ำมันอโรม่า เพื่อความผ่อนคลาย</p>
             <a class="service-more" href="/aromatherapy/">ดูรายละเอียดนวดอโรม่า</a>
             <ul class="prices service-prices" aria-label="ราคานวดอโรม่าต่อท่าน หน่วยบาท">
@@ -888,7 +869,6 @@ footer a{color:var(--brown)}
         </article>
       </div>
       <div class="services-footer">
-        <p class="note">หมอนวดประจำร้าน 2 ท่าน แนะนำให้โทรหรือทัก LINE สอบถามคิวก่อนเดินทาง</p>
         <button class="offer-reopen" type="button" id="offer-open">ดูโปรลูกค้าเว็บไซต์: นวด 2 ชั่วโมง ลด 100 บาท (ยกเว้นนวดไทย)</button>
       </div>
     </div>
@@ -897,7 +877,7 @@ footer a{color:var(--brown)}
   <section id="photos">
     <div class="wrap">
       <div class="section-head">
-        <h2>บรรยากาศร้านและทางเข้า<span class="en">A Look Inside Nualbusaya</span></h2>
+        <h2>บรรยากาศร้านและทางเข้า</h2>
         <p>ดูรูปไว้ก่อนมา จะหาร้านง่ายขึ้น</p>
       </div>
       <div class="shop-photos">
@@ -906,7 +886,6 @@ footer a{color:var(--brown)}
         <figure><a href="img/shop-welcome.jpg" target="_blank" rel="noopener" aria-label="ดูภาพเต็ม: บรรยากาศหน้าร้านนวลบุษยา"><img src="img/shop-welcome.jpg" alt="ภาพบรรยากาศและผู้มาเยือนบริเวณหน้าร้านนวลบุษยา" width="720" height="960" loading="lazy" decoding="async"></a><figcaption>บรรยากาศเป็นกันเองหน้าร้าน</figcaption></figure>
         <figure><a href="img/shop-interior.jpg" target="_blank" rel="noopener" aria-label="ดูภาพเต็ม: บรรยากาศภายในร้านนวลบุษยา"><img src="img/shop-interior.jpg" alt="บรรยากาศภายในร้านนวลบุษยา บริเวณเก้าอี้นวดและป้ายชื่อร้าน" width="1179" height="1614" loading="lazy" decoding="async"></a><figcaption>มุมพักผ่อนภายในร้าน</figcaption></figure>
       </div>
-      <p class="note">แตะที่ภาพเพื่อเปิดดูขนาดเต็ม · <a href="#location">ดูแผนที่และเส้นทางมาร้าน</a></p>
     </div>
   </section>
 
@@ -916,12 +895,9 @@ footer a{color:var(--brown)}
         <img src="img/shop-shoulder.jpg" alt="หมอนวดร้านนวลบุษยากับลูกค้าในห้องนวดของร้าน" width="509" height="771" loading="lazy">
       </div>
       <div>
-        <h2>ผ่อนคลายใกล้บ้าน<span class="en">About Nualbusaya</span></h2>
+        <h2>ผ่อนคลายใกล้บ้าน</h2>
         <p style="color:var(--muted);margin-top:12px">นวลบุษยาเป็นร้านนวดเล็ก ๆ ภายในโรงแรม Luka House ลำลูกกา ตั้งใจดูแลลูกค้าทุกคนให้ได้พักผ่อนอย่างเต็มที่ หลังวันทำงานที่เหนื่อยล้าหรือในวันหยุดสบาย ๆ</p>
         <ul class="checks">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>เปิดทุกวัน 10:00–21:00 น.</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ห้องนวดสะอาด บรรยากาศสงบ</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>มีที่จอดรถฟรี เดินทางสะดวก</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ร้านมีใบอนุญาตประกอบกิจการนวดเพื่อสุขภาพจากกระทรวงสาธารณสุข</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>หมอนวดมีใบรับรอง ให้บริการนวดเพื่อความผ่อนคลาย</li>
         </ul>
@@ -956,7 +932,7 @@ footer a{color:var(--brown)}
   <section id="gallery" hidden>
     <div class="wrap">
       <div class="section-head">
-        <h2>บรรยากาศร้าน<span class="en">Photos on Google Maps</span></h2>
+        <h2>บรรยากาศร้าน</h2>
       </div>
       <div class="gal-grid" id="gal-grid"></div>
       <p class="rv-attr">รูปจาก Google Maps เครดิตตามชื่อผู้ถ่ายในแต่ละรูป</p>
@@ -966,8 +942,7 @@ footer a{color:var(--brown)}
   <section id="faq">
     <div class="wrap">
       <div class="section-head">
-        <h2>คำถามที่พบบ่อย<span class="en">Before Your Visit</span></h2>
-        <p>ข้อมูลสำหรับวางแผนมาใช้บริการร้านนวลบุษยา</p>
+        <h2>คำถามที่พบบ่อย</h2>
       </div>
       <div class="faq-list">
         <details><summary>ร้านนวลบุษยาอยู่ที่ไหน มีที่จอดรถไหม?</summary><p>ร้านอยู่ภายในโรงแรม Luka House เลขที่ 63/19 ต.บึงคำพร้อย อ.ลำลูกกา จ.ปทุมธานี ขับรถเข้ามาจอดภายในโรงแรมลูก้าเฮาส์ได้เลย จอดฟรีสำหรับลูกค้าร้านนวลบุษยา <a href="#location">ดูแผนที่และเส้นทางมาร้าน</a></p></details>
@@ -975,7 +950,7 @@ footer a{color:var(--brown)}
         <details><summary>นวดเริ่มต้นเท่าไร เลือกเวลาได้กี่นาที?</summary><p>นวดไทยเริ่มต้น 300 บาทต่อท่าน สำหรับ 60 นาที ทุกบริการเลือกเวลาได้ 60, 90 หรือ 120 นาที ราคาขึ้นอยู่กับบริการและระยะเวลา <a href="#menu">ดูบริการและราคาทั้งหมด</a></p></details>
         <details><summary>ต้องจองคิวก่อนหรือไม่?</summary><p>ร้านมีหมอนวดประจำ 2 ท่าน แนะนำให้ <a href="tel:+66967781585">โทร 096-778-1585</a> หรือ <a href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener">ทัก LINE @288ojpuq</a> เพื่อสอบถามคิวและเวลาที่ต้องการก่อนเดินทาง</p></details>
         <details><summary>ร้านและหมอนวดมีใบรับรองหรือไม่?</summary><p>ร้านมีใบอนุญาตประกอบกิจการนวดเพื่อสุขภาพจากกระทรวงสาธารณสุข และหมอนวดมีใบรับรอง ให้บริการนวดเพื่อความผ่อนคลาย</p></details>
-        <details><summary>ชำระเงินด้วยวิธีใดได้บ้าง?</summary><p>รับชำระด้วยเงินสด โอนเงิน และพร้อมเพย์ (PromptPay)</p></details>
+        <details><summary>ชำระเงินด้วยวิธีใดได้บ้าง?</summary><p>รับชำระด้วยเงินสด โอนเงิน และพร้อมเพย์</p></details>
       </div>
     </div>
   </section>
@@ -983,7 +958,7 @@ footer a{color:var(--brown)}
   <section id="location">
     <div class="wrap">
       <div class="section-head">
-        <h2>แผนที่สำหรับเดินทางมาร้าน<span class="en">Location</span></h2>
+        <h2>แผนที่สำหรับเดินทางมาร้าน</h2>
         <p>ร้านอยู่ภายในโรงแรมลูก้าเฮาส์ (Luka House)</p>
         <p><strong>ขับรถเข้ามาจอดภายในโรงแรมได้เลย จอดฟรีสำหรับลูกค้าร้านนวลบุษยา</strong></p>
         <p>สังเกตป้าย Luka House ที่ทางเข้า หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา <a href="#photos">ดูรูปทางเข้า</a></p>
@@ -1010,11 +985,11 @@ footer a{color:var(--brown)}
 </main>
 
 <footer>
-  <nav class="wrap footer-links" aria-label="บริการทั้งหมด"><a href="/thai-massage/">นวดไทย</a><a href="/foot-massage/">นวดเท้า</a><a href="/head-neck-shoulder/">นวดศีรษะ คอ บ่า ไหล่</a><a href="/deep-tissue/">นวดเน้นเฉพาะจุด</a><a href="/oil-massage/">นวดน้ำมัน</a><a href="/thai-oil/">นวดไทยออย</a><a href="/aromatherapy/">นวดอโรม่า</a><a href="/outcall/">รับนวดนอกสถานที่</a><a href="/en/" lang="en" hreflang="en">English</a></nav>
+  <nav class="wrap footer-links" aria-label="บริการทั้งหมด"><a href="/thai-massage/">นวดไทย</a><a href="/foot-massage/">นวดเท้า</a><a href="/head-neck-shoulder/">นวดศีรษะ คอ บ่า ไหล่</a><a href="/deep-tissue/">นวดเน้นเฉพาะจุด</a><a href="/oil-massage/">นวดน้ำมัน</a><a href="/thai-oil/">นวดไทยออย</a><a href="/aromatherapy/">นวดอโรม่า</a><a href="/outcall/">รับนวดนอกสถานที่</a></nav>
   <div class="wrap row">
     <div style="display:flex;align-items:center;gap:10px">
       <img src="img/icon.png" alt="" width="32" height="32">
-      <span>© 2026 นวลบุษยา Nualbusaya · ร้านนวดลำลูกกา</span>
+      <span>© 2026 นวลบุษยา · ร้านนวดลำลูกกา</span>
     </div>
     <div style="display:flex;gap:16px">
       <a class="social-icon social-facebook" href="https://www.facebook.com/nualbusaya/" target="_blank" rel="noopener" aria-label="Facebook ของร้านนวลบุษยา" title="Facebook ของร้านนวลบุษยา"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M14 22v-9h3l.5-4H14V6.5c0-1.2.4-2 2-2H18V1.2A24 24 0 0 0 15.1 1C12.2 1 10 2.8 10 6v3H7v4h3v9z"/></svg></a>

@@ -94,10 +94,10 @@ def services():
     out = []
     for m in re.finditer(r'<article class="item service-card" id="([^"]+)".*?</article>', INDEX, re.S):
         key, card = m[1], m[0]
-        title = re.search(r'<h3[^>]*>(.*?)<span class="en" lang="en">(.*?)</span></h3>', card, re.S)
+        title = re.search(r'<h3[^>]*data-en="([^"]*)"[^>]*>(.*?)</h3>', card, re.S)
         desc = re.search(r'<p class="service-description">(.*?)</p>', card, re.S)[1]
         prices = re.findall(r'<small>(\d+) นาที</small><span class="price-amount"><b>([\d,]+)</b>', card)
-        out.append({"key": key, "th": html.unescape(title[1]).strip(), "en": html.unescape(title[2]).strip(),
+        out.append({"key": key, "th": html.unescape(title[2]).strip(), "en": html.unescape(title[1]).strip(),
                     "desc": html.unescape(desc).strip(),
                     "prices": [(int(mn), int(p.replace(",", ""))) for mn, p in prices],
                     **COPY[key]})
@@ -220,7 +220,7 @@ def header(lang, path="/"):
   <div class="wrap bar">
     <a class="brand" href="{'/' if lang == 'th' else '/en/'}" aria-label="{home}">
       <img src="/img/icon.png" alt="" width="40" height="40">
-      <b>นวลบุษยา</b>
+      <b>{'นวลบุษยา' if lang == 'th' else 'Nualbusaya'}</b>
     </a>
     <nav aria-label="{'เมนูหลัก' if lang == 'th' else 'Main menu'}">
       {links}
@@ -236,11 +236,11 @@ def header(lang, path="/"):
 
 def footer(lang, svc):
     if lang == "th":
-        links = "".join(f'<a href="/{s["slug"]}/">{s["th"]}</a>' for s in svc) + '<a href="/outcall/">รับนวดนอกสถานที่</a><a href="/en/" lang="en" hreflang="en">English</a>'
-        line = "© 2026 นวลบุษยา Nualbusaya · ร้านนวดลำลูกกา · 63/19 ภายในโรงแรม Luka House ต.บึงคำพร้อย อ.ลำลูกกา จ.ปทุมธานี 12150"
+        links = "".join(f'<a href="/{s["slug"]}/">{s["th"]}</a>' for s in svc) + '<a href="/outcall/">รับนวดนอกสถานที่</a>'
+        line = "© 2026 นวลบุษยา · ร้านนวดลำลูกกา · 63/19 ภายในโรงแรม Luka House ต.บึงคำพร้อย อ.ลำลูกกา จ.ปทุมธานี 12150"
         dock = ("นำทางมาร้าน", "โทร", "LINE")
     else:
-        links = '<a href="/" lang="th" hreflang="th">ภาษาไทย</a>'
+        links = '<a href="#services">Services &amp; prices</a><a href="#visit">Visit</a><a href="#faq">FAQ</a>'
         line = "© 2026 Nualbusaya · Massage in Lam Luk Ka · 63/19 inside Luka House Hotel, Bueng Kham Phroi, Lam Luk Ka, Pathum Thani 12150"
         dock = ("Directions", "Call", "LINE")
     return f"""<footer>
@@ -315,7 +315,7 @@ def service_page(s, svc):
   <section class="page-hero">
     <div class="wrap">
       <div class="eyebrow">ร้านนวด ลำลูกกา · ภายในโรงแรม Luka House</div>
-      <h1>{s['h1']}<span class="en" lang="en">{s['en']} · Lam Luk Ka</span></h1>
+      <h1>{s['h1']}</h1>
       <p class="lead">{html.escape(s['intro'])}</p>
       {contact_buttons()}
     </div>
@@ -379,8 +379,8 @@ def outcall_page(svc):
   <div class="wrap crumbs"><a href="/">หน้าแรก</a> › รับนวดนอกสถานที่</div>
   <section class="page-hero">
     <div class="wrap">
-      <div class="eyebrow">OUTCALL MASSAGE · ลำลูกกา</div>
-      <h1>รับนวดนอกสถานที่ ลำลูกกา<span class="en" lang="en">Outcall massage · Lam Luk Ka</span></h1>
+      <div class="eyebrow">นวดนอกสถานที่ · ลำลูกกา</div>
+      <h1>รับนวดนอกสถานที่ ลำลูกกา</h1>
       <p class="lead">นวลบุษยารับนวดนอกสถานที่ พื้นที่ให้บริการ คิว และราคา สอบถามได้ทาง LINE หรือโทร ร้านจะแจ้งรายละเอียดให้ก่อนยืนยันทุกครั้ง</p>
       {contact_buttons()}
     </div>
@@ -424,7 +424,7 @@ def english_page(svc):
     for s in svc:
         rows = "".join(f"<tr><td>{m} min</td><td>{p:,} THB</td></tr>" for m, p in s["prices"])
         cards.append(f"""        <div class="panel">
-          <h3 style="font-size:1.15rem">{s['en']}<span class="en" lang="th">{s['th']}</span></h3>
+          <h3 style="font-size:1.15rem">{s['en']}</h3>
           <p style="color:var(--muted);font-size:.95rem;margin:6px 0 8px">{html.escape(s['en_intro'])}</p>
           <table class="price-table"><tbody>{rows}</tbody></table>
         </div>""")
@@ -434,7 +434,7 @@ def english_page(svc):
   <section class="page-hero">
     <div class="wrap">
       <div class="eyebrow">Massage shop · Lam Luk Ka · inside Luka House Hotel</div>
-      <h1>Nualbusaya Massage, Lam Luk Ka<span class="en" lang="th">นวลบุษยา ร้านนวดลำลูกกา</span></h1>
+      <h1>Nualbusaya Massage, Lam Luk Ka</h1>
       <p class="lead">A small, quiet massage shop inside Luka House Hotel in Bueng Kham Phroi, Lam Luk Ka. Thai massage from 300 THB for 60 minutes. Open every day 10:00–21:00, with free parking at the hotel.</p>
       {contact_buttons('en')}
     </div>
@@ -445,7 +445,7 @@ def english_page(svc):
       <div class="menu" style="margin-top:18px">
 {chr(10).join(cards)}
       </div>
-      <p class="promo-note"><strong>Website offer:</strong> 100 THB off any 2-hour massage except Thai massage. Tell the staff you found us on the website (“มาจากเว็บไซต์”).</p>
+      <p class="promo-note"><strong>Website offer:</strong> 100 THB off any 2-hour massage except Thai massage. Just tell the staff you found us on the website.</p>
       <p style="margin-top:12px">Outcall massage is also available. Ask on LINE or by phone for areas, availability and prices.</p>
     </div>
   </section>

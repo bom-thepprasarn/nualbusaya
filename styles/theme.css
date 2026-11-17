@@ -122,3 +122,9 @@ footer a,.footer-links a{color:var(--charcoal)}
 .dock{background:rgba(253,249,238,.97)}
 .social-icon{background:transparent;border-color:var(--charcoal)}
 :focus-visible{outline-color:var(--charcoal)}
+
+/* minimal pass: fewer boxes, more air */
+.wellness-services .services-heading{grid-template-columns:1fr;margin-bottom:20px}
+.services-footer{text-align:center}
+section{padding:72px 0}
+.section-head{margin-bottom:28px}

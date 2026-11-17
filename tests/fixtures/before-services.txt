@@ -691,7 +691,7 @@ footer a{color:var(--brown)}
     <div class="wrap hero-grid">
       <div>
         <div class="eyebrow">ร้านนวด ลำลูกกา · ภายในโรงแรม Luka House</div>
-        <h1>นวลบุษยา<span class="hero-service">ร้านนวดแถวลำลูกกา ต.บึงคำพร้อย</span><span class="en" style="font-size:.36em;margin-top:6px">NUALBUSAYA · The Best Relaxation</span></h1>
+        <h1>นวลบุษยา<span class="hero-service">ร้านนวดแถวลำลูกกา ต.บึงคำพร้อย</span></h1>
         <p class="lead">นวดไทย นวดเท้า นวดน้ำมัน และนวดอโรม่า ในห้องนวดสะอาด บรรยากาศสงบ</p>
         <p class="parking-callout"><strong>ขับรถเข้ามาจอดภายในโรงแรมลูก้าเฮาส์ได้เลย</strong><br>จอดฟรีสำหรับลูกค้าร้านนวลบุษยา</p>
         <p class="visit-hours"><strong>เปิดทุกวัน 10:00–21:00 น.</strong></p>
@@ -707,19 +707,9 @@ footer a{color:var(--brown)}
             สอบถามคิวทาง LINE
           </a>
         </div>
-        <p class="visit-arrival"><a href="#photos">ดูรูปทางเข้าก่อนมา จะหาร้านง่ายขึ้น</a></p>
-        <p class="trust-note">นวดเพื่อสุขภาพได้มาตรฐาน · ร้านมีใบอนุญาตจากกระทรวงสาธารณสุข · หมอนวดมีใบรับรอง</p>
       </div>
       <div class="hero-photo">
         <img src="img/shop-thai-massage.jpg" alt="หมอนวดของร้านนวลบุษยากำลังนวดไทยให้ลูกค้าในห้องนวด" width="1178" height="692" fetchpriority="high">
-      </div>
-    </div>
-    <div class="wrap">
-      <div class="facts" role="list">
-        <div class="fact" role="listitem"><small>เวลาเปิด</small><strong>ทุกวัน 10:00–21:00 น.</strong></div>
-        <div class="fact" role="listitem"><small>ที่ตั้ง</small><strong>ในโรงแรม Luka House</strong></div>
-        <div class="fact" role="listitem"><small>ที่จอดรถ</small><strong>จอดฟรีในโรงแรม</strong></div>
-        <div class="fact" role="listitem"><small>ชำระเงิน</small><strong>เงินสด · โอน · พร้อมเพย์</strong></div>
       </div>
     </div>
   </section>
@@ -775,7 +765,7 @@ footer a{color:var(--brown)}
   <section id="photos">
     <div class="wrap">
       <div class="section-head">
-        <h2>บรรยากาศร้านและทางเข้า<span class="en">A Look Inside Nualbusaya</span></h2>
+        <h2>บรรยากาศร้านและทางเข้า</h2>
         <p>ชมหน้าร้าน ป้ายทางเข้า และบรรยากาศภายในนวลบุษยา เพื่อให้หาร้านได้ง่ายเมื่อมาถึงโรงแรม Luka House</p>
       </div>
       <div class="shop-photos">
@@ -784,7 +774,6 @@ footer a{color:var(--brown)}
         <figure><a href="img/shop-welcome.jpg" target="_blank" rel="noopener" aria-label="ดูภาพเต็ม: บรรยากาศหน้าร้านนวลบุษยา"><img src="img/shop-welcome.jpg" alt="ภาพบรรยากาศและผู้มาเยือนบริเวณหน้าร้านนวลบุษยา" width="720" height="960" loading="lazy" decoding="async"></a><figcaption>บรรยากาศเป็นกันเองหน้าร้าน</figcaption></figure>
         <figure><a href="img/shop-interior.jpg" target="_blank" rel="noopener" aria-label="ดูภาพเต็ม: บรรยากาศภายในร้านนวลบุษยา"><img src="img/shop-interior.jpg" alt="บรรยากาศภายในร้านนวลบุษยา บริเวณเก้าอี้นวดและป้ายชื่อร้าน" width="1179" height="1614" loading="lazy" decoding="async"></a><figcaption>มุมพักผ่อนภายในร้าน</figcaption></figure>
       </div>
-      <p class="note">แตะที่ภาพเพื่อเปิดดูขนาดเต็ม · <a href="#location">ดูแผนที่และเส้นทางมาร้าน</a></p>
     </div>
   </section>
 
@@ -794,12 +783,9 @@ footer a{color:var(--brown)}
         <img src="img/shop-shoulder.jpg" alt="หมอนวดร้านนวลบุษยากับลูกค้าในห้องนวดของร้าน" width="509" height="771" loading="lazy">
       </div>
       <div>
-        <h2>ผ่อนคลายใกล้บ้าน<span class="en">About Nualbusaya</span></h2>
+        <h2>ผ่อนคลายใกล้บ้าน</h2>
         <p style="color:var(--muted);margin-top:12px">นวลบุษยาเป็นร้านนวดเล็ก ๆ ภายในโรงแรม Luka House ลำลูกกา ตั้งใจดูแลลูกค้าทุกคนให้ได้พักผ่อนอย่างเต็มที่ หลังวันทำงานที่เหนื่อยล้าหรือในวันหยุดสบาย ๆ</p>
         <ul class="checks">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>เปิดทุกวัน 10:00–21:00 น.</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ห้องนวดสะอาด บรรยากาศสงบ</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>มีที่จอดรถฟรี เดินทางสะดวก</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>ร้านมีใบอนุญาตประกอบกิจการนวดเพื่อสุขภาพจากกระทรวงสาธารณสุข</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>หมอนวดมีใบรับรอง ให้บริการนวดเพื่อความผ่อนคลาย</li>
         </ul>
@@ -834,7 +820,7 @@ footer a{color:var(--brown)}
   <section id="gallery" hidden>
     <div class="wrap">
       <div class="section-head">
-        <h2>บรรยากาศร้าน<span class="en">Photos on Google Maps</span></h2>
+        <h2>บรรยากาศร้าน</h2>
       </div>
       <div class="gal-grid" id="gal-grid"></div>
       <p class="rv-attr">รูปจาก Google Maps เครดิตตามชื่อผู้ถ่ายในแต่ละรูป</p>
@@ -844,8 +830,7 @@ footer a{color:var(--brown)}
   <section id="faq">
     <div class="wrap">
       <div class="section-head">
-        <h2>คำถามที่พบบ่อย<span class="en">Before Your Visit</span></h2>
-        <p>ข้อมูลสำหรับวางแผนมาใช้บริการร้านนวลบุษยา</p>
+        <h2>คำถามที่พบบ่อย</h2>
       </div>
       <div class="faq-list">
         <details><summary>ร้านนวลบุษยาอยู่ที่ไหน มีที่จอดรถไหม?</summary><p>ร้านอยู่ภายในโรงแรม Luka House เลขที่ 63/19 ต.บึงคำพร้อย อ.ลำลูกกา จ.ปทุมธานี ขับรถเข้ามาจอดภายในโรงแรมลูก้าเฮาส์ได้เลย จอดฟรีสำหรับลูกค้าร้านนวลบุษยา <a href="#location">ดูแผนที่และเส้นทางมาร้าน</a></p></details>
@@ -853,7 +838,7 @@ footer a{color:var(--brown)}
         <details><summary>นวดเริ่มต้นเท่าไร เลือกเวลาได้กี่นาที?</summary><p>นวดไทยเริ่มต้น 300 บาทต่อท่าน สำหรับ 60 นาที ทุกบริการเลือกเวลาได้ 60, 90 หรือ 120 นาที ราคาขึ้นอยู่กับบริการและระยะเวลา <a href="#menu">ดูบริการและราคาทั้งหมด</a></p></details>
         <details><summary>ต้องจองคิวก่อนหรือไม่?</summary><p>ร้านมีหมอนวดประจำ 2 ท่าน แนะนำให้ <a href="tel:+66967781585">โทร 096-778-1585</a> หรือ <a href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener">ทัก LINE @288ojpuq</a> เพื่อสอบถามคิวและเวลาที่ต้องการก่อนเดินทาง</p></details>
         <details><summary>ร้านและหมอนวดมีใบรับรองหรือไม่?</summary><p>ร้านมีใบอนุญาตประกอบกิจการนวดเพื่อสุขภาพจากกระทรวงสาธารณสุข และหมอนวดมีใบรับรอง ให้บริการนวดเพื่อความผ่อนคลาย</p></details>
-        <details><summary>ชำระเงินด้วยวิธีใดได้บ้าง?</summary><p>รับชำระด้วยเงินสด โอนเงิน และพร้อมเพย์ (PromptPay)</p></details>
+        <details><summary>ชำระเงินด้วยวิธีใดได้บ้าง?</summary><p>รับชำระด้วยเงินสด โอนเงิน และพร้อมเพย์</p></details>
       </div>
     </div>
   </section>
@@ -861,7 +846,7 @@ footer a{color:var(--brown)}
   <section id="location">
     <div class="wrap">
       <div class="section-head">
-        <h2>แผนที่สำหรับเดินทางมาร้าน<span class="en">Location</span></h2>
+        <h2>แผนที่สำหรับเดินทางมาร้าน</h2>
         <p>ร้านอยู่ภายในโรงแรมลูก้าเฮาส์ (Luka House)</p>
         <p><strong>ขับรถเข้ามาจอดภายในโรงแรมได้เลย จอดฟรีสำหรับลูกค้าร้านนวลบุษยา</strong></p>
         <p>สังเกตป้าย Luka House ที่ทางเข้า หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา <a href="#photos">ดูรูปทางเข้า</a></p>
@@ -888,11 +873,11 @@ footer a{color:var(--brown)}
 </main>
 
 <footer>
-  <nav class="wrap footer-links" aria-label="บริการทั้งหมด"><a href="/thai-massage/">นวดไทย</a><a href="/foot-massage/">นวดเท้า</a><a href="/head-neck-shoulder/">นวดศีรษะ คอ บ่า ไหล่</a><a href="/deep-tissue/">นวดเน้นเฉพาะจุด</a><a href="/oil-massage/">นวดน้ำมัน</a><a href="/thai-oil/">นวดไทยออย</a><a href="/aromatherapy/">นวดอโรม่า</a><a href="/outcall/">รับนวดนอกสถานที่</a><a href="/en/" lang="en" hreflang="en">English</a></nav>
+  <nav class="wrap footer-links" aria-label="บริการทั้งหมด"><a href="/thai-massage/">นวดไทย</a><a href="/foot-massage/">นวดเท้า</a><a href="/head-neck-shoulder/">นวดศีรษะ คอ บ่า ไหล่</a><a href="/deep-tissue/">นวดเน้นเฉพาะจุด</a><a href="/oil-massage/">นวดน้ำมัน</a><a href="/thai-oil/">นวดไทยออย</a><a href="/aromatherapy/">นวดอโรม่า</a><a href="/outcall/">รับนวดนอกสถานที่</a></nav>
   <div class="wrap row">
     <div style="display:flex;align-items:center;gap:10px">
       <img src="img/icon.png" alt="" width="32" height="32">
-      <span>© 2026 นวลบุษยา Nualbusaya · ร้านนวดลำลูกกา</span>
+      <span>© 2026 นวลบุษยา · ร้านนวดลำลูกกา</span>
     </div>
     <div style="display:flex;gap:16px">
       <a class="social-icon social-facebook" href="https://www.facebook.com/nualbusaya/" target="_blank" rel="noopener" aria-label="Facebook ของร้านนวลบุษยา" title="Facebook ของร้านนวลบุษยา"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M14 22v-9h3l.5-4H14V6.5c0-1.2.4-2 2-2H18V1.2A24 24 0 0 0 15.1 1C12.2 1 10 2.8 10 6v3H7v4h3v9z"/></svg></a>

@@ -23,7 +23,7 @@ class ReviewsTests(unittest.TestCase):
         self.assertEqual(PROOF['source'], 'https://maps.google.com/?cid=15830764363691679197')
 
     def test_copy_and_cta(self):
-        for text in ['GOOGLE REVIEWS', 'เสียงจากลูกค้าของเรา', 'คะแนนรีวิวจาก Google Maps', 'อ่านรีวิวทั้งหมดบน Google']:
+        for text in ['รีวิวจาก Google', 'เสียงจากลูกค้าของเรา', 'คะแนนรีวิวจาก Google Maps', 'อ่านรีวิวทั้งหมดบน Google']:
             self.assertIn(text, SECTION)
         self.assertIn('href="'+PROOF['source']+'"', SECTION)
         self.assertIn('target="_blank" rel="noopener"', SECTION)

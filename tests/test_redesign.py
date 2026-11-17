@@ -43,7 +43,8 @@ class RedesignTests(unittest.TestCase):
                 self.assertIn(str(minutes) + ' นาที', after[key])
             old_names = re.search(r'<h3>(.*?)</h3>', before[key], re.S)[1]
             english = re.search(r'<span class="en">(.*?)</span>', old_names)[1]
-            self.assertIn(english, after[key])
+            self.assertIn('data-en="' + english + '"', after[key])
+            self.assertNotIn('<span class="en"', after[key])
 
     def test_every_service_has_image_and_existing_contact_destinations(self):
         for key, card in articles(NEW).items():

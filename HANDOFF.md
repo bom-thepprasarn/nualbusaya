@@ -74,3 +74,8 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Copy tidy-up on the owner's request: hero subtitle "ร้านนวดแถวลำลูกกา ต.บึงคำพร้อย", location heading "แผนที่สำหรับเดินทางมาร้าน", soi name removed everywhere (TH + EN), repeated "ไม่มีวันหยุดประจำสัปดาห์" kept only in the FAQ answer about holidays. Customer review text is untouched (verbatim).
 - Not adopted from the template: booking form (no booking system behind it), stock model photos, placeholder text.
 - Service illustration SVGs still carry the old lavender background.
+
+## 17 Nov 2026 — minimal pass + language separation
+- Homepage trimmed: removed repeated hours/parking/price blocks (facts row, services welcome box, hero trust line/tagline), section English subtitles, and filler intros. Prices, contact buttons, reviews and the parking callout are unchanged.
+- Thai pages are Thai-only and `/en/` is English-only (proper nouns like Luka House, LINE, Google Maps excepted; header language switch kept).
+- Service English names now live in `data-en` on each homepage card `<h3>`; `tools/build_pages.py` reads them from there for `/en/`.
