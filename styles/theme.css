@@ -1,130 +1,191 @@
-/* Theme: cream / light blue / olive, after the owner's Canva template (Nov 2026).
-   Loaded LAST on every page. Visual only: no content, links or tracking hooks change here.
-   Remove the <link> to this file to return to the previous look. */
+/* Theme: "Bright Blue Minimal Wellness" (owner-approved brand colors, 22 Nov 2026).
+   Loaded LAST on every page. Visual only: content, links, prices and tracking hooks are unchanged.
+   Brand: Bright Blue #0879E8, Sky Cyan #00BCEB, Vibrant Pink #FF3792, White.
+   Text-on-color uses slightly deeper shades so every label passes WCAG AA (4.5:1):
+   blue text/buttons #0868C7 (5.5:1 with white), pink buttons #D81B72 (4.86:1 with white).
+   Cyan is never used for text (2.2:1). Remove the <link> to this file to return to the base look. */
 :root{
-  --cream:#fdf9ee; --sand:#f2ecdf; --paper:#fffcf5;
-  --charcoal:#3b3732; --charcoal-dark:#2a2723;
-  --olive:#7a6e52; --olive-ink:#fdf9ee;
-  --sky:#add0dc; --sky-soft:#e4eff3; --sky-deep:#9cc3d1;
+  --blue:#0879E8; --blue-ink:#0868C7; --blue-deep:#0757A8;
+  --cyan:#00BCEB; --pink:#FF3792; --pink-ink:#D81B72; --pink-deep:#B8155F;
+  --white:#FFFFFF; --navy:#12345A; --blue-50:#F2F9FF; --blue-100:#E5F3FF;
+  --gray-50:#F5F7FA; --border:#E5EDF5; --text-muted:#4A6178;
+  --font-display:"Chonburi","Noto Serif Thai",serif;
+  --font-body:"Inter","Noto Sans Thai",system-ui,sans-serif;
 
-  /* base site tokens */
-  --bg:var(--cream); --surface:var(--paper); --ink:#3b3732; --muted:#5f584f;
-  --brown:#3b3732; --gold:var(--olive); --sage:var(--charcoal); --sage-soft:var(--sky-soft);
-  --line:#e3dacb; --radius:4px; --shadow:none;
+  /* base site tokens (index.html inline CSS + generated pages) */
+  --bg:var(--white); --surface:var(--white); --ink:var(--navy); --muted:var(--text-muted);
+  --brown:var(--navy); --gold:var(--blue); --sage:var(--blue-ink); --sage-soft:var(--blue-50);
+  --line:var(--border); --radius:14px; --shadow:0 6px 20px rgba(18,52,90,.08);
 
-  /* services / reviews tokens */
-  --wellness-ivory:var(--cream); --wellness-paper:var(--paper);
-  --wellness-plum:var(--charcoal); --wellness-plum-dark:var(--charcoal-dark);
-  --wellness-muted:#5f584f; --wellness-gold:var(--olive); --wellness-border:#e3dacb;
+  /* services / reviews / outcall tokens */
+  --wellness-ivory:var(--white); --wellness-paper:var(--white);
+  --wellness-plum:var(--blue-ink); --wellness-plum-dark:var(--blue-deep);
+  --wellness-muted:var(--text-muted); --wellness-gold:var(--blue-ink); --wellness-border:var(--border);
 }
 
-body{background:var(--cream);color:var(--ink)}
-h1,h2,h3{font-weight:500;color:var(--charcoal);letter-spacing:-.01em}
-h2{font-size:clamp(1.9rem,3.6vw,2.8rem)}
-.en{color:var(--muted)}
+body{background:var(--white);color:var(--navy);font-family:var(--font-body)}
+h1,h2{font-family:var(--font-display);font-weight:400;letter-spacing:0;color:var(--blue-ink);line-height:1.35}
+h3{font-family:var(--font-body);font-weight:600;color:var(--navy);letter-spacing:-.005em}
+h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
+.en{color:var(--muted);font-family:var(--font-body)}
+a{text-underline-offset:3px}
 
-/* header */
-header{background:rgba(253,249,238,.94);border-bottom-color:var(--line)}
-.brand b{color:var(--charcoal)}
-nav a:hover{color:var(--charcoal)}
+/* header: white, blue logo, pink booking CTA */
+header{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border)}
+.brand b{font-family:var(--font-display);font-weight:400;color:var(--blue-ink)}
+nav a{color:var(--navy)}
+nav a:hover{color:var(--blue-ink)}
+.header-actions{display:flex;align-items:center;gap:10px}
+.header-book{padding:9px 18px;font-size:.95rem}
+@media (max-width:720px){.header-directions{display:none}} /* the bottom dock keeps directions on phones */
 
-/* buttons: dark pill like the template's BOOKINGS button; LINE keeps its brand green */
-.btn-primary{background:var(--charcoal);color:var(--cream)}
-.btn-primary:hover{background:var(--charcoal-dark)}
-.btn-ghost{background:transparent;border-color:var(--charcoal);color:var(--charcoal)}
-.btn:hover{box-shadow:none}
+/* buttons */
+.btn{transition:background-color .2s ease,border-color .2s ease,color .2s ease,transform .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(18,52,90,.12)}
+.btn-primary{background:var(--blue-ink);color:#fff}
+.btn-primary:hover{background:var(--blue-deep)}
+.btn-ghost{background:#fff;border-color:var(--blue-ink);color:var(--blue-ink)}
+.btn-ghost:hover{background:var(--blue-50)}
+.btn-book{background:var(--pink-ink);color:#fff}
+.btn-book:hover{background:var(--pink-deep)}
+.btn-line:hover{background:#066a30}
+.btns .btn-book{order:-1} /* booking first wherever it appears (hero, service pages, English page) */
 
-/* hero: photo on the left, copy on the right */
-.hero{padding:40px 0 48px}
-.hero-photo{border-radius:0;box-shadow:none;aspect-ratio:20/13} /* matches img/hero-foot-massage.webp (800x520) so the whole photo shows */
+/* hero */
+.hero{padding:44px 0 56px;background:linear-gradient(180deg,var(--blue-50) 0,#fff 70%)}
+.hero h1{color:var(--blue-ink)}
+.hero h1 .hero-service{font-family:var(--font-body);font-weight:600;color:var(--navy);font-size:.5em}
+.hero p.lead{color:var(--muted)}
+.eyebrow{color:var(--blue-ink);font-weight:600;letter-spacing:.02em}
+.hero-photo{border-radius:18px;box-shadow:var(--shadow);aspect-ratio:20/13} /* same 800x520 shape as the owner's slideshow GIF */
+/* hero slideshow: owner's GIF rebuilt from the real photos. 5 photos x 4s (3.2s hold + 0.8s crossfade), 20s loop.
+   Slow and calm on purpose; stops on the first photo under prefers-reduced-motion. */
+.hero-slideshow{position:relative}
+.hero-slideshow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:hero-fade 20s linear infinite}
+.hero-slideshow img:first-child{opacity:1}
+.hero-slideshow img:nth-child(1){animation-delay:-.8s}
+.hero-slideshow img:nth-child(2){animation-delay:3.2s}
+.hero-slideshow img:nth-child(3){animation-delay:7.2s}
+.hero-slideshow img:nth-child(4){animation-delay:11.2s}
+.hero-slideshow img:nth-child(5){animation-delay:15.2s}
+@keyframes hero-fade{0%{opacity:0}4%{opacity:1}20%{opacity:1}24%{opacity:0}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.hero-slideshow img{animation:none}}
 @media (min-width:821px){.hero-grid{grid-template-columns:1fr 1.05fr;gap:56px}.hero-grid>.hero-photo{order:-1}}
-.eyebrow{color:var(--olive);letter-spacing:.04em}
-/* free-parking callout: Luka House orange, gentle shine + glow (no fast flashing) */
-.parking-callout{position:relative;overflow:hidden;background:#c9501a;border-left:0;border-radius:4px;color:#fff;padding:14px 18px;font-size:1.02rem}
-.parking-callout strong{color:#fff;font-size:1.08em}
-.parking-callout::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-100%);pointer-events:none}
-@media (prefers-reduced-motion:no-preference){
-  .parking-callout{animation:luka-glow 2.4s ease-in-out infinite}
-  .parking-callout::before{animation:luka-shine 3.2s ease-in-out infinite}
-}
-@keyframes luka-glow{0%,100%{box-shadow:0 0 0 0 rgba(232,105,46,.55)}50%{box-shadow:0 0 0 8px rgba(232,105,46,0)}}
-@keyframes luka-shine{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
-.starting-price{background:var(--sand);color:var(--charcoal);border-radius:2px}
-.visit-hours,.trust-note{color:var(--olive)}
-.fact{background:var(--sand);border-color:transparent;border-radius:2px}
+/* parking note: calm light-blue panel (no glow/shine animation) */
+.parking-callout{background:var(--blue-50);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:10px;color:var(--navy);padding:14px 18px;font-size:1rem}
+.parking-callout strong{color:var(--blue-ink)}
+.visit-hours,.trust-note{color:var(--navy)}
+.starting-price{background:#fff;border:1px solid var(--border);border-radius:999px;color:var(--navy)}
+.fact{background:var(--blue-50);border-color:var(--border)}
 
-/* services: light-blue band, cream cards, table-like price rows */
-.wellness-services{background:var(--sky);border-block:0;color:var(--charcoal)}
-.wellness-services .services-eyebrow{color:var(--charcoal)}
-.wellness-services .services-eyebrow::before{background:var(--charcoal)}
-.wellness-services h2{color:var(--charcoal)}
-.wellness-services .services-subtitle,.wellness-services .services-intro{color:#3f4a4e}
-.wellness-services .services-welcome{background:var(--cream);border-left:0;border-radius:2px}
-.wellness-services .services-welcome>p{color:var(--muted)}
-.wellness-services .services-meta{border-bottom-color:rgba(59,55,50,.25);color:var(--charcoal)}
-.wellness-services .services-contact-line{border-radius:999px}
-.service-card,.wellness-services .item{background:var(--cream);border:0;border-radius:2px;box-shadow:none}
-.service-visual,.service-visual img{border-radius:0}
-.wellness-services .prices li,.service-prices li{background:transparent;border:1px solid var(--line);border-radius:0}
-.wellness-services .prices small,.service-prices small{color:var(--muted)}
-.service-book{border-radius:999px}
-.wellness-services .note{color:#3f4a4e}
-.outcall-service{background:var(--cream);border:0;border-radius:2px}
-.outcall-service-actions .services-contact-line{border-radius:999px}
-.offer-reopen{background:var(--cream);border-color:var(--charcoal);color:var(--charcoal);border-radius:999px}
-
-/* shop photos: olive band ("Spa moments") */
-#photos{background:var(--olive);color:var(--olive-ink)}
-#photos h2,#photos .en,#photos .section-head p,#photos .note,#photos .note a{color:var(--olive-ink)}
-#photos .shop-photos figure{background:transparent;border:0;border-radius:0}
-#photos .shop-photos figcaption{color:var(--olive-ink);padding-inline:0}
-
-/* about: cream, photo on the right */
-.about{background:var(--cream);border:0}
-.about-photo{border-radius:0;box-shadow:none}
-@media (min-width:821px){.about-grid{grid-template-columns:1.1fr 1fr}.about-grid>.about-photo{order:2}}
-.checks svg{color:var(--olive)}
-
-/* reviews: "From our guests" sand cards */
-.wellness-reviews{background:var(--cream)}
-.review-summary-card{background:var(--sand);border:0;border-radius:2px;box-shadow:none}
-.review-summary-panel{border-left-color:rgba(59,55,50,.18)}
-.review-google-cta{border-radius:999px}
-.curated-review-card{background:var(--sand);border:0;border-radius:2px;box-shadow:none}
-.review-initials{background:var(--sky-soft);color:var(--charcoal)}
-.wellness-reviews .review-gold-stars,.review-card-stars{color:var(--charcoal)}
-.review-star-fill{fill:var(--charcoal)}
-.review-carousel-buttons button{border-color:var(--charcoal);color:var(--charcoal);background:transparent}
-.review-carousel-buttons button:hover:not(:disabled){background:var(--sand)}
-.curated-review-card blockquote{color:var(--charcoal)}
-.wellness-reviews .curated-review-grid{scrollbar-color:#b9ad95 transparent}
-
-/* faq + location */
-.faq-list details,.card,.panel{background:var(--sand);border-color:transparent;border-radius:2px}
-.faq-list summary{color:var(--charcoal)}
-.map{border-radius:0;border:0}
-
-/* generated service pages */
-.price-table th{background:var(--sky-deep);color:var(--charcoal);font-weight:500;padding-inline:12px}
-.price-table td{padding-inline:12px;border-bottom-color:var(--charcoal)}
-.price-table td:last-child,.price-table th:last-child{color:var(--charcoal)}
-.promo-note{background:var(--sky-soft);border-radius:2px}
-.other-services a{background:transparent;border-color:var(--charcoal);color:var(--charcoal)}
-.lang-menu summary{background:transparent;color:var(--charcoal)}
-.lang-menu ul{border-radius:4px}
-
-/* dialogs, footer, dock */
-.offer-dialog{background:var(--cream);border-radius:4px}
-.offer-close{background:var(--sand);color:var(--charcoal)}
-.offer-kicker,.offer-discount{color:var(--olive)}
-footer{background:var(--sand);border-top:0}
-footer a,.footer-links a{color:var(--charcoal)}
-.dock{background:rgba(253,249,238,.97)}
-.social-icon{background:transparent;border-color:var(--charcoal)}
-:focus-visible{outline-color:var(--charcoal)}
-
-/* minimal pass: fewer boxes, more air */
-.wellness-services .services-heading{grid-template-columns:1fr;margin-bottom:20px}
-.services-footer{text-align:center}
+/* sections: mostly white, light-blue bands for services and reviews */
 section{padding:72px 0}
 .section-head{margin-bottom:28px}
+.section-head p{color:var(--muted)}
+
+/* services: white cards on a very light blue band */
+.wellness-services{background:var(--blue-50);border-block:0;color:var(--navy)}
+.wellness-services .services-eyebrow{color:var(--blue-ink)}
+.wellness-services .services-eyebrow::before{background:var(--cyan)}
+.wellness-services h2{color:var(--blue-ink)}
+.wellness-services .services-heading{grid-template-columns:1fr;margin-bottom:24px}
+.wellness-services .services-subtitle,.wellness-services .services-intro,.wellness-services .note{color:var(--muted)}
+.wellness-services .services-welcome{background:#fff;border:1px solid var(--border);border-left:0;border-radius:14px}
+.wellness-services .services-meta{border-bottom-color:var(--border);color:var(--navy)}
+.wellness-services .services-grid{gap:28px}
+.service-card,.wellness-services .item{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 2px 10px rgba(18,52,90,.04)}
+.wellness-services .service-card:hover{border-color:var(--blue-100);box-shadow:0 12px 28px rgba(18,52,90,.10)}
+.wellness-services .service-card:focus-within{border-color:var(--blue)}
+.service-visual{background:var(--blue-50)}
+.service-visual,.service-visual img{border-radius:0}
+.wellness-services .service-number{color:var(--blue-ink)}
+.wellness-services .service-card h3{color:var(--navy)}
+.wellness-services .service-more{color:var(--blue-ink)}
+/* 60 / 90 / 120 minutes: three clear tiles, the starting price highlighted */
+.wellness-services .prices li,.service-prices li{background:#fff;border:1px solid var(--border);border-radius:10px}
+.wellness-services .service-prices .price-start{background:var(--blue-50);border-color:var(--blue-100)}
+.wellness-services .prices small,.service-prices small{color:var(--muted)}
+.wellness-services .service-prices b,.wellness-services .prices b{color:var(--blue-ink)}
+.wellness-services .service-book{border-radius:999px;background:#fff;border:1.5px solid var(--pink-ink);color:var(--pink-ink)}
+.wellness-services .service-book:hover{background:var(--pink-ink);color:#fff}
+.wellness-services .service-call{color:var(--blue-ink);border:1px solid var(--border);background:#fff}
+.wellness-services .service-call:hover{background:var(--blue-50)}
+.wellness-services .services-contact-line{border-radius:999px}
+.outcall-service{background:#fff;border:1px solid var(--border);border-radius:16px}
+.outcall-service-actions .services-contact-line{border-radius:999px}
+.offer-reopen,.wellness-services .services-footer .offer-reopen{background:#fff;border:1.5px solid var(--pink-ink);color:var(--pink-ink);border-radius:999px;font-weight:600}
+.offer-reopen:hover,.wellness-services .services-footer .offer-reopen:hover{background:var(--pink-ink);color:#fff}
+.services-footer{text-align:center}
+
+/* photo galleries */
+.service-gallery .service-gallery-btn{color:var(--blue-ink)}
+.service-gallery .service-gallery-count{background:rgba(18,52,90,.72)}
+.shop-photos .service-gallery-slide img{background:var(--blue-50)}
+
+/* shop photos: white section, soft cards */
+#photos{background:#fff;color:var(--navy)}
+#photos h2{color:var(--blue-ink)}
+#photos .section-head p,#photos .note,#photos .note a{color:var(--muted)}
+#photos .shop-photos figure{background:#fff;border:1px solid var(--border);border-radius:14px}
+#photos .shop-photos figcaption{color:var(--navy);padding:12px 14px}
+
+/* about */
+.about{background:var(--white);border-block:1px solid var(--border)}
+.about-photo{border-radius:18px;box-shadow:var(--shadow)}
+@media (min-width:821px){.about-grid{grid-template-columns:1.1fr 1fr}.about-grid>.about-photo{order:2}}
+.checks svg{color:var(--cyan)}
+
+/* reviews: light-blue band, white cards (text verbatim, unchanged) */
+.wellness-reviews{background:var(--blue-50)}
+.review-summary-card{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:none}
+.review-summary-panel{border-left-color:var(--border)}
+.review-google-cta{border-radius:999px;color:#fff}
+.curated-review-card{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:none}
+.review-initials{background:var(--blue-100);color:var(--blue-ink)}
+.wellness-reviews .review-gold-stars,.review-card-stars{color:var(--blue-ink)}
+.review-star-fill{fill:var(--blue)}
+.review-carousel-buttons button{border-color:var(--blue-ink);color:var(--blue-ink);background:#fff}
+.review-carousel-buttons button:hover:not(:disabled){background:var(--blue-100)}
+.curated-review-card blockquote{color:var(--navy)}
+.wellness-reviews .curated-review-grid{scrollbar-color:#9cc7ef transparent}
+
+/* faq + location */
+.faq-list details,.card,.panel{background:#fff;border:1px solid var(--border);border-radius:14px}
+.faq-list summary{color:var(--navy)}
+.faq-list details[open] summary{color:var(--blue-ink)}
+.faq-list a{color:var(--blue-ink)}
+.card dt{color:var(--muted)}
+.card dd a{color:var(--blue-ink)}
+.map{border-radius:14px;border:1px solid var(--border)}
+
+/* generated service pages */
+.crumbs a{color:var(--blue-ink)}
+.price-table th{background:var(--blue-50);color:var(--navy);font-weight:600;padding-inline:12px}
+.price-table td{padding-inline:12px;border-bottom-color:var(--border)}
+.price-table td:last-child,.price-table th:last-child{color:var(--blue-ink)}
+.promo-note{background:#FFF0F7;border:1px solid #FFD3E7;border-radius:10px}
+.other-services a{background:#fff;border-color:var(--border);color:var(--blue-ink)}
+.other-services a:hover{border-color:var(--blue)}
+.ticks li::marker{color:var(--cyan)}
+.lang-menu summary{background:#fff;color:var(--navy);border-color:var(--border)}
+.lang-menu ul{border-radius:10px;border-color:var(--border)}
+
+/* dialogs, footer, dock */
+.offer-dialog{background:#fff;border-color:var(--border);border-radius:20px}
+.offer-dialog::backdrop{background:rgba(18,52,90,.55)}
+.offer-close{background:var(--blue-50);color:var(--navy)}
+.offer-kicker{color:var(--blue-ink)}
+.offer-discount{color:var(--pink-ink)}
+.offer-price strong{color:var(--navy)}
+footer{background:var(--gray-50);border-top:1px solid var(--border);color:var(--muted)}
+footer a,.footer-links a{color:var(--navy)}
+footer a:hover,.footer-links a:hover{color:var(--blue-ink)}
+.social-icon{background:#fff;border-color:var(--border)}
+.social-icon:hover{background:var(--blue-50);border-color:var(--blue)}
+/* phone dock: booking first and widest, then call, then directions; never covers the footer (padding in base CSS) */
+.dock{background:rgba(255,255,255,.97);border-top:1px solid var(--border)}
+.dock a{flex:1}
+.dock .btn-book{order:-1;flex:1.6}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+@media (prefers-reduced-motion:reduce){.btn,.wellness-services .service-book{transition:none}.btn:hover{transform:none}}

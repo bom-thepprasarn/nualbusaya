@@ -63,7 +63,8 @@ class PagesTests(unittest.TestCase):
             if slug not in galleries:
                 self.assertNotIn('data-service-gallery', src, slug)
                 continue
-            home = re.findall(r'src="img/(%s/[^"]+)"' % slug, INDEX)
+            card = re.search(r'<article class="item service-card" id="%s".*?</article>' % slug, INDEX, re.S)[0]
+            home = re.findall(r'src="img/(%s/[^"]+)"' % slug, card)  # the hero slideshow reuses some photos
             self.assertEqual(len(home), galleries[slug], slug)
             self.assertEqual(re.findall(r'src="/img/(%s/[^"]+)"' % slug, src), home)
             for name in home:

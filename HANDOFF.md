@@ -96,3 +96,13 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 ## 22 Nov 2026 — hero photo
 - The hero panel uses the owner's foot-massage photo `img/hero-foot-massage.webp` (800×520, supplied as-is, no EXIF). `.hero-photo` in `styles/theme.css` is `aspect-ratio:20/13` to match it, so the whole photo shows. If you swap the hero photo again, update that ratio to the new photo's width/height.
 - `img/shop-thai-massage.jpg` is no longer shown on the page but is still the social share image (`og:image`, `twitter:image`, JSON-LD and every generated page's `og:image`), so keep it.
+
+## 22 Nov 2026 — Bright Blue Minimal Wellness redesign (owner-approved plan)
+- Replaces the 17 Nov cream/Canva look. All styling is still in `styles/theme.css` (loaded last on every page) as CSS variables: brand `--blue #0879E8`, `--cyan #00BCEB`, `--pink #FF3792`, neutrals `--navy #12345A`, `--blue-50 #F2F9FF`, `--gray-50 #F5F7FA`, `--border #E5EDF5`. Old token names (`--brown`, `--sage`, `--wellness-*`) are mapped onto the new ones so services/reviews/outcall CSS needed no edits.
+- Contrast rule: text and text-on-color use deeper shades so everything passes WCAG AA: blue text/buttons `--blue-ink #0868C7`, pink buttons `--pink-ink #D81B72`, muted text `#4A6178`. Cyan is decoration only (never text).
+- Fonts: Chonburi for H1/H2 and the brand name only; body Inter (Latin) + Noto Sans Thai. The Google Fonts link in `index.html` and `tools/build_pages.py` adds Chonburi + Inter; the old families stay loaded.
+- Logo: `img/icon-blue.png` is the original icon recoloured to #0879E8 (alpha mask; same artwork and proportions). `favicon.png` was recoloured in place. `img/icon.png` (brown original) is kept but unused.
+- Booking: pink `.btn-book` (LINE link, LINE icon) is the primary action: new header button “จองคิว”, hero, service pages, English page (“Book on LINE”), and first/widest in the phone dock. Service-card buttons are pink outlines. Other LINE buttons (outcall) keep LINE green. Header “นำทางมาร้าน” became an outline button and is hidden under 720 px (the dock has it).
+- Calm motion: the orange parking callout's glow/shine animation was removed (now a light-blue panel, same text). The hero slideshow is slower (5 photos × 4 s, 20 s loop) and stops under prefers-reduced-motion.
+- The 4 remaining service illustrations had backgrounds/outlines/leaves recoloured to the blue palette (skin and props untouched).
+- Tests: `tests/redesign_norm.py` maps the redesign's deliberate markup changes back for the fixture snapshot tests; run tests with `discover -s tests` so that helper is importable.

@@ -4,6 +4,8 @@ import json
 import re
 import unittest
 
+from redesign_norm import undo_redesign
+
 ROOT = Path(__file__).resolve().parents[1]
 HTML = (ROOT/'index.html').read_text(encoding='utf-8')
 BASE = (ROOT/'tests/fixtures/before-reviews.txt').read_text(encoding='utf-8')
@@ -51,10 +53,11 @@ class ReviewsTests(unittest.TestCase):
 
     def test_only_reviews_and_requested_line_asset_changed(self):
         def normalize(s):
+            s = undo_redesign(s)
             s = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', s, flags=re.S)
             # Entrance photos section is owner-curated and checked in test_redesign.
             s = re.sub(r'  <section id="photos"[^>]*>.*?  </section>', 'PHOTOS', s, flags=re.S)
-            s = re.sub(r'<div class="hero-photo">\s*<img [^>]*>', '<div class="hero-photo">HERO', s)  # owner hero photo, 22 Nov 2026
+            s = re.sub(r'<div class="hero-photo[^"]*">.*?</div>', '<div class="hero-photo">HERO</div>', s, flags=re.S)  # owner hero photo, 22 Nov 2026
             s = s.replace('<br><strong>ร้านอยู่ด้านในโรงแรม</strong>', '')  # owner-requested hero note, 22 Nov 2026
             # Owner photo galleries (22 Nov 2026) replace these cards' illustrations.
             s = re.sub(r'<div class="service-visual service-gallery" data-service-gallery>.*?src="img/([a-z-]+)/.*?(<span class="service-number" aria-hidden="true">\d+</span>)',

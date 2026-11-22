@@ -166,6 +166,7 @@ def lang_menu(lang, th_href="/", en_href="/en/", root=""):
             f'    </details>')
 
 
+ICON_LINE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.5s5.9-3.5 8-5.9C21.4 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>'
 ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>'
 
 
@@ -204,7 +205,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="theme-color" content="#4e6b55">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600&family=Noto+Serif+Thai:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Inter:wght@400;500;600&family=Noto+Sans+Thai:wght@400;500;600&family=Noto+Serif+Thai:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles/site.css">
 <link rel="stylesheet" href="/styles/theme.css">
 <script type="application/ld+json">
@@ -221,17 +222,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 def header(lang, path="/"):
     if lang == "th":
         nav = [("/#menu", "บริการและราคา"), ("/#reviews", "รีวิว"), ("/#faq", "คำถามที่พบบ่อย"), ("/#location", "แผนที่")]
-        cta, home = "นำทางมาร้าน", "นวลบุษยา หน้าแรก"
+        cta, home, book = "นำทางมาร้าน", "นวลบุษยา หน้าแรก", "จองคิว"
         menu = lang_menu("th", th_href=path, root="/")
     else:
         nav = [("#services", "Services &amp; prices"), ("#visit", "Visit"), ("#faq", "FAQ")]
-        cta, home = "Directions", "Nualbusaya home"
+        cta, home, book = "Directions", "Nualbusaya home", "Book"
         menu = lang_menu("en", root="/")
     links = "\n      ".join(f'<a href="{h}">{t}</a>' for h, t in nav)
     return f"""<header>
   <div class="wrap bar">
     <a class="brand" href="{'/' if lang == 'th' else '/en/'}" aria-label="{home}">
-      <img src="/img/icon.png" alt="" width="40" height="40">
+      <img src="/img/icon-blue.png" alt="" width="40" height="40">
       <b>{'นวลบุษยา' if lang == 'th' else 'Nualbusaya'}</b>
     </a>
     <nav aria-label="{'เมนูหลัก' if lang == 'th' else 'Main menu'}">
@@ -239,7 +240,8 @@ def header(lang, path="/"):
     </nav>
     <div class="header-actions">
     {menu}
-    <a class="btn btn-primary" href="{DIRECTIONS}" target="_blank" rel="noopener" style="padding:9px 16px;font-size:.95rem">{ICON_PIN}{cta}</a>
+    <a class="btn btn-ghost header-directions" href="{DIRECTIONS}" target="_blank" rel="noopener" style="padding:9px 16px;font-size:.95rem">{ICON_PIN}{cta}</a>
+    <a class="btn btn-book header-book" href="{LINE}" target="_blank" rel="noopener">{ICON_LINE}{book}</a>
     </div>
   </div>
 </header>
@@ -250,11 +252,11 @@ def footer(lang, svc):
     if lang == "th":
         links = "".join(f'<a href="/{s["slug"]}/">{s["th"]}</a>' for s in svc) + '<a href="/outcall/">รับนวดนอกสถานที่</a>'
         line = "© 2026 นวลบุษยา · ร้านนวดลำลูกกา · 63/19 ภายในโรงแรม Luka House ต.บึงคำพร้อย อ.ลำลูกกา จ.ปทุมธานี 12150"
-        dock = ("นำทางมาร้าน", "โทร", "LINE")
+        dock = ("นำทางมาร้าน", "โทร", "จองคิว LINE")
     else:
         links = '<a href="#services">Services &amp; prices</a><a href="#visit">Visit</a><a href="#faq">FAQ</a>'
         line = "© 2026 Nualbusaya · Massage in Lam Luk Ka · 63/19 inside Luka House Hotel, Bueng Kham Phroi, Lam Luk Ka, Pathum Thani 12150"
-        dock = ("Directions", "Call", "LINE")
+        dock = ("Directions", "Call", "Book on LINE")
     return f"""<footer>
   <div class="wrap row" style="flex-direction:column;align-items:flex-start;gap:10px">
     <nav class="footer-links" aria-label="{'บริการทั้งหมด' if lang == 'th' else 'Other pages'}">{links}</nav>
@@ -264,7 +266,7 @@ def footer(lang, svc):
 <div class="dock" aria-label="{'นำทางและติดต่อร้าน' if lang == 'th' else 'Directions and contact'}">
   <a class="btn btn-primary" href="{DIRECTIONS}" target="_blank" rel="noopener">{dock[0]}</a>
   <a class="btn btn-ghost" href="tel:{PHONE_TEL}">{dock[1]}</a>
-  <a class="btn btn-line" href="{LINE}" target="_blank" rel="noopener">{dock[2]}</a>
+  <a class="btn btn-book" href="{LINE}" target="_blank" rel="noopener">{dock[2]}</a>
 </div>
 </body>
 </html>
@@ -280,11 +282,11 @@ BUSINESS = {
 
 
 def contact_buttons(lang="th"):
-    t = ("นำทางมาร้าน", f"โทร {PHONE}", "สอบถามคิวทาง LINE") if lang == "th" else ("Directions", f"Call {PHONE}", "Ask on LINE")
+    t = ("นำทางมาร้าน", f"โทร {PHONE}", "จองคิวทาง LINE") if lang == "th" else ("Directions", f"Call {PHONE}", "Book on LINE")
     return f"""<div class="btns">
           <a class="btn btn-primary" href="{DIRECTIONS}" target="_blank" rel="noopener">{ICON_PIN}{t[0]}</a>
           <a class="btn btn-ghost" href="tel:{PHONE_TEL}">{t[1]}</a>
-          <a class="btn btn-line" href="{LINE}" target="_blank" rel="noopener">{t[2]}</a>
+          <a class="btn btn-book" href="{LINE}" target="_blank" rel="noopener">{ICON_LINE}{t[2]}</a>
         </div>"""
 
 

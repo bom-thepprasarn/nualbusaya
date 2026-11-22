@@ -4,6 +4,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re
 import unittest
+
+from redesign_norm import undo_redesign
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -93,9 +95,15 @@ class RedesignTests(unittest.TestCase):
         schema_pattern = r'<script type="application/ld\+json">(.*?)</script>'
         self.assertEqual(json.loads(re.search(schema_pattern, OLD, re.S)[1]),
                          json.loads(re.search(schema_pattern, NEW, re.S)[1]))
+        fonts = lambda links: [a for a in links if 'fonts.googleapis.com/css2' in a.get('href', '')]
         old_links = [a for t, a in Elements(old_head).elements if t == 'link']
         new_links = [a for t, a in Elements(new_head).elements if t == 'link']
-        self.assertTrue(all(a in new_links for a in old_links))
+        self.assertTrue(all(a in new_links for a in old_links if a not in fonts(old_links)))
+        # 22 Nov 2026 Bright Blue redesign adds Chonburi + Inter; every earlier font stays loaded.
+        old_fams = re.findall(r'family=([^&]+)', fonts(old_links)[0]['href'])
+        new_fams = re.findall(r'family=([^&]+)', fonts(new_links)[0]['href'])
+        self.assertTrue(set(old_fams) <= set(new_fams))
+        self.assertIn('Chonburi', new_fams)
 
     def test_navigation_ids_and_existing_outbound_urls_are_preserved(self):
         old_el, new_el = Elements(OLD).elements, Elements(NEW).elements
@@ -142,10 +150,11 @@ class RedesignTests(unittest.TestCase):
 
     def test_no_change_outside_scoped_section_head_and_footer(self):
         def normalize(source):
+            source = undo_redesign(source)
             source = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', source, flags=re.S)
             source = re.sub(r'  <section id="menu"[^>]*>.*?  </section>', 'SERVICES', source, flags=re.S)
             source = re.sub(r'  <section id="photos"[^>]*>.*?  </section>', 'PHOTOS', source, flags=re.S)
-            source = re.sub(r'<div class="hero-photo">\s*<img [^>]*>', '<div class="hero-photo">HERO', source)  # owner hero photo, 22 Nov 2026
+            source = re.sub(r'<div class="hero-photo[^"]*">.*?</div>', '<div class="hero-photo">HERO</div>', source, flags=re.S)  # owner hero photo, 22 Nov 2026
             source = source.replace('<br><strong>ร้านอยู่ด้านในโรงแรม</strong>', '')  # owner-requested hero note, 22 Nov 2026
             source = re.sub(r'  <section id="reviews"[^>]*>.*?  </section>', 'REVIEWS', source, flags=re.S)
             source = re.sub(r'<script src="config.js"></script>\s*<script>.*?</script>', '', source, flags=re.S)
@@ -169,15 +178,22 @@ class RedesignTests(unittest.TestCase):
         self.assertEqual(callout, '<strong>ขับรถเข้ามาจอดภายในโรงแรมลูก้าเฮาส์ได้เลย</strong><br>'
                                   '<strong>ร้านอยู่ด้านในโรงแรม</strong><br>จอดฟรีสำหรับลูกค้าร้านนวลบุษยา')
 
-    def test_hero_uses_owner_photo_uncropped(self):
-        hero = re.search(r'<div class="hero-photo">\s*<img ([^>]*)>', NEW)[1]
-        attrs = dict(re.findall(r'(\w+)="([^"]*)"', hero))
-        self.assertEqual(attrs['src'], 'img/hero-foot-massage.webp')
-        self.assertTrue((ROOT / attrs['src']).is_file())
-        self.assertTrue(attrs['alt'])
-        self.assertEqual((attrs['width'], attrs['height']), ('800', '520'))
+    def test_hero_slideshow_follows_owner_gif(self):
+        # Owner's slideshow GIF (22 Nov 2026) rebuilt from the real photos with a CSS crossfade.
+        hero = re.search(r'<div class="hero-photo hero-slideshow">(.*?)</div>', NEW, re.S)[1]
+        imgs = [dict(re.findall(r'([\w-]+)="([^"]*)"', m)) for m in re.findall(r'<img ([^>]*)>', hero)]
+        self.assertEqual([i['src'] for i in imgs], [
+            'img/foot-massage/foot-massage-1.jpg', 'img/thai-massage/thai-massage-3.jpg',
+            'img/thai-massage/thai-massage-2.jpg', 'img/thai-massage/thai-massage-1.jpg',
+            'img/head-neck-shoulder/head-neck-shoulder-1.jpg'])
+        for i in imgs:
+            self.assertTrue((ROOT / i['src']).is_file(), i['src'])
+            self.assertTrue(i['alt'])
+        self.assertEqual(imgs[0].get('fetchpriority'), 'high')
         theme = (ROOT / 'styles/theme.css').read_text(encoding='utf-8')
-        self.assertIn('.hero-photo{border-radius:0;box-shadow:none;aspect-ratio:20/13}', theme)  # 800/520 frame
+        self.assertIn('.hero-photo{border-radius:18px;box-shadow:var(--shadow);aspect-ratio:20/13}', theme)
+        self.assertIn('animation:hero-fade 20s linear infinite', theme)  # slowed in the redesign
+        self.assertIn('@media (prefers-reduced-motion:reduce){.hero-slideshow img{animation:none}}', theme)
 
     def test_entrance_and_parking_photos_follow_owner_instructions(self):
         photos = NEW.split('<section id="photos">')[1].split('</section>')[0]
