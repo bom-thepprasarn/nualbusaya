@@ -90,5 +90,5 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 ## 22 Nov 2026 — entrance photo galleries (#photos)
 - First card is now a 3-photo gallery captioned “ร้านอยู่ด้านในโรงแรม” (was a single sign photo captioned “สังเกตป้ายโรงแรมลูก้าเฮาส์ แล้วขับรถเข้ามาจอดได้เลย”): `img/entrance/hotel-1..3.jpg` = Luka House building and car park, orange street sign with arrow, street view of the entrance.
 - Second card “หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา” is now a 2-photo gallery of the real shop front (`img/entrance/shop-1..2.jpg`), replacing `img/shop-entrance-luka-house.jpg`.
-- Photos are 720 px max, EXIF stripped, shown uncropped in the card's 3:4 frame (landscape photos get bars). Same gallery markup and arrows as the service cards; extra sizing is the `.shop-photos .service-gallery…` rules at the end of `styles/services.css`.
+- Photos are 720 px max, EXIF stripped, shown uncropped in the card's 3:4 frame. `hotel-1.jpg` (originally landscape) was cropped to 3:4 around the LUKA HOUSE sign on the owner's request so it fills the frame like the others. Same gallery markup and arrows as the service cards; extra sizing is the `.shop-photos .service-gallery…` rules at the end of `styles/services.css`.
 - `img/luka-house-entrance-sign.jpg` and `img/shop-entrance-luka-house.jpg` are no longer referenced by any page.
