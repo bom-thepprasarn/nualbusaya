@@ -81,7 +81,7 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Service English names now live in `data-en` on each homepage card `<h3>`; `tools/build_pages.py` reads them from there for `/en/`.
 
 ## 22 Nov 2026 — Thai massage photo card
-- The homepage Thai massage card (`#thai-massage`) shows the owner's four LINE-album photos instead of the illustration, in a swipeable card with previous/next arrows and a “1 / 4” counter.
-- Photos: `img/thai-massage/thai-massage-1..4.jpg`, 900 px wide, EXIF/GPS stripped; the portrait room photo was cropped to 3:2. Order: technique photos first, room last.
+- The homepage Thai massage card (`#thai-massage`) shows the owner's three LINE-album technique photos instead of the illustration, in a swipeable card with previous/next arrows and a “1 / 3” counter. The bed-only room photo was removed on the owner's request (22 Nov).
+- Photos: `img/thai-massage/thai-massage-1..3.jpg`, 900×675 (4:3), EXIF/GPS stripped. The gallery frame is 4:3 with `object-fit: contain` so the whole photo is always visible (the owner asked for no cropping); this card's photo is therefore a little taller than the illustrations on other cards.
 - Markup is `[data-service-gallery]` in `index.html`; styles are at the end of `styles/services.css` (rerun `python tools/build_pages.py` so `styles/site.css` stays in sync); arrow logic is the second block in `scripts/services.js`. Without JS the photos still scroll by swipe/trackpad and the arrows stay hidden.
 - `/thai-massage/` shows the same gallery under the contact buttons. `tools/build_pages.py` (`gallery_from_card`) copies it from the homepage card on build, so edit photos only in `index.html` and rerun the build. Gallery CSS is generic (`.service-gallery …`); page sizing is `.page-gallery` in the build's generated-pages CSS. Other service cards and pages still use the illustration.

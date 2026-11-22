@@ -59,7 +59,7 @@ class PagesTests(unittest.TestCase):
     def test_thai_massage_page_reuses_homepage_photo_gallery(self):
         src = page('thai-massage')
         home = re.findall(r'src="img/(thai-massage/[^"]+)"', INDEX)
-        self.assertEqual(len(home), 4)
+        self.assertEqual(len(home), 3)
         self.assertEqual(re.findall(r'src="/img/(thai-massage/[^"]+)"', src), home)
         for name in home:
             self.assertTrue((ROOT / 'img' / name).is_file(), name)

@@ -143,7 +143,6 @@ def site_css():
 .footer-links a{color:var(--muted)}
 .lang-switch{font-size:.9rem;color:var(--muted)}
 .page-gallery{max-width:760px;border-radius:var(--radius)}
-.page-gallery .service-gallery-slide img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
 """
     services_css = (ROOT / "styles/services.css").read_text(encoding="utf-8")
     extra += services_css[services_css.index("/* language dropdown"):]

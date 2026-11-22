@@ -299,7 +299,8 @@
 .service-gallery .service-gallery-track::-webkit-scrollbar { display: none; }
 .service-gallery .service-gallery-track:focus-visible { outline: 3px solid var(--wellness-plum); outline-offset: -3px; }
 .service-gallery .service-gallery-slide { flex: 0 0 100%; margin: 0; scroll-snap-align: start; }
-.service-gallery .service-gallery-slide img { object-position: 50% 28%; }
+/* Show the whole photo (owner request): 4:3 frame matches the photos, contain never crops. */
+.service-gallery .service-gallery-slide img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; background: #eee2dd; }
 .service-gallery .service-gallery-btn {
   position: absolute;
   top: 50%;
