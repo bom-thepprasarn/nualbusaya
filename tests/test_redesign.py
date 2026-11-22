@@ -146,6 +146,7 @@ class RedesignTests(unittest.TestCase):
             source = re.sub(r'  <section id="menu"[^>]*>.*?  </section>', 'SERVICES', source, flags=re.S)
             source = re.sub(r'  <section id="photos"[^>]*>.*?  </section>', 'PHOTOS', source, flags=re.S)
             source = re.sub(r'<div class="hero-photo">\s*<img [^>]*>', '<div class="hero-photo">HERO', source)  # owner hero photo, 22 Nov 2026
+            source = source.replace('<br><strong>ร้านอยู่ด้านในโรงแรม</strong>', '')  # owner-requested hero note, 22 Nov 2026
             source = re.sub(r'  <section id="reviews"[^>]*>.*?  </section>', 'REVIEWS', source, flags=re.S)
             source = re.sub(r'<script src="config.js"></script>\s*<script>.*?</script>', '', source, flags=re.S)
             source = re.sub(r'<link rel="stylesheet" href="styles/reviews.css">\s*', '', source)
@@ -162,6 +163,11 @@ class RedesignTests(unittest.TestCase):
                 '<a href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener">LINE</a>', source)
             return re.sub(r'\s+', ' ', source).strip()
         self.assertEqual(normalize(NEW), normalize(OLD))
+
+    def test_parking_callout_says_shop_is_inside_hotel(self):
+        callout = re.search(r'<p class="parking-callout">(.*?)</p>', NEW)[1]
+        self.assertEqual(callout, '<strong>ขับรถเข้ามาจอดภายในโรงแรมลูก้าเฮาส์ได้เลย</strong><br>'
+                                  '<strong>ร้านอยู่ด้านในโรงแรม</strong><br>จอดฟรีสำหรับลูกค้าร้านนวลบุษยา')
 
     def test_hero_uses_owner_photo_uncropped(self):
         hero = re.search(r'<div class="hero-photo">\s*<img ([^>]*)>', NEW)[1]
