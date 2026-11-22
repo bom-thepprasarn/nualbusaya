@@ -77,26 +77,33 @@ class PagesTests(unittest.TestCase):
         for s in ['outcall', 'en']:
             self.assertNotIn('data-service-gallery', page(s), s)
 
-    def test_deep_tissue_landing_page_follows_seo_brief(self):
-        # SEO brief, 22 Nov 2026: expanded best-seller page, FAQ mirrored in FAQPage schema.
-        src = page('deep-tissue')
-        title = re.search(r'<title>(.*?)</title>', src)[1]
-        self.assertLessEqual(len(title), 60)
-        self.assertIn('ขายดี', title)
-        desc = re.search(r'<meta name="description" content="([^"]*)"', src)[1]
-        self.assertLessEqual(len(desc), 130)
-        self.assertIn(card_prices('deep-tissue')[0], desc)
-        schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', src, re.S)[1])
-        faq = [n for n in schema['@graph'] if n['@type'] == 'FAQPage'][0]['mainEntity']
-        visible = re.findall(r'<details><summary>(.*?)</summary><p>(.*?)</p></details>', src)
-        self.assertEqual([(q['name'], q['acceptedAnswer']['text']) for q in faq],
-                         [(q.replace('&quot;', '"'), a.replace('&quot;', '"')) for q, a in visible])
-        for h2 in ('เหมาะกับใคร', 'ขั้นตอนการมาใช้บริการ', 'เทียบกับนวดแบบอื่นของร้าน'):
-            self.assertIn(h2, src)
-        table = re.search(r'<table class="price-table compare-table">.*?</table>', src, re.S)[0]
-        for key in ('thai-massage', 'deep-tissue', 'head-neck-shoulder'):
-            self.assertIn(f"{int(card_prices(key)[0]):,} บาท", table)
-        self.assertEqual(src.count('class="btn btn-book"'), 3)  # top of page, after the content, phone dock
+    def test_expanded_landing_pages_follow_seo_brief(self):
+        # SEO brief / content calendar, 22 Nov 2026: expanded pages, FAQ mirrored in FAQPage schema.
+        expanded = {'deep-tissue': ('ขายดี', ['thai-massage', 'deep-tissue', 'head-neck-shoulder']),
+                    'aromatherapy': ('', ['aromatherapy', 'oil-massage', 'thai-oil'])}
+        for slug, (title_word, compared) in expanded.items():
+            src = page(slug)
+            title = re.search(r'<title>(.*?)</title>', src)[1]
+            self.assertLessEqual(len(title), 60, slug)
+            self.assertIn(title_word, title)
+            desc = re.search(r'<meta name="description" content="([^"]*)"', src)[1]
+            self.assertLessEqual(len(desc), 130, slug)
+            self.assertIn(card_prices(slug)[0], desc)
+            schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', src, re.S)[1])
+            faq = [n for n in schema['@graph'] if n['@type'] == 'FAQPage'][0]['mainEntity']
+            visible = re.findall(r'<details><summary>(.*?)</summary><p>(.*?)</p></details>', src)
+            self.assertEqual([(q['name'], q['acceptedAnswer']['text']) for q in faq],
+                             [(q.replace('&quot;', '"'), a.replace('&quot;', '"')) for q, a in visible], slug)
+            for h2 in ('เหมาะกับใคร', 'ขั้นตอนการมาใช้บริการ', 'เทียบกับนวดแบบอื่นของร้าน'):
+                self.assertIn(h2, src)
+            table = re.search(r'<table class="price-table compare-table">.*?</table>', src, re.S)[0]
+            for key in compared:
+                self.assertIn(f"{int(card_prices(key)[0]):,} บาท", table)
+            self.assertEqual(src.count('class="btn btn-book"'), 3)  # top of page, after the content, phone dock
+            self.assertNotIn('รีด' + 'เส้น', src)
+        # the promo answer is computed from the 120-minute card price
+        p120 = int(card_prices('aromatherapy')[-1])
+        self.assertIn(f"จาก {p120:,} บาท เหลือ {p120 - 100:,} บาท", page('aromatherapy'))
         # other service pages keep the short template until their own brief
         self.assertNotIn('FAQPage', page('thai-massage'))
 
