@@ -86,7 +86,9 @@ class PagesTests(unittest.TestCase):
                     'aromatherapy': ('', ['aromatherapy', 'oil-massage', 'thai-oil']),
                     'head-neck-shoulder': ('', ['head-neck-shoulder', 'deep-tissue', 'thai-massage']),
                     'foot-massage': ('', ['foot-massage', 'head-neck-shoulder', 'thai-massage']),
-                    'thai-massage': ('', ['thai-massage', 'thai-oil', 'deep-tissue'])}
+                    'thai-massage': ('', ['thai-massage', 'thai-oil', 'deep-tissue']),
+                    'oil-massage': ('', ['oil-massage', 'aromatherapy', 'thai-oil']),
+                    'thai-oil': ('', ['thai-oil', 'thai-massage', 'oil-massage'])}
         for slug, (title_word, compared) in expanded.items():
             src = page(slug)
             title = re.search(r'<title>(.*?)</title>', src)[1]
@@ -122,8 +124,12 @@ class PagesTests(unittest.TestCase):
         thai = page('thai-massage')
         for fact in ('มีชุดให้เปลี่ยน', 'นวดบนเตียงนวด', 'ลูกค้าส่วนใหญ่ที่มานวดไทยเลือก 120 นาที'):
             self.assertIn(fact, thai)
-        # other service pages keep the short template until their own brief
-        self.assertNotIn('FAQPage', page('oil-massage'))
+        # owner answers, 22 Nov 2026: oil + Thai oil: shop clothes, full body except the face, massage bed, 120 minutes
+        for slug, name in (('oil-massage', 'นวดน้ำมัน'), ('thai-oil', 'นวดไทยออย')):
+            for fact in ('มีชุดให้เปลี่ยน', 'ทั้งตัว ยกเว้นใบหน้า', 'บนเตียงนวด', f'ลูกค้าส่วนใหญ่ที่มา{name}เลือก 120 นาที'):
+                self.assertIn(fact, page(slug), slug)
+        # every service page is now expanded (content calendar weeks 1-9)
+        self.assertEqual(sorted(expanded), sorted(SERVICES))
 
     def test_aroma_vs_oil_article(self):
         # Content calendar week 3 (22 Nov 2026): facts and prices come from the homepage cards only.
