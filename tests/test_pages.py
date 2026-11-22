@@ -13,7 +13,8 @@ SERVICES = ['thai-massage', 'foot-massage', 'head-neck-shoulder', 'deep-tissue',
 PAGES = SERVICES + ['outcall', 'en']
 GUIDE = 'guides/aromatherapy-vs-oil-massage'
 GUIDE2 = 'guides/thai-oil-massage'
-ALL_PAGES = PAGES + ['guides', GUIDE, GUIDE2]
+GUIDE3 = 'guides/first-visit'
+ALL_PAGES = PAGES + ['guides', GUIDE, GUIDE2, GUIDE3]
 BANNED = 'รีด' + 'เส้น'
 
 
@@ -181,6 +182,24 @@ class PagesTests(unittest.TestCase):
         self.assertIn(f'href="/{GUIDE}/"', src)
         for s in ('thai-oil', 'thai-massage', 'guides'):
             self.assertIn(f'href="/{GUIDE2}/"', page(s), s)
+
+    def test_first_visit_article(self):
+        # Content calendar week 10. Owner answers, 22 Nov 2026: shop clothes for Thai, oil, Thai oil and
+        # aromatherapy; curtain around each bed; arriving on time is fine.
+        src = page(GUIDE3)
+        self.assertLessEqual(len(re.search(r'<title>(.*?)</title>', src)[1]), 70)
+        self.assertLessEqual(len(re.search(r'<meta name="description" content="([^"]*)"', src)[1]), 130)
+        schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', src, re.S)[1])
+        faq = [n for n in schema['@graph'] if n['@type'] == 'FAQPage'][0]['mainEntity']
+        visible = re.findall(r'<details><summary>(.*?)</summary><p>(.*?)</p></details>', src)
+        self.assertEqual([(q['name'], q['acceptedAnswer']['text']) for q in faq], visible)
+        self.assertEqual(faq[0]['name'], 'นวดอโรม่าต้องถอดหมดไหม?')
+        for fact in ('ม่านกั้นรอบเตียง', 'มาตามเวลาที่นัดได้เลย', 'ยกเว้นนวดไทย', 'ไม่ใช่การรักษาโรค'):
+            self.assertIn(fact, src)
+        for slug in ('thai-massage', 'oil-massage', 'thai-oil', 'aromatherapy'):
+            self.assertIn(f'<tr><td><a href="/{slug}/">', src)
+        for s in ('aromatherapy', 'thai-massage', 'oil-massage', 'thai-oil', 'guides'):
+            self.assertIn(f'href="/{GUIDE3}/"', page(s), s)
 
     def test_promotion_excludes_thai_massage(self):
         self.assertNotIn('โปรลูกค้าเว็บไซต์', page('thai-massage'))

@@ -736,6 +736,16 @@ ARTICLES = [
         "related": ["thai-oil", "thai-massage"],
         "body": "thai_oil",
     },
+    {
+        "slug": "first-visit",
+        "date": "2026-11-22",
+        "title": "มานวดครั้งแรกเตรียมตัวยังไง นวดอโรม่าต้องถอดหมดไหม",
+        "h1": "มานวดครั้งแรกต้องเตรียมตัวอย่างไร",
+        "desc": "มานวดครั้งแรกที่นวลบุษยาเตรียมตัวยังไง จองคิว ที่จอดรถ ชุดที่ร้านเตรียมให้ นวดอโรม่าต้องถอดหมดไหม และการชำระเงิน",
+        "image": "staff/staff-1.jpg",
+        "related": ["aromatherapy", "thai-massage", "oil-massage", "thai-oil"],
+        "body": "first_visit",
+    },
 ]
 
 
@@ -859,7 +869,65 @@ def body_thai_oil(a, by):
     return body, faq
 
 
-ARTICLE_BODIES = {"aroma_vs_oil": body_aroma_vs_oil, "thai_oil": body_thai_oil}
+def body_first_visit(a, by):
+    link = lambda key: f'<a href="/{by[key]["slug"]}/">{by[key]["th"]}</a>'
+    clothes = ["thai-massage", "oil-massage", "thai-oil", "aromatherapy"]
+    clothes_text = " ".join(by[k]["th"] for k in clothes[:-1]) + " และ" + by[clothes[-1]]["th"]
+    lead = ("มานวดที่ร้านนวลบุษยาครั้งแรก ไม่ต้องเตรียมอะไรมาก จองคิวก่อน มาตามเวลาที่นัด "
+            f"ร้านมีชุดให้เปลี่ยนสำหรับ{clothes_text} และมีม่านกั้นรอบเตียงนวดแต่ละเตียง")
+    faq = [
+        ("นวดอโรม่าต้องถอดหมดไหม?", "ไม่ต้องกังวล ที่นวลบุษยาร้านมีชุดให้เปลี่ยนก่อนนวดอโรม่า และมีม่านกั้นรอบเตียงนวด ถ้าไม่แน่ใจเรื่องชุด ถามพนักงานได้เลย"),
+        ("ต้องเตรียมชุดมาเองไหม?", f"ไม่ต้อง ร้านมีชุดให้เปลี่ยนสำหรับ{clothes_text} ส่วนบริการอื่น สอบถามพนักงานได้"),
+        ("ต้องมาก่อนเวลานัดไหม?", "มาตามเวลาที่นัดได้เลย"),
+        ("ต้องจองคิวก่อนไหม?", f"ร้านมีหมอนวดประจำ 2 ท่าน แนะนำให้โทร {PHONE} หรือทัก LINE @288ojpuq สอบถามคิวก่อนเดินทาง"),
+        ("ชำระเงินแบบไหนได้บ้าง?", "เงินสด โอนเงิน หรือพร้อมเพย์"),
+    ]
+    faq_html = "\n".join(f"        <details><summary>{html.escape(q)}</summary><p>{html.escape(ans)}</p></details>" for q, ans in faq)
+    clothes_rows = "\n".join(f"            <tr><td>{link(k)}</td><td>ร้านมีชุดให้เปลี่ยน</td></tr>" for k in clothes)
+    body = f"""  <section class="guide" id="guide"><article>
+    <div class="wrap">
+      <p class="lead">{html.escape(lead)}</p>
+      <h2>ก่อนมา: จองคิวและเดินทาง</h2>
+      <ul class="ticks">
+        <li>จองคิวทาง LINE @288ojpuq หรือโทร {PHONE} ร้านมีหมอนวดประจำ 2 ท่าน จึงแนะนำให้จองก่อน</li>
+        <li>มาตามเวลาที่นัดได้เลย ไม่ต้องมาก่อนเวลา</li>
+        <li>ร้านอยู่ด้านในโรงแรม Luka House ต.บึงคำพร้อย อ.ลำลูกกา ขับรถเข้ามาจอดภายในโรงแรมได้ฟรี ดู<a href="/#photos">รูปทางเข้าร้าน</a>ไว้ก่อนมา จะหาร้านง่ายขึ้น</li>
+        <li>ร้านเปิดทุกวัน 10:00–21:00 น.</li>
+      </ul>
+      <h2>เรื่องชุด: ร้านมีชุดให้เปลี่ยน</h2>
+      <table class="price-table compare-table guide-table">
+        <thead><tr><th scope="col">บริการ</th><th scope="col">ชุด</th></tr></thead>
+        <tbody>
+{clothes_rows}
+        </tbody>
+      </table>
+      <p class="guide-note">บริการอื่น เช่น {link("foot-massage")} และ{link("head-neck-shoulder")} สอบถามเรื่องชุดกับพนักงานได้</p>
+      <h2>นวดอโรม่าต้องถอดหมดไหม</h2>
+      <p>คำถามนี้เจอบ่อยสำหรับคนที่ยังไม่เคยนวดอโรม่า ที่นวลบุษยา ร้านมีชุดให้เปลี่ยนก่อนนวดอโรม่า เช่นเดียวกับ{link("oil-massage")}และ{link("thai-oil")} ถ้าไม่แน่ใจ ถามพนักงานก่อนเปลี่ยนชุดได้เลย</p>
+      <h2>ความเป็นส่วนตัว</h2>
+      <p>เตียงนวดแต่ละเตียงมีม่านกั้นรอบเตียง</p>
+      <h2>ระหว่างนวด</h2>
+      <ul class="ticks">
+        <li>บอกหมอนวดได้เลยว่าต้องการน้ำหนักมือหนักหรือเบา</li>
+        <li>อยากให้เน้นบริเวณไหนเป็นพิเศษ บอกหมอนวดได้ หรือเลือก{link("deep-tissue")}</li>
+        <li>ถ้ามีอาการบาดเจ็บหรือโรคประจำตัว ควรปรึกษาแพทย์ก่อนรับบริการนวด บริการของร้านเป็นการนวดเพื่อความผ่อนคลาย ไม่ใช่การรักษาโรค</li>
+      </ul>
+      <h2>หลังนวด: ชำระเงินและโปร</h2>
+      <p>ชำระเงินด้วยเงินสด โอนเงิน หรือพร้อมเพย์ ถ้านวด 2 ชั่วโมงและมาจากเว็บไซต์ แจ้งพนักงานว่า “มาจากเว็บไซต์” เพื่อรับส่วนลด 100 บาท (ทุกบริการ ยกเว้น{by["thai-massage"]["th"]})</p>
+      <h2>ยังไม่แน่ใจว่าจะนวดแบบไหน?</h2>
+      <p>อ่าน<a href="/guides/aromatherapy-vs-oil-massage/">นวดอโรม่ากับนวดน้ำมันต่างกันยังไง</a> หรือ<a href="/guides/thai-oil-massage/">นวดไทยออยคืออะไร ต่างจากนวดไทยยังไง</a> หรือทัก LINE @288ojpuq ถามร้านได้เลย</p>
+      {contact_buttons()}
+      <div class="panel faq-mini" style="margin-top:28px">
+        <h2>คำถามที่พบบ่อย</h2>
+{faq_html}
+      </div>
+    </div>
+  </article></section>
+"""
+    return body, faq
+
+
+ARTICLE_BODIES = {"aroma_vs_oil": body_aroma_vs_oil, "thai_oil": body_thai_oil, "first_visit": body_first_visit}
 
 
 def article_page(a, svc):
