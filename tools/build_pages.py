@@ -620,11 +620,22 @@ ARTICLES = [
         "desc": "นวดอโรม่ากับนวดน้ำมันใช้น้ำมันทั้งคู่ ต่างกันที่กลิ่นและเทคนิค เทียบราคา 60–120 นาที และวิธีเลือก จากร้านนวลบุษยา ลำลูกกา",
         "image": "aromatherapy/aromatherapy-1.jpg",
         "related": ["aromatherapy", "oil-massage", "thai-oil"],
+        "body": "aroma_vs_oil",
+    },
+    {
+        "slug": "thai-oil-massage",
+        "date": "2026-11-22",
+        "title": "นวดไทยออยคืออะไร ต่างจากนวดไทยยังไง",
+        "h1": "นวดไทยออยคืออะไร ต่างจากนวดไทยยังไง",
+        "desc": "นวดไทยออยคือท่านวดสไตล์ไทยร่วมกับการใช้น้ำมัน ต่างจากนวดไทยอย่างไร เทียบราคา 60–120 นาที จากร้านนวลบุษยา ลำลูกกา",
+        "image": "thai-oil/thai-oil-1.jpg",
+        "related": ["thai-oil", "thai-massage"],
+        "body": "thai_oil",
     },
 ]
 
 
-def article_body(a, by):
+def body_aroma_vs_oil(a, by):
     aroma, oil, thai_oil, deep = by["aromatherapy"], by["oil-massage"], by["thai-oil"], by["deep-tissue"]
     mins = [m for m, _ in aroma["prices"]]
     price = lambda svc, i: svc["prices"][i][1]
@@ -681,10 +692,76 @@ def article_body(a, by):
     return body, faq
 
 
+def body_thai_oil(a, by):
+    thai, thai_oil, oil, aroma = by["thai-massage"], by["thai-oil"], by["oil-massage"], by["aromatherapy"]
+    mins = [m for m, _ in thai_oil["prices"]]
+    price = lambda svc, i: svc["prices"][i][1]
+    diff = [price(thai_oil, i) - price(thai, i) for i in range(len(mins))]
+    link = lambda svc: f'<a href="/{svc["slug"]}/">{svc["th"]}</a>'
+    promo120 = price(thai_oil, -1) - 100
+    price_rows = "\n".join(
+        f"            <tr><td>{m} นาที</td><td>{price(thai, i):,} บาท</td><td>{price(thai_oil, i):,} บาท</td></tr>"
+        for i, m in enumerate(mins))
+    lead = ("นวดไทยออยคือการนวดที่ใช้ท่านวดสไตล์ไทยร่วมกับการใช้น้ำมัน ส่วนนวดไทยเป็นนวดไทยแบบดั้งเดิมที่ใช้การกดและยืดตามแบบนวดไทย "
+            f"ที่ร้านนวลบุษยา นวดไทยออย 60 นาที {price(thai_oil, 0):,} บาท นวดไทย 60 นาที {price(thai, 0):,} บาท")
+    same_as_thai = (f" เท่ากับนวดไทย {mins[-1]} นาที" if promo120 == price(thai, -1) else "")
+    faq = [
+        ("นวดไทยออยคืออะไร?", "นวดไทยออยคือการนวดด้วยน้ำมัน ผสมผสานเทคนิคการนวดสไตล์ไทย เพื่อความผ่อนคลาย"),
+        ("นวดไทยออยแพงกว่านวดไทยเท่าไร?",
+         "ที่นวลบุษยา " + " ".join(f"{m} นาทีต่างกัน {d:,} บาท" for m, d in zip(mins, diff))),
+        ("นวดไทยใช้โปร 2 ชั่วโมงได้ไหม?",
+         "ไม่ได้ โปรลูกค้าเว็บไซต์ นวด 2 ชั่วโมง ลด 100 บาท ใช้ได้กับนวดไทยออยและบริการอื่น ยกเว้นนวดไทย"),
+        ("ปรับน้ำหนักมือได้ไหม?", "ได้ทั้งสองแบบ บอกหมอนวดได้เลยว่าต้องการน้ำหนักมือหนักหรือเบา"),
+        ("ต้องจองคิวก่อนไหม?", f"ร้านมีหมอนวดประจำ 2 ท่าน แนะนำให้โทร {PHONE} หรือทัก LINE @288ojpuq สอบถามคิวก่อนเดินทาง"),
+    ]
+    faq_html = "\n".join(f"        <details><summary>{html.escape(q)}</summary><p>{html.escape(ans)}</p></details>" for q, ans in faq)
+    body = f"""  <section class="guide" id="guide"><article>
+    <div class="wrap">
+      <p class="lead">{html.escape(lead)}</p>
+      <h2>นวดไทยออยกับนวดไทย ต่างกันตรงไหน</h2>
+      <table class="price-table compare-table guide-table">
+        <thead><tr><th scope="col">เทียบ</th><th scope="col">{link(thai)}</th><th scope="col">{link(thai_oil)}</th></tr></thead>
+        <tbody>
+            <tr><td>ลักษณะ</td><td>นวดไทยแบบดั้งเดิม ใช้การกดและยืดตามแบบนวดไทย</td><td>ท่านวดสไตล์ไทยร่วมกับการใช้น้ำมัน</td></tr>
+            <tr><td>น้ำหนักมือ</td><td>บอกหมอนวดได้ หนักหรือเบา</td><td>บอกหมอนวดได้ หนักหรือเบา</td></tr>
+{price_rows}
+            <tr><td>โปร 2 ชั่วโมง ลด 100 บาท</td><td>ไม่รวม</td><td>ใช้ได้</td></tr>
+        </tbody>
+      </table>
+      <p class="guide-note">ราคาต่อท่าน</p>
+      <h2>คำว่า “ออย” มาจากไหน</h2>
+      <p>“ออย” มาจากคำภาษาอังกฤษ oil ที่แปลว่าน้ำมัน นวดไทยออยจึงหมายถึงนวดสไตล์ไทยที่ใช้น้ำมันร่วมด้วย</p>
+      <h2>เลือกแบบไหนดี</h2>
+      <ul class="ticks">
+        <li>อยากได้นวดไทยแบบดั้งเดิมในราคาเริ่มต้นของร้าน เลือก{link(thai)} เริ่มต้น {price(thai, 0):,} บาท / 60 นาที</li>
+        <li>อยากได้ท่านวดสไตล์ไทยและให้ใช้น้ำมันร่วมด้วย เลือก{link(thai_oil)}</li>
+        <li>อยากนวดน้ำมันด้วยเทคนิคการนวดแบบสากล เลือก{link(oil)}</li>
+        <li>อยากได้กลิ่นหอมของน้ำมันอโรม่าระหว่างนวด เลือก{link(aroma)}</li>
+      </ul>
+      <p>ยังไม่แน่ใจระหว่างนวดน้ำมันกับนวดอโรม่า อ่าน<a href="/guides/aromatherapy-vs-oil-massage/">นวดอโรม่ากับนวดน้ำมันต่างกันยังไง</a></p>
+      <h2>นวดนานแค่ไหนดี</h2>
+      <p>ทั้งสองแบบเลือกได้ {", ".join(str(m) for m in mins[:-1])} หรือ {mins[-1]} นาที นวดไทยออย {mins[-1]} นาที ถ้ามาจากเว็บไซต์ แจ้งพนักงานเพื่อรับส่วนลด 100 บาท จาก {price(thai_oil, -1):,} บาท เหลือ {promo120:,} บาท{same_as_thai}</p>
+      <p class="guide-note">บริการของร้านเป็นการนวดเพื่อความผ่อนคลาย ไม่ใช่การรักษาโรค ถ้ามีอาการบาดเจ็บหรือโรคประจำตัว ควรปรึกษาแพทย์ก่อนรับบริการนวด</p>
+      <h2>ยังเลือกไม่ได้?</h2>
+      <p>ทัก LINE @288ojpuq หรือโทร {PHONE} สอบถามได้ก่อนจองคิว ร้านอยู่ด้านในโรงแรม Luka House ลำลูกกา จอดรถฟรี เปิดทุกวัน 10:00–21:00 น.</p>
+      {contact_buttons()}
+      <div class="panel faq-mini" style="margin-top:28px">
+        <h2>คำถามที่พบบ่อย</h2>
+{faq_html}
+      </div>
+    </div>
+  </article></section>
+"""
+    return body, faq
+
+
+ARTICLE_BODIES = {"aroma_vs_oil": body_aroma_vs_oil, "thai_oil": body_thai_oil}
+
+
 def article_page(a, svc):
     by = {o["key"]: o for o in svc}
     path = f"/guides/{a['slug']}/"
-    body_html, faq = article_body(a, by)
+    body_html, faq = ARTICLE_BODIES[a["body"]](a, by)
     schema = {"@context": "https://schema.org", "@graph": [
         {**BUSINESS},
         {"@type": "Article", "@id": SITE + path + "#article", "headline": a["h1"], "description": a["desc"],

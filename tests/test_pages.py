@@ -12,7 +12,8 @@ SERVICES = ['thai-massage', 'foot-massage', 'head-neck-shoulder', 'deep-tissue',
             'oil-massage', 'thai-oil', 'aromatherapy']
 PAGES = SERVICES + ['outcall', 'en']
 GUIDE = 'guides/aromatherapy-vs-oil-massage'
-ALL_PAGES = PAGES + ['guides', GUIDE]
+GUIDE2 = 'guides/thai-oil-massage'
+ALL_PAGES = PAGES + ['guides', GUIDE, GUIDE2]
 BANNED = 'รีด' + 'เส้น'
 
 
@@ -138,6 +139,27 @@ class PagesTests(unittest.TestCase):
             self.assertIn(f'href="/{GUIDE}/"', page(s), s)
         self.assertIn('href="/guides/"', INDEX)
         self.assertNotIn(f'href="/{GUIDE}/"', page('thai-massage'))
+
+    def test_thai_oil_article(self):
+        # Content calendar week 4 (22 Nov 2026): facts and prices from the homepage cards only.
+        src = page(GUIDE2)
+        self.assertLessEqual(len(re.search(r'<title>(.*?)</title>', src)[1]), 70)
+        self.assertLessEqual(len(re.search(r'<meta name="description" content="([^"]*)"', src)[1]), 130)
+        schema = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', src, re.S)[1])
+        faq = [n for n in schema['@graph'] if n['@type'] == 'FAQPage'][0]['mainEntity']
+        visible = re.findall(r'<details><summary>(.*?)</summary><p>(.*?)</p></details>', src)
+        self.assertEqual([(q['name'], q['acceptedAnswer']['text']) for q in faq], visible)
+        table = re.search(r'<table class="price-table compare-table guide-table">.*?</table>', src, re.S)[0]
+        rows = re.findall(r'<tr><td>(\d+) นาที</td><td>([\d,]+) บาท</td><td>([\d,]+) บาท</td></tr>', table)
+        self.assertEqual([[r[i].replace(',', '') for r in rows] for i in (1, 2)],
+                         [card_prices('thai-massage'), card_prices('thai-oil')])
+        t, o = [int(x) for x in card_prices('thai-massage')], [int(x) for x in card_prices('thai-oil')]
+        self.assertIn(f"จาก {o[-1]:,} บาท เหลือ {o[-1] - 100:,} บาท", src)
+        self.assertIn('ยกเว้นนวดไทย', src)  # the website promo never applies to Thai massage
+        self.assertIn('ไม่ใช่การรักษาโรค', src)
+        self.assertIn(f'href="/{GUIDE}/"', src)
+        for s in ('thai-oil', 'thai-massage', 'guides'):
+            self.assertIn(f'href="/{GUIDE2}/"', page(s), s)
 
     def test_promotion_excludes_thai_massage(self):
         self.assertNotIn('โปรลูกค้าเว็บไซต์', page('thai-massage'))
