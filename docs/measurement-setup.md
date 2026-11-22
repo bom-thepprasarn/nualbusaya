@@ -38,7 +38,18 @@ The existing site loader and scripts/track.js were retained; no campaign/budget 
 - node --check scripts/track.js: passed.
 - Tag Assistant Preview connected to the real domain and detected both destination IDs. GA4 base, Ads base and Conversion Linker each fired once at page load; no console errors were shown in that Preview session.
 - GTM Versions UI confirmed version 2 as Live, Latest, published at 22:37 on 15 November 2026, with 5 tags, 2 custom triggers, 2 user variables and 2 settings.
-- Contact-click end-to-end firing and downstream receipt in GA4/Ads remain unverified: browser input failed during click testing in the earlier session. Runtime tests and published trigger inspection are not a substitute for confirming actual received conversions.
+- Contact-click firing on the live site was verified on 22 November 2026 (see "Live click test" below). Receipt inside the GA4 Realtime/DebugView UI and Ads conversion diagnostics was not inspected (the test browser was signed out of Google).
+
+## Live click test (22 Nov 2026)
+
+On https://nualbusaya.com/?nual_qa=1 with navigation suppressed, one call, LINE, directions (`/maps/dir/`) and map (review) link were clicked, and the outgoing requests were read from the page's resource timing:
+
+- Page load: GA4 `page_view` to G-2DXDJB8RMT plus the Ads AW-16724394777 config hits.
+- dataLayer received exactly four `contact_click` pushes: call, line, directions, map.
+- Google Ads sent one `googleadservices.com/pagead/conversion/16724394777/` hit per conversion method, each with the matching label (call `1zfTCJms…`, line `k79fCJys…`, directions `QH-GCJ-s…`). The map click sent no Ads conversion, as intended.
+- GA4 sent `en=contact_click` with `ep.contact_method=map` (a single-event hit); the first four events went out in one batched POST to `/g/collect`.
+- Homepage now has no Maps link labelled “นำทาง” with a `?cid=` URL; directions use the `/maps/dir/` link, which classifies correctly.
+- These test conversions carry no ad click (no gclid), so they are not attributed to the campaign. They may appear as a few GA4 `contact_click` events on 22 Nov (URL contains `nual_qa=1`).
 
 ## Follow-up verification
 
