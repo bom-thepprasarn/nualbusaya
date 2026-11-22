@@ -53,7 +53,7 @@ class RedesignTests(unittest.TestCase):
             elements = Elements(card).elements
             images = [a for t, a in elements if t == 'img']
             # One illustration per card; Thai, foot and head/neck/shoulder cards are owner photo galleries.
-            self.assertEqual(len(images), {'thai-massage': 3, 'foot-massage': 3, 'head-neck-shoulder': 2, 'aromatherapy': 3, 'deep-tissue': 3}.get(key, 1), key)
+            self.assertEqual(len(images), {'thai-massage': 3, 'foot-massage': 3, 'head-neck-shoulder': 2, 'aromatherapy': 2, 'deep-tissue': 2, 'oil-massage': 1, 'thai-oil': 1}.get(key, 1), key)
             for image in images:
                 self.assertTrue(image['alt'])
                 self.assertEqual(image['loading'], 'lazy')
@@ -116,7 +116,8 @@ class RedesignTests(unittest.TestCase):
         new_urls = {a['href'] for t, a in new_el if t == 'a'}
         # Owner replaced these photo links: hotel-entrance photo (16 Nov), then the hotel and
         # shop-front galleries (22 Nov 2026), which show every photo uncropped.
-        replaced = {'img/shop-sign-luka-house.jpg', 'img/luka-house-entrance-sign.jpg', 'img/shop-entrance-luka-house.jpg'}
+        replaced = {'img/shop-sign-luka-house.jpg', 'img/luka-house-entrance-sign.jpg', 'img/shop-entrance-luka-house.jpg',
+                    'img/shop-welcome.jpg', 'img/shop-interior.jpg'}  # now photo galleries (22 Nov 2026)
         self.assertTrue((old_urls - replaced) <= new_urls)
         for url in new_urls:
             if url.startswith('#'):
@@ -186,8 +187,8 @@ class RedesignTests(unittest.TestCase):
             return [dict(re.findall(r'([\w-]+)="([^"]*)"', m)) for m in re.findall(r'<img ([^>]*)>', block)]
         hero, about = slides('hero-photo'), slides('about-photo')
         self.assertEqual([i['src'] for i in hero], [
-            'img/aromatherapy/aromatherapy-3.jpg', 'img/deep-tissue/deep-tissue-1.jpg',
-            'img/deep-tissue/deep-tissue-2.jpg', 'img/deep-tissue/deep-tissue-3.jpg',
+            'img/oil-massage/oil-massage-1.jpg', 'img/deep-tissue/deep-tissue-1.jpg',
+            'img/deep-tissue/deep-tissue-2.jpg', 'img/thai-oil/thai-oil-1.jpg',
             'img/aromatherapy/aromatherapy-2.jpg'])
         self.assertEqual([i['src'] for i in about], [
             'img/foot-massage/foot-massage-1.jpg', 'img/thai-massage/thai-massage-3.jpg',
@@ -204,19 +205,28 @@ class RedesignTests(unittest.TestCase):
         self.assertIn('animation:hero-fade 20s linear infinite', theme)  # slowed in the redesign
         self.assertIn('@media (prefers-reduced-motion:reduce){.photo-slideshow img{animation:none}}', theme)
 
+    def test_no_photo_appears_in_two_galleries(self):
+        # Owner rule (22 Nov 2026): every service / shop-card photo is used once. The hero and about
+        # slideshows are the owner's GIFs rebuilt from these same photos, so they are not galleries.
+        slides = re.findall(r'<figure class="service-gallery-slide"[^>]*><img src="([^"]+)"', NEW)
+        self.assertEqual(len(slides), len(set(slides)), [s for s in slides if slides.count(s) > 1])
+
     def test_entrance_and_parking_photos_follow_owner_instructions(self):
         photos = NEW.split('<section id="photos">')[1].split('</section>')[0]
-        # 22 Nov 2026 owner photos: hotel/street-sign gallery, then the real shop-front gallery.
+        # 22 Nov 2026 owner photos (Downloads/Nualbusaya/บรรยากาศร้านและทางเข้า): four gallery cards.
         cards = re.findall(r'<figure class="shop-gallery-card">(.*?)</figcaption>', photos, re.S)
-        self.assertEqual(len(cards), 2)
-        expected = [(['hotel-1', 'hotel-2', 'hotel-3'], 'ร้านอยู่ด้านในโรงแรม'),
-                    (['shop-1', 'shop-2'], 'หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา')]
+        expected = [
+            (['entrance/hotel-1', 'entrance/hotel-2', 'entrance/hotel-3'], 'ร้านอยู่ด้านในโรงแรม'),
+            (['entrance/shop-1', 'entrance/shop-2'], 'หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา'),
+            (['entrance/front-1', 'shop-welcome'], 'บรรยากาศเป็นกันเองหน้าร้าน'),
+            (['entrance/interior-1', 'entrance/interior-2', 'entrance/interior-3', 'shop-interior'], 'มุมพักผ่อนภายในร้าน')]
+        self.assertEqual(len(cards), len(expected))
         for card, (names, caption) in zip(cards, expected):
-            self.assertEqual(re.findall(r'src="img/entrance/([a-z]+-\d)\.jpg"', card), names)
+            self.assertEqual(re.findall(r'src="img/([a-z/-]+(?:-\d)?)\.jpg"', card), names)
             self.assertIn('<figcaption>' + caption, card)
             self.assertIn('1 / %d' % len(names), card)
             for name in names:
-                self.assertTrue((ROOT / 'img/entrance' / (name + '.jpg')).is_file(), name)
+                self.assertTrue((ROOT / 'img' / (name + '.jpg')).is_file(), name)
         self.assertNotIn('สังเกตป้ายโรงแรมลูก้าเฮาส์ แล้วขับรถเข้ามาจอดได้เลย', photos)
         self.assertNotIn('src="img/shop-entrance-luka-house.jpg"', photos)
         self.assertNotIn('src="img/shop-sign-luka-house.jpg"', photos)
