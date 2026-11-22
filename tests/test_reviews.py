@@ -13,7 +13,7 @@ PROOF = json.loads((ROOT/'docs/reviews-verification.json').read_text(encoding='u
 DATA = json.loads((ROOT/'data/google-reviews.json').read_text(encoding='utf-8'))
 SECTION = re.search(r'  <section id="reviews".*?  </section>', HTML, re.S)[0]
 
-GALLERY_LABELS = {'thai-massage': 'นวดไทย', 'foot-massage': 'นวดเท้า', 'head-neck-shoulder': 'นวดศีรษะ คอ บ่า ไหล่'}
+GALLERY_LABELS = {'thai-massage': 'นวดไทย', 'foot-massage': 'นวดเท้า', 'head-neck-shoulder': 'นวดศีรษะ คอ บ่า ไหล่', 'aromatherapy': 'นวดอโรม่า'}
 
 
 class ReviewsTests(unittest.TestCase):

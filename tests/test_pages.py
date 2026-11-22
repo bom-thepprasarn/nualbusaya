@@ -57,7 +57,7 @@ class PagesTests(unittest.TestCase):
             self.assertEqual([str(o['price']) for o in service['offers']], card_prices(s))
 
     def test_service_pages_reuse_homepage_photo_galleries(self):
-        galleries = {'thai-massage': 3, 'foot-massage': 3, 'head-neck-shoulder': 2}  # owner photos, 22 Nov 2026
+        galleries = {'thai-massage': 3, 'foot-massage': 3, 'head-neck-shoulder': 2, 'aromatherapy': 3}  # owner photos, 22 Nov 2026
         for slug in SERVICES:
             src = page(slug)
             if slug not in galleries:

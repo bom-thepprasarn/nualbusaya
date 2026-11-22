@@ -106,3 +106,4 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Calm motion: the orange parking callout's glow/shine animation was removed (now a light-blue panel, same text). The hero slideshow is slower (5 photos × 4 s, 20 s loop) and stops under prefers-reduced-motion.
 - The 4 remaining service illustrations had backgrounds/outlines/leaves recoloured to the blue palette (skin and props untouched).
 - Tests: `tests/redesign_norm.py` maps the redesign's deliberate markup changes back for the fixture snapshot tests; run tests with `discover -s tests` so that helper is importable.
+- Aromatherapy card got a 3-photo owner gallery (`img/aromatherapy/aromatherapy-1..3.jpg`) on 22 Nov 2026; its illustration `img/services/aromatherapy.svg` was deleted as unused.
