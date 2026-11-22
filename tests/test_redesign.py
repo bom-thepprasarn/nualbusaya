@@ -120,11 +120,15 @@ class RedesignTests(unittest.TestCase):
             if src and not src.startswith(('http:', 'https:', 'tel:', '#', 'data:')):
                 self.assertTrue((ROOT / src.lstrip('/')).is_file(), src)
         for key in EXPECTED:
+            if f'img/services/{key}.svg' not in NEW:
+                continue  # card uses an owner photo gallery instead (illustration deleted 22 Nov 2026)
             path = ROOT / 'img/services' / (key + '.svg')
             tree = ET.parse(path)
             self.assertEqual(tree.getroot().attrib['viewBox'], '0 0 360 220')
             self.assertLess(path.stat().st_size, 6000)
             self.assertNotIn('<script', path.read_text())
+        for src in re.findall(r'<figure class="service-gallery-slide"[^>]*><img src="([^"]+)"', NEW):
+            self.assertLess((ROOT / src).stat().st_size, 200_000, src)
 
     def test_footer_line_icon_and_promotion_are_intact(self):
         footer = NEW.split('<footer>')[1].split('</footer>')[0]
