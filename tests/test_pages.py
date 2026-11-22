@@ -84,7 +84,8 @@ class PagesTests(unittest.TestCase):
         # SEO brief / content calendar, 22 Nov 2026: expanded pages, FAQ mirrored in FAQPage schema.
         expanded = {'deep-tissue': ('ขายดี', ['thai-massage', 'deep-tissue', 'head-neck-shoulder']),
                     'aromatherapy': ('', ['aromatherapy', 'oil-massage', 'thai-oil']),
-                    'head-neck-shoulder': ('', ['head-neck-shoulder', 'deep-tissue', 'thai-massage'])}
+                    'head-neck-shoulder': ('', ['head-neck-shoulder', 'deep-tissue', 'thai-massage']),
+                    'foot-massage': ('', ['foot-massage', 'head-neck-shoulder', 'thai-massage'])}
         for slug, (title_word, compared) in expanded.items():
             src = page(slug)
             title = re.search(r'<title>(.*?)</title>', src)[1]
@@ -112,6 +113,10 @@ class PagesTests(unittest.TestCase):
         neck = page('head-neck-shoulder')
         for fact in ('ท่านั่งหรือท่านอน', 'ไม่ใช้น้ำมัน', 'ลูกค้าส่วนใหญ่ของร้านเลือก 120 นาที'):
             self.assertIn(fact, neck)
+        # owner answers, 22 Nov 2026: feet, calves and knees; oil or cream; most customers book 90 minutes
+        foot = page('foot-massage')
+        for fact in ('ฝ่าเท้า น่อง จนถึงหัวเข่า', 'ใช้น้ำมันหรือครีม', 'ลูกค้าส่วนใหญ่ที่มานวดเท้าเลือก 90 นาที'):
+            self.assertIn(fact, foot)
         # other service pages keep the short template until their own brief
         self.assertNotIn('FAQPage', page('thai-massage'))
 
