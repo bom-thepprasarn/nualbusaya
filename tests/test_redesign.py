@@ -205,6 +205,21 @@ class RedesignTests(unittest.TestCase):
         self.assertIn('animation:hero-fade 20s linear infinite', theme)  # slowed in the redesign
         self.assertIn('@media (prefers-reduced-motion:reduce){.photo-slideshow img{animation:none}}', theme)
 
+    def test_service_order_and_best_seller_badge(self):
+        # Owner, 22 Nov 2026: Thai massage stays first (300-baht anchor), then the best seller
+        # (deep tissue, owner-confirmed) and the highest-priced aromatherapy.
+        order = re.findall(r'<article class="item service-card" id="([^"]+)"', NEW)
+        self.assertEqual(order, ['thai-massage', 'deep-tissue', 'aromatherapy', 'foot-massage',
+                                 'head-neck-shoulder', 'oil-massage', 'thai-oil'])
+        numbers = re.findall(r'<span class="service-number" aria-hidden="true">(\d+)</span>', NEW)
+        self.assertEqual(numbers, ['%02d' % i for i in range(1, 8)])
+        badges = re.findall(r'<article class="item service-card" id="([^"]+)"(?:(?!</article>).)*?<span class="service-badge">([^<]+)</span>', NEW, re.S)
+        self.assertEqual(badges, [('deep-tissue', 'ขายดี')])
+        self.assertNotIn('รีด' + 'เส้น', NEW.split('<section id="reviews"')[0])  # banned former term (reviews stay verbatim)
+        theme = (ROOT / 'styles/theme.css').read_text(encoding='utf-8')
+        badge_css = re.search(r'\.wellness-services \.service-badge\{[^}]*\}', theme)[0]
+        self.assertNotIn('animation', badge_css)  # static, no blinking
+
     def test_no_photo_appears_in_two_galleries(self):
         # Owner rule (22 Nov 2026): every service / shop-card photo is used once. The hero and about
         # slideshows are the owner's GIFs rebuilt from these same photos, so they are not galleries.

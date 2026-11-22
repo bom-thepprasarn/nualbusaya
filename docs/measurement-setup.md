@@ -56,3 +56,6 @@ On https://nualbusaya.com/?nual_qa=1 with navigation suppressed, one call, LINE,
 Use GTM Preview on https://nualbusaya.com/, click call, LINE and directions once each, and confirm GA4 contact_click plus the matching Ads label fire once per event. Review/map clicks must fire GA4 only. Inspect GA4 DebugView/Realtime and Ads diagnostics afterward. Do not treat a tag firing as evidence of an attributed paid-ad conversion.
 
 Change future tagging in GTM and publish a new named version. Avoid adding parallel inline gtag conversion snippets that would duplicate events.
+
+## 22 Nov 2026 change
+- `scripts/track.js` adds `link_service` (service card id or service page slug) to every `contact_click` push. Not yet forwarded by GTM (needs a DLV + GA4 event parameter + GA4 custom dimension). Service order and a "ขายดี" badge changed on the homepage the same day, mid Ads test.

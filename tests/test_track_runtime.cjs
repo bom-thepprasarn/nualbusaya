@@ -11,14 +11,16 @@ let clickHandler;
 const document = { addEventListener(name, fn, capture) {
   assert.equal(name, 'click'); assert.equal(capture, true); clickHandler = fn; } };
 const window = {};
-vm.runInNewContext(source, { document, window });
+const location = { pathname: '/' };
+vm.runInNewContext(source, { document, window, location });
 
-function link(href, text = '', section = 'contact') {
+function link(href, text = '', section = 'contact', card = null) {
   return {
     href, textContent: text,
     getAttribute(name) { return name === 'href' ? href : null; },
     closest(sel) {
       if (sel === 'a[href]') return this;
+      if (sel === 'article.service-card[id]') return card ? { id: card } : null;
       return { id: section, tagName: 'SECTION' };
     },
   };
@@ -37,10 +39,20 @@ assert.equal(classify(link('#menu')), '');
 const a = link('tel:+66967781585', 'โทร', 'top');
 clickHandler({ target: { closest: () => a } });
 assert.deepEqual(JSON.parse(JSON.stringify(window.dataLayer)), [{
-  event: 'contact_click', contact_method: 'call', link_url: 'tel:+66967781585', link_section: 'top' }]);
+  event: 'contact_click', contact_method: 'call', link_url: 'tel:+66967781585', link_section: 'top', link_service: '' }]);
 clickHandler({ target: { closest: () => null } });
 clickHandler({ target: { closest: () => link('#menu') } });
 assert.equal(window.dataLayer.length, 1, 'untracked clicks must not push');
+
+// Booking from a homepage service card reports that service; on a service page, the page slug.
+clickHandler({ target: { closest: () => link('https://line.me/R/ti/p/@288ojpuq', 'จองคิวทาง LINE', 'menu', 'deep-tissue') } });
+assert.equal(window.dataLayer[1].link_service, 'deep-tissue');
+assert.equal(window.dataLayer[1].contact_method, 'line');
+location.pathname = '/aromatherapy/';
+clickHandler({ target: { closest: () => link('tel:+66967781585', 'โทร', 'top') } });
+assert.equal(window.dataLayer[2].link_service, 'aromatherapy');
+location.pathname = '/';
+window.dataLayer.length = 1;
 
 // Every contact link on the page maps to a conversion method.
 const hrefs = [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)];

@@ -1,7 +1,7 @@
 // Contact-click measurement for Google Tag Manager (container GTM-5KD9B98P).
 // Pushes one dataLayer event per click on a call, LINE, directions or map link:
 //   { event: "contact_click", contact_method: "call" | "line" | "directions" | "map",
-//     link_url, link_section }
+//     link_url, link_section, link_service }  (link_service: service card id or service page slug)
 // GTM turns these into GA4 events and Google Ads conversions. No personal data is sent.
 (function () {
   "use strict";
@@ -24,6 +24,15 @@
     return node.id || node.tagName.toLowerCase();
   }
 
+  // Which service the click is about: the homepage service card, else the service page slug.
+  function serviceOf(link) {
+    var card = link.closest("article.service-card[id]");
+    if (card) return card.id;
+    var path = typeof location !== "undefined" ? location.pathname : "";
+    var m = /^\/([a-z-]+)\/$/.exec(path || "");
+    return m ? m[1] : "";
+  }
+
   function onClick(event) {
     var target = event.target;
     var link = target && target.closest ? target.closest("a[href]") : null;
@@ -35,7 +44,8 @@
       event: "contact_click",
       contact_method: method,
       link_url: link.href,
-      link_section: sectionOf(link)
+      link_section: sectionOf(link),
+      link_service: serviceOf(link)
     });
   }
 

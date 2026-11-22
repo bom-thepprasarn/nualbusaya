@@ -22,4 +22,7 @@ def undo_redesign(source):
     source = source.replace('จองคิวทาง LINE', 'สอบถามคิวทาง LINE')
     # about section photo replaced by the photo slideshow moved from the hero (owner request, 22 Nov 2026)
     source = re.sub(r'<div class="about-photo[^"]*">.*?</div>', '<div class="about-photo">ABOUT</div>', source, flags=re.S)
+    # service cards reordered for sales + best-seller badge (owner, 22 Nov 2026); the menu section has its
+    # own content tests (prices, descriptions, order, badge) in test_redesign.py
+    source = re.sub(r'  <section id="menu"[^>]*>.*?  </section>', 'SERVICES', source, flags=re.S)
     return source

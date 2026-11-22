@@ -116,3 +116,9 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Single-photo galleries hide the counter (`hidden`); arrows stay hidden because `scripts/services.js` skips galleries with fewer than 2 photos.
 - #photos cards 3 and 4 are now galleries: “บรรยากาศเป็นกันเองหน้าร้าน” = night shop front `img/entrance/front-1.jpg` + existing `img/shop-welcome.jpg`; “มุมพักผ่อนภายในร้าน” = lounge `interior-1`, logo wall `interior-2`, bed room `interior-3` + existing `img/shop-interior.jpg`. New photos cropped to the cards' 3:4 frame.
 - #9 (street entrance at night) was added as the 4th photo of “ร้านอยู่ด้านในโรงแรม” (`img/entrance/hotel-4.jpg`); every photo in the owner's folders is now on the site.
+
+## 22 Nov 2026 — service order for sales + best-seller badge
+- Order is now นวดไทย (300-baht anchor, matches hero/ads) → นวดเน้นเฉพาะจุด (owner-confirmed best seller) → นวดอโรม่า (highest price) → นวดเท้า → คอบ่าไหล่ → นวดน้ำมัน → นวดไทยออย; card numbers follow the order. Generated pages, sitemap and the English page follow the homepage order.
+- นวดเน้นเฉพาะจุด has a static pink “ขายดี” badge (`.service-badge` in `styles/theme.css`; no animation by design). `tools/add_service_gallery.py` keeps a card's badge when re-run. Use only “นวดเน้นเฉพาะจุด” on the site, never the banned former term. Keep sales figures out of this public repo.
+- Measurement: `scripts/track.js` now also pushes `link_service` (homepage card id, or the service page slug). GTM still forwards only `contact_method` to GA4/Ads; to report by service, add a DLV for `link_service`, add it as a GA4 event parameter on the `GA4 - contact_click` tag, publish, and register `link_service` as a GA4 custom dimension.
+- The change went live on 22 Nov 2026 during the THB 700 Ads test (16–29 Nov); compare conversions before/after this date separately.

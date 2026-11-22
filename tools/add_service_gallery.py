@@ -61,7 +61,12 @@ def main(slug, label, *specs):
                        card[0], re.S)
     assert visual, "card visual not found"
     photos = save_photos(slug, sources)
-    new_card = card[0].replace(visual[0], gallery_html(slug, label, visual[1], photos), 1)
+    new_visual = gallery_html(slug, label, visual[1], photos)
+    badge = re.search(r'\n\s*<span class="service-badge">.*?</span>', visual[0])
+    if badge:  # keep a card badge such as "ขายดี"
+        new_visual = new_visual.replace('\n            <span class="service-number"',
+                                        badge[0] + '\n            <span class="service-number"', 1)
+    new_card = card[0].replace(visual[0], new_visual, 1)
     index.write_text(src.replace(card[0], new_card, 1), encoding="utf-8", newline="\n")
     for name, _, w, h in photos:
         print(f"img/{slug}/{name} {w}x{h}")
