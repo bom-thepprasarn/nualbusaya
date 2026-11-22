@@ -203,3 +203,56 @@ footer a{color:var(--brown)}
 .lang-menu li a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;text-decoration:none;color:var(--ink);font-size:.93rem}
 .lang-menu li a:hover,.lang-menu li a[aria-current="true"]{background:var(--sage-soft)}
 @media (max-width:720px){.lang-menu summary span{display:none}}
+
+/* Thai massage photo card: swipeable on its own, arrows added by scripts/services.js. */
+.wellness-services .service-gallery-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.wellness-services .service-gallery-track::-webkit-scrollbar { display: none; }
+.wellness-services .service-gallery-track:focus-visible { outline: 3px solid var(--wellness-plum); outline-offset: -3px; }
+.wellness-services .service-gallery-slide { flex: 0 0 100%; margin: 0; scroll-snap-align: start; }
+.wellness-services .service-gallery-slide img { object-position: 50% 28%; }
+.wellness-services .service-gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(253 249 238 / 90%);
+  color: var(--wellness-plum);
+  box-shadow: 0 2px 8px rgb(42 39 35 / 18%);
+  cursor: pointer;
+}
+.wellness-services .service-gallery-btn[hidden] { display: none; }
+.wellness-services .service-gallery-btn svg { width: 20px; height: 20px; }
+.wellness-services .service-gallery-prev { left: 10px; }
+.wellness-services .service-gallery-next { right: 10px; }
+.wellness-services .service-gallery-btn:hover:not(:disabled) { background: var(--wellness-paper); }
+.wellness-services .service-gallery-btn:disabled { opacity: .35; cursor: default; }
+.wellness-services .service-gallery-btn:focus-visible { outline: 3px solid var(--wellness-plum); outline-offset: 2px; }
+.wellness-services .service-gallery-count {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgb(42 39 35 / 62%);
+  color: #fffcf5;
+  font-size: .72rem;
+  letter-spacing: .04em;
+}
+.wellness-services .service-gallery .service-number {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgb(253 249 238 / 85%);
+}

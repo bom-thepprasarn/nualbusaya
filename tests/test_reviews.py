@@ -49,6 +49,9 @@ class ReviewsTests(unittest.TestCase):
     def test_only_reviews_and_requested_line_asset_changed(self):
         def normalize(s):
             s = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', s, flags=re.S)
+            # Thai massage card photo gallery (owner photos, 22 Nov 2026) replaces its illustration.
+            s = re.sub(r'<div class="service-visual service-gallery" data-service-gallery>.*?(<span class="service-number" aria-hidden="true">01</span>)',
+                       r'<div class="service-visual"> <img src="img/services/thai-massage.svg" alt="ภาพประกอบนวดไทย" width="720" height="440" loading="lazy" decoding="async"> \1', s, flags=re.S)
             s = re.sub(r'  <section id="reviews".*?  </section>', 'REVIEWS', s, flags=re.S)
             s = re.sub(r'<link rel="stylesheet" href="styles/reviews.css">\s*', '', s)
             s = re.sub(r'<script src="scripts/reviews.js" defer></script>\s*', '', s)

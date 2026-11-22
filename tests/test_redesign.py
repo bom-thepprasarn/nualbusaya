@@ -50,11 +50,13 @@ class RedesignTests(unittest.TestCase):
         for key, card in articles(NEW).items():
             elements = Elements(card).elements
             images = [a for t, a in elements if t == 'img']
-            self.assertEqual(len(images), 1)
-            image = images[0]
-            self.assertTrue(image['alt'])
-            self.assertEqual(image['loading'], 'lazy')
-            self.assertTrue(int(image['width']) > 0 and int(image['height']) > 0)
+            # One illustration per card; the Thai massage card is an owner-supplied photo gallery.
+            self.assertEqual(len(images), 4 if key == 'thai-massage' else 1, key)
+            for image in images:
+                self.assertTrue(image['alt'])
+                self.assertEqual(image['loading'], 'lazy')
+                self.assertTrue(int(image['width']) > 0 and int(image['height']) > 0)
+                self.assertTrue((ROOT / image['src']).is_file(), image['src'])
             links = [a for t, a in elements if t == 'a']
             self.assertEqual({a['href'] for a in links}, {
                 'https://line.me/R/ti/p/@288ojpuq', 'tel:+66967781585', '/' + key + '/'})

@@ -79,3 +79,9 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Homepage trimmed: removed repeated hours/parking/price blocks (facts row, services welcome box, hero trust line/tagline), section English subtitles, and filler intros. Prices, contact buttons, reviews and the parking callout are unchanged.
 - Thai pages are Thai-only and `/en/` is English-only (proper nouns like Luka House, LINE, Google Maps excepted; header language switch kept).
 - Service English names now live in `data-en` on each homepage card `<h3>`; `tools/build_pages.py` reads them from there for `/en/`.
+
+## 22 Nov 2026 — Thai massage photo card
+- The homepage Thai massage card (`#thai-massage`) shows the owner's four LINE-album photos instead of the illustration, in a swipeable card with previous/next arrows and a “1 / 4” counter.
+- Photos: `img/thai-massage/thai-massage-1..4.jpg`, 900 px wide, EXIF/GPS stripped; the portrait room photo was cropped to 3:2. Order: technique photos first, room last.
+- Markup is `[data-service-gallery]` in `index.html`; styles are at the end of `styles/services.css` (rerun `python tools/build_pages.py` so `styles/site.css` stays in sync); arrow logic is the second block in `scripts/services.js`. Without JS the photos still scroll by swipe/trackpad and the arrows stay hidden.
+- Other service cards and the `/thai-massage/` page still use the illustration.
