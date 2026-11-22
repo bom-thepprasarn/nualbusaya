@@ -20,4 +20,6 @@ def undo_redesign(source):
     source = source.replace('>จองคิว LINE</a>', '>LINE</a>')
     source = source.replace('class="btn btn-book"', 'class="btn btn-line"')
     source = source.replace('จองคิวทาง LINE', 'สอบถามคิวทาง LINE')
+    # about section photo replaced by the photo slideshow moved from the hero (owner request, 22 Nov 2026)
+    source = re.sub(r'<div class="about-photo[^"]*">.*?</div>', '<div class="about-photo">ABOUT</div>', source, flags=re.S)
     return source

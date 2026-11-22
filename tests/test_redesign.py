@@ -178,22 +178,31 @@ class RedesignTests(unittest.TestCase):
         self.assertEqual(callout, '<strong>ขับรถเข้ามาจอดภายในโรงแรมลูก้าเฮาส์ได้เลย</strong><br>'
                                   '<strong>ร้านอยู่ด้านในโรงแรม</strong><br>จอดฟรีสำหรับลูกค้าร้านนวลบุษยา')
 
-    def test_hero_slideshow_follows_owner_gif(self):
-        # Owner's slideshow GIF (22 Nov 2026) rebuilt from the real photos with a CSS crossfade.
-        hero = re.search(r'<div class="hero-photo hero-slideshow">(.*?)</div>', NEW, re.S)[1]
-        imgs = [dict(re.findall(r'([\w-]+)="([^"]*)"', m)) for m in re.findall(r'<img ([^>]*)>', hero)]
-        self.assertEqual([i['src'] for i in imgs], [
+    def test_photo_slideshows_follow_owner_gifs(self):
+        # Owner's slideshow GIFs (22 Nov 2026) rebuilt from the real photos with a CSS crossfade:
+        # the oil-first GIF in the hero, the earlier GIF moved to the "about" section.
+        def slides(cls):
+            block = re.search(r'<div class="%s photo-slideshow">(.*?)</div>' % cls, NEW, re.S)[1]
+            return [dict(re.findall(r'([\w-]+)="([^"]*)"', m)) for m in re.findall(r'<img ([^>]*)>', block)]
+        hero, about = slides('hero-photo'), slides('about-photo')
+        self.assertEqual([i['src'] for i in hero], [
+            'img/aromatherapy/aromatherapy-3.jpg', 'img/deep-tissue/deep-tissue-1.jpg',
+            'img/deep-tissue/deep-tissue-2.jpg', 'img/deep-tissue/deep-tissue-3.jpg',
+            'img/aromatherapy/aromatherapy-2.jpg'])
+        self.assertEqual([i['src'] for i in about], [
             'img/foot-massage/foot-massage-1.jpg', 'img/thai-massage/thai-massage-3.jpg',
             'img/thai-massage/thai-massage-2.jpg', 'img/thai-massage/thai-massage-1.jpg',
             'img/head-neck-shoulder/head-neck-shoulder-1.jpg'])
-        for i in imgs:
+        for i in hero + about:
             self.assertTrue((ROOT / i['src']).is_file(), i['src'])
             self.assertTrue(i['alt'])
-        self.assertEqual(imgs[0].get('fetchpriority'), 'high')
+        self.assertEqual(hero[0].get('fetchpriority'), 'high')
+        self.assertTrue(all(i.get('loading') == 'lazy' for i in about))
         theme = (ROOT / 'styles/theme.css').read_text(encoding='utf-8')
-        self.assertIn('.hero-photo{border-radius:18px;box-shadow:var(--shadow);aspect-ratio:20/13}', theme)
+        self.assertIn('.hero-photo{border-radius:18px;box-shadow:var(--shadow);aspect-ratio:40/27}', theme)
+        self.assertIn('.about-photo.photo-slideshow{aspect-ratio:20/13;max-height:none}', theme)
         self.assertIn('animation:hero-fade 20s linear infinite', theme)  # slowed in the redesign
-        self.assertIn('@media (prefers-reduced-motion:reduce){.hero-slideshow img{animation:none}}', theme)
+        self.assertIn('@media (prefers-reduced-motion:reduce){.photo-slideshow img{animation:none}}', theme)
 
     def test_entrance_and_parking_photos_follow_owner_instructions(self):
         photos = NEW.split('<section id="photos">')[1].split('</section>')[0]
