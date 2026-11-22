@@ -220,6 +220,20 @@ class RedesignTests(unittest.TestCase):
         badge_css = re.search(r'\.wellness-services \.service-badge\{[^}]*\}', theme)[0]
         self.assertNotIn('animation', badge_css)  # static, no blinking
 
+    def test_staff_section_sits_above_reviews(self):
+        # owner's staff photos, 22 Nov 2026: own section between about and reviews
+        html = (ROOT / 'index.html').read_text(encoding='utf-8')
+        about, team, reviews = html.index('<section id="about"'), html.index('<section id="team"'), html.index('<section id="reviews"')
+        self.assertLess(about, team)
+        self.assertLess(team, reviews)
+        section = html[team:reviews]
+        self.assertEqual(re.findall(r'src="(img/staff/[^"]+)"', section), ['img/staff/staff-1.jpg', 'img/staff/staff-2.jpg'])
+        for name in ('staff-1.jpg', 'staff-2.jpg'):
+            self.assertLess((ROOT / 'img/staff' / name).stat().st_size, 200_000)
+        self.assertIn('หมอนวดประจำ 2 ท่าน', section)
+        self.assertIn('class="btn btn-book"', section)
+        self.assertIn('1 / 2', section)
+
     def test_no_photo_appears_in_two_galleries(self):
         # Owner rule (22 Nov 2026): every service / shop-card photo is used once. The hero and about
         # slideshows are the owner's GIFs rebuilt from these same photos, so they are not galleries.

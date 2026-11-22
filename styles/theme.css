@@ -192,3 +192,11 @@ footer a:hover,.footer-links a:hover{color:var(--blue-ink)}
 :focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 
 @media (prefers-reduced-motion:reduce){.btn,.wellness-services .service-book{transition:none}.btn:hover{transform:none}}
+
+/* Staff section above the reviews (owner photos, 22 Nov 2026) */
+.team{background:var(--blue-50)}
+.team-grid{display:grid;gap:32px;align-items:center}
+@media (min-width:821px){.team-grid{grid-template-columns:minmax(0,380px) 1fr;gap:48px}}
+.team-photo{margin:0;max-width:420px;width:100%;justify-self:center;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.team-photo .service-gallery .service-gallery-slide img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+.team-intro{color:var(--text-muted);margin-top:12px}
