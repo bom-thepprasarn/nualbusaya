@@ -54,6 +54,7 @@ class ReviewsTests(unittest.TestCase):
             s = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', s, flags=re.S)
             # Entrance photos section is owner-curated and checked in test_redesign.
             s = re.sub(r'  <section id="photos"[^>]*>.*?  </section>', 'PHOTOS', s, flags=re.S)
+            s = re.sub(r'<div class="hero-photo">\s*<img [^>]*>', '<div class="hero-photo">HERO', s)  # owner hero photo, 22 Nov 2026
             # Owner photo galleries (22 Nov 2026) replace these cards' illustrations.
             s = re.sub(r'<div class="service-visual service-gallery" data-service-gallery>.*?src="img/([a-z-]+)/.*?(<span class="service-number" aria-hidden="true">\d+</span>)',
                        lambda m: '<div class="service-visual"> <img src="img/services/%s.svg" alt="ภาพประกอบ%s" width="720" height="440" loading="lazy" decoding="async"> %s'

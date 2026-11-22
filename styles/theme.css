@@ -36,7 +36,7 @@ nav a:hover{color:var(--charcoal)}
 
 /* hero: photo on the left, copy on the right */
 .hero{padding:40px 0 48px}
-.hero-photo{border-radius:0;box-shadow:none;aspect-ratio:4/5}
+.hero-photo{border-radius:0;box-shadow:none;aspect-ratio:20/13} /* matches img/hero-foot-massage.webp (800x520) so the whole photo shows */
 @media (min-width:821px){.hero-grid{grid-template-columns:1fr 1.05fr;gap:56px}.hero-grid>.hero-photo{order:-1}}
 .eyebrow{color:var(--olive);letter-spacing:.04em}
 /* free-parking callout: Luka House orange, gentle shine + glow (no fast flashing) */

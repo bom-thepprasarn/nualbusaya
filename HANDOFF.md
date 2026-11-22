@@ -92,3 +92,7 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Second card “หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา” is now a 2-photo gallery of the real shop front (`img/entrance/shop-1..2.jpg`), replacing `img/shop-entrance-luka-house.jpg`.
 - Photos are 720 px max, EXIF stripped, shown uncropped in the card's 3:4 frame. `hotel-1.jpg` (originally landscape) was cropped to 3:4 around the LUKA HOUSE sign on the owner's request so it fills the frame like the others. Same gallery markup and arrows as the service cards; extra sizing is the `.shop-photos .service-gallery…` rules at the end of `styles/services.css`.
 - Unused images were deleted on 22 Nov 2026 (recoverable from git history): `img/luka-house-entrance-sign.jpg`, `img/shop-sign-luka-house.jpg`, `img/line-icon.webp`, `img/logo-en.png`, and the replaced illustrations `img/services/{thai-massage,foot-massage,head-neck-shoulder}.svg`. `img/shop-entrance-luka-house.jpg` is kept because the homepage JSON-LD `image` list still points to it.
+
+## 22 Nov 2026 — hero photo
+- The hero panel uses the owner's foot-massage photo `img/hero-foot-massage.webp` (800×520, supplied as-is, no EXIF). `.hero-photo` in `styles/theme.css` is `aspect-ratio:20/13` to match it, so the whole photo shows. If you swap the hero photo again, update that ratio to the new photo's width/height.
+- `img/shop-thai-massage.jpg` is no longer shown on the page but is still the social share image (`og:image`, `twitter:image`, JSON-LD and every generated page's `og:image`), so keep it.

@@ -145,6 +145,7 @@ class RedesignTests(unittest.TestCase):
             source = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', source, flags=re.S)
             source = re.sub(r'  <section id="menu"[^>]*>.*?  </section>', 'SERVICES', source, flags=re.S)
             source = re.sub(r'  <section id="photos"[^>]*>.*?  </section>', 'PHOTOS', source, flags=re.S)
+            source = re.sub(r'<div class="hero-photo">\s*<img [^>]*>', '<div class="hero-photo">HERO', source)  # owner hero photo, 22 Nov 2026
             source = re.sub(r'  <section id="reviews"[^>]*>.*?  </section>', 'REVIEWS', source, flags=re.S)
             source = re.sub(r'<script src="config.js"></script>\s*<script>.*?</script>', '', source, flags=re.S)
             source = re.sub(r'<link rel="stylesheet" href="styles/reviews.css">\s*', '', source)
@@ -161,6 +162,16 @@ class RedesignTests(unittest.TestCase):
                 '<a href="https://line.me/R/ti/p/@288ojpuq" target="_blank" rel="noopener">LINE</a>', source)
             return re.sub(r'\s+', ' ', source).strip()
         self.assertEqual(normalize(NEW), normalize(OLD))
+
+    def test_hero_uses_owner_photo_uncropped(self):
+        hero = re.search(r'<div class="hero-photo">\s*<img ([^>]*)>', NEW)[1]
+        attrs = dict(re.findall(r'(\w+)="([^"]*)"', hero))
+        self.assertEqual(attrs['src'], 'img/hero-foot-massage.webp')
+        self.assertTrue((ROOT / attrs['src']).is_file())
+        self.assertTrue(attrs['alt'])
+        self.assertEqual((attrs['width'], attrs['height']), ('800', '520'))
+        theme = (ROOT / 'styles/theme.css').read_text(encoding='utf-8')
+        self.assertIn('.hero-photo{border-radius:0;box-shadow:none;aspect-ratio:20/13}', theme)  # 800/520 frame
 
     def test_entrance_and_parking_photos_follow_owner_instructions(self):
         photos = NEW.split('<section id="photos">')[1].split('</section>')[0]
