@@ -194,6 +194,16 @@ def site_css():
 .steps li{margin:6px 0}
 .compare-table td:nth-child(2){text-align:left;font-weight:400;color:var(--ink)}
 .compare-table td,.compare-table th{vertical-align:top}
+.guide .wrap{max-width:760px}
+.guide h2{margin:28px 0 10px;font-size:1.35rem}
+.guide p{margin:10px 0 0}
+.guide-table th a{color:inherit}
+.guide-table td:nth-child(n+2){text-align:left;font-weight:400}
+.guide-note{color:var(--muted);font-size:.93rem}
+.guide-list{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.guide-list li{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.guide-list span{color:var(--muted);font-size:.93rem}
+.related-guide{margin:20px 0 0;font-weight:600}
 """
     services_css = (ROOT / "styles/services.css").read_text(encoding="utf-8")
     extra += services_css[services_css.index("/* language dropdown"):]
@@ -301,7 +311,7 @@ def header(lang, path="/"):
 
 def footer(lang, svc):
     if lang == "th":
-        links = "".join(f'<a href="/{s["slug"]}/">{s["th"]}</a>' for s in svc) + '<a href="/outcall/">รับนวดนอกสถานที่</a>'
+        links = "".join(f'<a href="/{s["slug"]}/">{s["th"]}</a>' for s in svc) + '<a href="/outcall/">รับนวดนอกสถานที่</a><a href="/guides/">บทความ</a>'
         line = "© 2026 นวลบุษยา · ร้านนวดลำลูกกา · 63/19 ภายในโรงแรม Luka House ต.บึงคำพร้อย อ.ลำลูกกา จ.ปทุมธานี 12150"
         dock = ("นำทางมาร้าน", "โทร", "จองคิว LINE")
     else:
@@ -388,6 +398,9 @@ def service_page(s, svc):
   </section>
 """ if s.get("gallery") else "")
     others = "".join(f'<li><a href="/{o["slug"]}/">{o["th"]}</a></li>' for o in svc if o["key"] != s["key"]) + '<li><a href="/outcall/">รับนวดนอกสถานที่</a></li>'
+    rel = [a for a in ARTICLES if s["key"] in a["related"]]
+    related = ("".join(f'      <p class="related-guide">อ่านเพิ่ม: <a href="/guides/{a["slug"]}/">{a["h1"]}</a></p>\n' for a in rel)
+               if rel else "")
     extra = ""
     if s.get("about"):
         by_key = {o["key"]: o for o in svc}
@@ -471,7 +484,7 @@ def service_page(s, svc):
         <h2>คำถามเกี่ยวกับ{s['th']}</h2>
 {faq_items}
       </div>
-      <h2 style="margin:28px 0 12px;font-size:1.3rem">บริการอื่นของร้าน</h2>
+{related}      <h2 style="margin:28px 0 12px;font-size:1.3rem">บริการอื่นของร้าน</h2>
       <ul class="other-services">{others}</ul>
     </div>
   </section>
@@ -596,6 +609,142 @@ def english_page(svc):
                 alternates=[("th", "/"), ("en", "/en/"), ("x-default", "/")]) + body + footer("en", svc)
 
 
+# Articles (SEO content calendar, 22 Nov 2026). Facts from COPY / the homepage cards only, plus general
+# word meanings; relaxation wording only. Prices and differences are computed from the cards at build time.
+ARTICLES = [
+    {
+        "slug": "aromatherapy-vs-oil-massage",
+        "date": "2026-11-22",
+        "title": "นวดอโรม่ากับนวดน้ำมันต่างกันยังไง เลือกแบบไหนดี",
+        "h1": "นวดอโรม่ากับนวดน้ำมันต่างกันยังไง",
+        "desc": "นวดอโรม่ากับนวดน้ำมันใช้น้ำมันทั้งคู่ ต่างกันที่กลิ่นและเทคนิค เทียบราคา 60–120 นาที และวิธีเลือก จากร้านนวลบุษยา ลำลูกกา",
+        "image": "aromatherapy/aromatherapy-1.jpg",
+        "related": ["aromatherapy", "oil-massage", "thai-oil"],
+    },
+]
+
+
+def article_body(a, by):
+    aroma, oil, thai_oil, deep = by["aromatherapy"], by["oil-massage"], by["thai-oil"], by["deep-tissue"]
+    mins = [m for m, _ in aroma["prices"]]
+    price = lambda svc, i: svc["prices"][i][1]
+    diff = [price(aroma, i) - price(oil, i) for i in range(len(mins))]
+    link = lambda svc: f'<a href="/{svc["slug"]}/">{svc["th"]}</a>'
+    price_rows = "\n".join(
+        f"            <tr><td>{m} นาที</td><td>{price(aroma, i):,} บาท</td><td>{price(oil, i):,} บาท</td><td>{price(thai_oil, i):,} บาท</td></tr>"
+        for i, m in enumerate(mins))
+    lead = (f"ทั้งนวดอโรม่าและนวดน้ำมันเป็นการนวดด้วยน้ำมันเพื่อความผ่อนคลาย ความต่างคือ นวดอโรม่าใช้น้ำมันอโรม่าที่มีกลิ่นหอม "
+            f"ส่วนนวดน้ำมันใช้เทคนิคการนวดแบบสากล ที่ร้านนวลบุษยา ราคา 60 นาทีต่างกัน {diff[0]:,} บาท")
+    faq = [
+        ("นวดอโรม่าแพงกว่านวดน้ำมันเท่าไร?",
+         "ที่นวลบุษยา " + " ".join(f"{m} นาทีต่างกัน {d:,} บาท" for m, d in zip(mins, diff))),
+        ("นวดอโรม่ากับนวดน้ำมันใช้โปร 2 ชั่วโมงได้ไหม?",
+         "ได้ทั้งสองแบบ นวด 2 ชั่วโมง ลด 100 บาท แจ้งพนักงานว่า “มาจากเว็บไซต์”"),
+        ("นวดไทยออยต่างจากสองแบบนี้ยังไง?", "นวดไทยออยใช้ท่านวดสไตล์ไทยร่วมกับการใช้น้ำมัน"),
+        ("ต้องจองคิวก่อนไหม?", f"ร้านมีหมอนวดประจำ 2 ท่าน แนะนำให้โทร {PHONE} หรือทัก LINE @288ojpuq สอบถามคิวก่อนเดินทาง"),
+    ]
+    faq_html = "\n".join(f"        <details><summary>{html.escape(q)}</summary><p>{html.escape(ans)}</p></details>" for q, ans in faq)
+    body = f"""  <section class="guide" id="guide"><article>
+    <div class="wrap">
+      <p class="lead">{html.escape(lead)}</p>
+      <h2>สรุปความต่างในตารางเดียว</h2>
+      <table class="price-table compare-table guide-table">
+        <thead><tr><th scope="col">เทียบ</th><th scope="col">{link(aroma)}</th><th scope="col">{link(oil)}</th><th scope="col">{link(thai_oil)}</th></tr></thead>
+        <tbody>
+            <tr><td>ลักษณะ</td><td>นวดด้วยน้ำมันอโรม่า มีกลิ่นหอม</td><td>เทคนิคการนวดแบบสากลที่ใช้น้ำมัน</td><td>ท่านวดสไตล์ไทยร่วมกับการใช้น้ำมัน</td></tr>
+{price_rows}
+        </tbody>
+      </table>
+      <p class="guide-note">ราคาต่อท่าน ทั้ง 3 แบบใช้โปรลูกค้าเว็บไซต์ นวด 2 ชั่วโมง ลด 100 บาท ได้</p>
+      <h2>อโรม่าคืออะไร</h2>
+      <p>คำว่าอโรม่ามาจากภาษาอังกฤษ aroma ที่แปลว่ากลิ่นหอม นวดอโรม่าจึงหมายถึงการนวดด้วยน้ำมันที่มีกลิ่นหอม ส่วนนวดน้ำมันเน้นที่เทคนิคการนวดแบบสากลโดยใช้น้ำมัน</p>
+      <h2>เลือกแบบไหนดี</h2>
+      <ul class="ticks">
+        <li>ชอบกลิ่นหอมระหว่างนวด เลือก{link(aroma)}</li>
+        <li>อยากนวดด้วยน้ำมันแต่ไม่ต้องการกลิ่นอโรม่า เลือก{link(oil)}</li>
+        <li>อยากได้ท่านวดสไตล์ไทยร่วมกับน้ำมัน เลือก{link(thai_oil)}</li>
+        <li>อยากให้หมอนวดเน้นบางบริเวณเป็นพิเศษ เลือก{link(deep)}</li>
+      </ul>
+      <h2>นวดนานแค่ไหนดี</h2>
+      <p>ทุกแบบเลือกได้ {", ".join(str(m) for m in mins[:-1])} หรือ {mins[-1]} นาที ถ้านวด 2 ชั่วโมงและมาจากเว็บไซต์ แจ้งพนักงานเพื่อรับส่วนลด 100 บาท เช่น นวดอโรม่า {mins[-1]} นาที จาก {price(aroma, -1):,} บาท เหลือ {price(aroma, -1) - 100:,} บาท</p>
+      <p class="guide-note">บริการของร้านเป็นการนวดเพื่อความผ่อนคลาย ไม่ใช่การรักษาโรค ถ้ามีอาการบาดเจ็บหรือโรคประจำตัว ควรปรึกษาแพทย์ก่อนรับบริการนวด</p>
+      <h2>ยังเลือกไม่ได้?</h2>
+      <p>ทัก LINE @288ojpuq หรือโทร {PHONE} สอบถามได้ก่อนจองคิว ร้านอยู่ด้านในโรงแรม Luka House ลำลูกกา จอดรถฟรี เปิดทุกวัน 10:00–21:00 น.</p>
+      {contact_buttons()}
+      <div class="panel faq-mini" style="margin-top:28px">
+        <h2>คำถามที่พบบ่อย</h2>
+{faq_html}
+      </div>
+    </div>
+  </article></section>
+"""
+    return body, faq
+
+
+def article_page(a, svc):
+    by = {o["key"]: o for o in svc}
+    path = f"/guides/{a['slug']}/"
+    body_html, faq = article_body(a, by)
+    schema = {"@context": "https://schema.org", "@graph": [
+        {**BUSINESS},
+        {"@type": "Article", "@id": SITE + path + "#article", "headline": a["h1"], "description": a["desc"],
+         "datePublished": a["date"], "dateModified": a["date"], "inLanguage": "th",
+         "image": f"{SITE}/img/{a['image']}", "mainEntityOfPage": SITE + path,
+         "author": {"@id": SITE + "/#business"}, "publisher": {"@id": SITE + "/#business"}},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "นวลบุษยา", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "บทความ", "item": SITE + "/guides/"},
+            {"@type": "ListItem", "position": 3, "name": a["h1"], "item": SITE + path}]},
+        {"@type": "FAQPage", "@id": SITE + path + "#faq", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": ans}} for q, ans in faq]},
+    ]}
+    body = f"""<a class="skip-link" href="#top">ข้ามไปเนื้อหาหลัก</a>
+{header('th', path)}
+<main id="top">
+  <div class="wrap crumbs"><a href="/">หน้าแรก</a> › <a href="/guides/">บทความ</a> › {a['h1']}</div>
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">บทความจากนวลบุษยา · ร้านนวด ลำลูกกา</div>
+      <h1>{a['h1']}</h1>
+    </div>
+  </section>
+{body_html}</main>
+"""
+    page = head("th", f"{a['title']} | นวลบุษยา", a["desc"], path, a["image"], schema) + body + footer("th", svc)
+    return page.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">', 1)
+
+
+def guides_index(svc):
+    path = "/guides/"
+    desc = "บทความจากร้านนวลบุษยา ลำลูกกา เรื่องการเลือกบริการนวด ราคา และการเตรียมตัวก่อนมานวด"
+    items = "\n".join(
+        f'        <li><a href="/guides/{a["slug"]}/"><strong>{a["h1"]}</strong></a><br><span>{html.escape(a["desc"])}</span></li>'
+        for a in ARTICLES)
+    schema = {"@context": "https://schema.org", "@graph": [
+        {**BUSINESS},
+        {"@type": "CollectionPage", "@id": SITE + path, "name": "บทความจากนวลบุษยา", "url": SITE + path, "inLanguage": "th"},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "นวลบุษยา", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "บทความ", "item": SITE + path}]},
+    ]}
+    body = f"""<a class="skip-link" href="#top">ข้ามไปเนื้อหาหลัก</a>
+{header('th', path)}
+<main id="top">
+  <div class="wrap crumbs"><a href="/">หน้าแรก</a> › บทความ</div>
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>บทความจากนวลบุษยา</h1>
+      <p class="lead">{desc}</p>
+      <ul class="guide-list">
+{items}
+      </ul>
+    </div>
+  </section>
+</main>
+"""
+    return head("th", "บทความเรื่องนวด | นวลบุษยา ร้านนวดลำลูกกา", desc, path, "shop-thai-massage.jpg", schema) + body + footer("th", svc)
+
+
 def sitemap(paths):
     urls = "\n".join(f"  <url>\n    <loc>{SITE}{p}</loc>\n    <lastmod>{TODAY}</lastmod>\n  </url>" for p in paths)
     (ROOT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n', encoding="utf-8")
@@ -615,6 +764,14 @@ def main():
     (ROOT / "en").mkdir(exist_ok=True)
     (ROOT / "en/index.html").write_text(english_page(svc), encoding="utf-8")
     paths += ["/outcall/", "/en/"]
+    (ROOT / "guides").mkdir(exist_ok=True)
+    (ROOT / "guides/index.html").write_text(guides_index(svc), encoding="utf-8")
+    paths.append("/guides/")
+    for a in ARTICLES:
+        out = ROOT / "guides" / a["slug"] / "index.html"
+        out.parent.mkdir(exist_ok=True)
+        out.write_text(article_page(a, svc), encoding="utf-8")
+        paths.append(f"/guides/{a['slug']}/")
     sitemap(paths)
     print(f"Generated {len(paths) - 1} pages + styles/site.css + sitemap.xml")
 

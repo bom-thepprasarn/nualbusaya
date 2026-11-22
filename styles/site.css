@@ -196,6 +196,16 @@ footer a{color:var(--brown)}
 .steps li{margin:6px 0}
 .compare-table td:nth-child(2){text-align:left;font-weight:400;color:var(--ink)}
 .compare-table td,.compare-table th{vertical-align:top}
+.guide .wrap{max-width:760px}
+.guide h2{margin:28px 0 10px;font-size:1.35rem}
+.guide p{margin:10px 0 0}
+.guide-table th a{color:inherit}
+.guide-table td:nth-child(n+2){text-align:left;font-weight:400}
+.guide-note{color:var(--muted);font-size:.93rem}
+.guide-list{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.guide-list li{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.guide-list span{color:var(--muted);font-size:.93rem}
+.related-guide{margin:20px 0 0;font-weight:600}
 /* language dropdown (shared with generated pages via tools/build_pages.py) */
 .header-actions{display:flex;align-items:center;gap:10px}
 .lang-menu{position:relative}

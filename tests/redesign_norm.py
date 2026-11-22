@@ -13,6 +13,8 @@ FONT_NEW = 'https://fonts.googleapis.com/css2?family=Chonburi&family=Inter:wght@
 def undo_redesign(source):
     source = source.replace(FONT_NEW, FONT_OLD)
     source = source.replace('img/icon-blue.png', 'img/icon.png')
+    # footer: link to the guides section (content calendar, 22 Nov 2026)
+    source = source.replace('<a href="/guides/">บทความ</a></nav>', '</nav>')
     # header: new pink booking button; directions became an outline button
     source = re.sub(r'\s*<a class="btn btn-book header-book"[^>]*>.*?</a>', '', source, flags=re.S)
     source = source.replace('btn btn-ghost header-directions', 'btn btn-primary')
