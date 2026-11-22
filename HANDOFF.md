@@ -115,4 +115,4 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Moves to match the folders: the oil-pump photo is now นวดน้ำมัน (`img/oil-massage/oil-massage-1.jpg`, was aromatherapy-3); the shoulder photo is now นวดไทยออย (`img/thai-oil/thai-oil-1.jpg`, was deep-tissue-3). Aromatherapy and deep tissue keep 2 photos each. Every service card now uses real photos (only oil-massage and thai-oil SVGs were left; both deleted).
 - Single-photo galleries hide the counter (`hidden`); arrows stay hidden because `scripts/services.js` skips galleries with fewer than 2 photos.
 - #photos cards 3 and 4 are now galleries: “บรรยากาศเป็นกันเองหน้าร้าน” = night shop front `img/entrance/front-1.jpg` + existing `img/shop-welcome.jpg`; “มุมพักผ่อนภายในร้าน” = lounge `interior-1`, logo wall `interior-2`, bed room `interior-3` + existing `img/shop-interior.jpg`. New photos cropped to the cards' 3:4 frame.
-- Not used yet from the บรรยากาศ folder: #9 (street entrance at night).
+- #9 (street entrance at night) was added as the 4th photo of “ร้านอยู่ด้านในโรงแรม” (`img/entrance/hotel-4.jpg`); every photo in the owner's folders is now on the site.

@@ -216,7 +216,7 @@ class RedesignTests(unittest.TestCase):
         # 22 Nov 2026 owner photos (Downloads/Nualbusaya/บรรยากาศร้านและทางเข้า): four gallery cards.
         cards = re.findall(r'<figure class="shop-gallery-card">(.*?)</figcaption>', photos, re.S)
         expected = [
-            (['entrance/hotel-1', 'entrance/hotel-2', 'entrance/hotel-3'], 'ร้านอยู่ด้านในโรงแรม'),
+            (['entrance/hotel-1', 'entrance/hotel-2', 'entrance/hotel-3', 'entrance/hotel-4'], 'ร้านอยู่ด้านในโรงแรม'),
             (['entrance/shop-1', 'entrance/shop-2'], 'หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา'),
             (['entrance/front-1', 'shop-welcome'], 'บรรยากาศเป็นกันเองหน้าร้าน'),
             (['entrance/interior-1', 'entrance/interior-2', 'entrance/interior-3', 'shop-interior'], 'มุมพักผ่อนภายในร้าน')]
