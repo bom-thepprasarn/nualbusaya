@@ -59,6 +59,30 @@ COPY = {
                    "เลือกเวลาได้ 60, 90 หรือ 120 นาที"],
         "en_intro": "A focused massage for relaxation: tell the therapist which areas to focus on and how firm you like it.",
         "promo": True,
+        # SEO brief (22 Nov 2026). Only facts already on the site or confirmed by the owner (best seller).
+        "title_suffix": "ขายดี · นวลบุษยา",
+        "meta_desc": "นวดเน้นเฉพาะจุด บริการขายดีของนวลบุษยา บอกจุดที่อยากให้เน้นได้ 60 นาที {p60} บาท ในโรงแรม Luka House ลำลูกกา จอดรถฟรี จองทาง LINE",
+        "about_h2": "นวดเน้นเฉพาะจุดที่นวลบุษยาเป็นแบบไหน",
+        "about": ["นวดเน้นเฉพาะจุดเป็นบริการขายดีที่สุดของร้านนวลบุษยา ก่อนเริ่มนวด คุณบอกหมอนวดได้เลยว่าอยากให้ใช้เวลากับบริเวณไหนเป็นพิเศษ และอยากได้น้ำหนักมือหนักหรือเบา หมอนวดจะปรับให้ตามที่คุณสบาย",
+                  "บริการนี้เป็นการนวดเพื่อความผ่อนคลาย ไม่ใช่การรักษาโรค ถ้ามีอาการบาดเจ็บหรือโรคประจำตัว ควรปรึกษาแพทย์ก่อนรับบริการนวด"],
+        "fit": ["คนที่รู้ว่าอยากให้เน้นบริเวณไหน เช่น บ่า ไหล่ หรือหลัง",
+                "คนที่อยากเลือกน้ำหนักมือเอง หนักหรือเบาตามที่สบาย",
+                "คนที่มีเวลาไม่มาก เลือกได้ตั้งแต่ 60 นาที",
+                "คนที่อยากนวดนาน 2 ชั่วโมง ใช้โปรลูกค้าเว็บไซต์ลด 100 บาทได้"],
+        "steps": ["จองคิวทาง LINE @288ojpuq หรือโทร 096-778-1585 ร้านมีหมอนวดประจำ 2 ท่าน จึงแนะนำให้จองก่อน",
+                  "ขับรถเข้ามาจอดในโรงแรม Luka House ได้ฟรี ร้านอยู่ด้านในโรงแรม",
+                  "บอกหมอนวดว่าอยากให้เน้นบริเวณไหน และชอบน้ำหนักมือแบบไหน",
+                  "นวดตามเวลาที่เลือก 60, 90 หรือ 120 นาที",
+                  "ชำระเงินด้วยเงินสด โอนเงิน หรือพร้อมเพย์ ถ้านวด 2 ชั่วโมงและมาจากเว็บไซต์ แจ้งพนักงานเพื่อรับส่วนลด 100 บาท"],
+        "compare": [("thai-massage", "การกดและยืดตามแบบนวดไทย"),
+                    ("deep-tissue", "เน้นบริเวณที่คุณเลือก ปรับน้ำหนักมือได้"),
+                    ("head-neck-shoulder", "เน้นบริเวณศีรษะ คอ บ่า และไหล่")],
+        "faq": [("บอกจุดที่อยากให้เน้นได้ไหม?", "ได้ บอกหมอนวดก่อนเริ่มได้เลยว่าอยากให้เน้นบริเวณไหน"),
+                ("ปรับน้ำหนักมือได้ไหม?", "ได้ บอกหมอนวดได้ว่าต้องการน้ำหนักมือหนักหรือเบา"),
+                ("นวดเน้นเฉพาะจุดราคาเท่าไร?", "{prices} ราคาต่อท่าน"),
+                ("ใช้โปรลูกค้าเว็บไซต์ได้ไหม?", "ได้ นวด 2 ชั่วโมง ลด 100 บาท แจ้งพนักงานว่า “มาจากเว็บไซต์”"),
+                ("ต้องจองคิวก่อนไหม?", "ร้านมีหมอนวดประจำ 2 ท่าน แนะนำให้โทร 096-778-1585 หรือทัก LINE @288ojpuq สอบถามคิวก่อนเดินทาง"),
+                ("ร้านอยู่ตรงไหน จอดรถได้ไหม?", "ร้านอยู่ด้านในโรงแรม Luka House ต.บึงคำพร้อย อ.ลำลูกกา ขับรถเข้ามาจอดภายในโรงแรมได้ฟรี")],
     },
     "oil-massage": {
         "slug": "oil-massage", "h1": "นวดน้ำมัน ลำลูกกา",
@@ -143,6 +167,11 @@ def site_css():
 .footer-links a{color:var(--muted)}
 .lang-switch{font-size:.9rem;color:var(--muted)}
 .page-gallery{max-width:760px;border-radius:var(--radius)}
+.service-detail .panel p{margin:10px 0 0;max-width:46em}
+.steps{margin:8px 0 0;padding-left:1.4em}
+.steps li{margin:6px 0}
+.compare-table td:nth-child(2){text-align:left;font-weight:400;color:var(--ink)}
+.compare-table td,.compare-table th{vertical-align:top}
 """
     services_css = (ROOT / "styles/services.css").read_text(encoding="utf-8")
     extra += services_css[services_css.index("/* language dropdown"):]
@@ -303,8 +332,12 @@ VISIT_TH = """<ul class="ticks">
 def service_page(s, svc):
     path = f"/{s['slug']}/"
     p60 = s["prices"][0][1]
-    title = f"{s['h1']} {p60} บาท/60 นาที | นวลบุษยา Luka House"
+    title = f"{s['h1']} {p60} บาท/60 นาที " + s.get("title_suffix", "| นวลบุษยา Luka House")
+    prices_text = " · ".join(f"{m} นาที {p:,} บาท" for m, p in s["prices"])
     desc = f"{s['th']}ที่ร้านนวลบุษยา ในโรงแรม Luka House บึงคำพร้อย ลำลูกกา " + " · ".join(f"{m} นาที {p:,} บาท" for m, p in s["prices"]) + " เปิดทุกวัน 10:00–21:00 น. จอดรถฟรี โทร " + PHONE
+    if s.get("meta_desc"):
+        desc = s["meta_desc"].format(p60=f"{p60:,}")
+    faq = [(q, a.format(prices=prices_text)) for q, a in s.get("faq", [])]
     schema = {"@context": "https://schema.org", "@graph": [
         {**BUSINESS},
         {"@type": "Service", "@id": SITE + path + "#service", "name": s["th"], "alternateName": s["en"],
@@ -317,6 +350,9 @@ def service_page(s, svc):
             {"@type": "ListItem", "position": 2, "name": "บริการและราคา", "item": SITE + "/#menu"},
             {"@type": "ListItem", "position": 3, "name": s["th"], "item": SITE + path}]},
     ]}
+    if faq:  # FAQPage mirrors the visible FAQ below, word for word
+        schema["@graph"].append({"@type": "FAQPage", "@id": SITE + path + "#faq", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]})
     rows = "\n".join(f"              <tr><td>{m} นาที</td><td>{p:,} บาท</td></tr>" for m, p in s["prices"])
     points = "\n".join(f"            <li>{html.escape(x)}</li>" for x in s["points"])
     promo = ('<p class="promo-note"><strong>โปรลูกค้าเว็บไซต์:</strong> นวด 2 ชั่วโมง ลด 100 บาท (ทุกบริการ ยกเว้นนวดไทย) แจ้งพนักงานว่า “มาจากเว็บไซต์”</p>'
@@ -329,6 +365,48 @@ def service_page(s, svc):
   </section>
 """ if s.get("gallery") else "")
     others = "".join(f'<li><a href="/{o["slug"]}/">{o["th"]}</a></li>' for o in svc if o["key"] != s["key"]) + '<li><a href="/outcall/">รับนวดนอกสถานที่</a></li>'
+    extra = ""
+    if s.get("about"):
+        by_key = {o["key"]: o for o in svc}
+        about = "\n".join(f"        <p>{html.escape(x)}</p>" for x in s["about"])
+        fit = "\n".join(f"          <li>{html.escape(x)}</li>" for x in s.get("fit", []))
+        steps = "\n".join(f"          <li>{html.escape(x)}</li>" for x in s.get("steps", []))
+        def cmp_name(k):  # this page's own service in bold, the others linked
+            o = by_key[k]
+            return f"<strong>{o['th']}</strong>" if k == s["key"] else f'<a href="/{o["slug"]}/">{o["th"]}</a>'
+        cmp_rows = "\n".join(
+            f"            <tr><td>{cmp_name(k)}</td><td>{html.escape(note)}</td><td>{by_key[k]['prices'][0][1]:,} บาท</td></tr>"
+            for k, note in s.get("compare", []))
+        extra = f"""  <section class="service-detail" id="details" style="padding-top:8px">
+    <div class="wrap">
+      <div class="panel">
+        <h2>{html.escape(s['about_h2'])}</h2>
+{about}
+        <h2 style="margin-top:22px">เหมาะกับใคร</h2>
+        <ul class="ticks">
+{fit}
+        </ul>
+        <h2 style="margin-top:22px">ขั้นตอนการมาใช้บริการ</h2>
+        <ol class="steps">
+{steps}
+        </ol>
+        <h2 style="margin-top:22px">เทียบกับนวดแบบอื่นของร้าน</h2>
+        <table class="price-table compare-table">
+          <thead><tr><th scope="col">บริการ</th><th scope="col">จุดเด่น</th><th scope="col">60 นาที</th></tr></thead>
+          <tbody>
+{cmp_rows}
+          </tbody>
+        </table>
+        <h2 style="margin-top:22px">จองคิว{s['th']}</h2>
+        {contact_buttons()}
+      </div>
+    </div>
+  </section>
+"""
+    faq_items = ("\n".join(f"        <details><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>" for q, a in faq) if faq else
+                 f"""        <details><summary>{s['th']}ราคาเท่าไร?</summary><p>{prices_text} ราคาต่อท่าน</p></details>
+        <details><summary>ต้องจองคิวก่อนไหม?</summary><p>ร้านมีหมอนวดประจำ 2 ท่าน แนะนำให้โทร {PHONE} หรือทัก LINE @288ojpuq สอบถามคิวก่อนเดินทาง</p></details>
+        <details><summary>ร้านอยู่ตรงไหน จอดรถได้ไหม?</summary><p>อยู่ภายในโรงแรม Luka House ต.บึงคำพร้อย อ.ลำลูกกา ขับรถเข้ามาจอดภายในโรงแรมได้ฟรี</p></details>""")
     body = f"""<a class="skip-link" href="#top">ข้ามไปเนื้อหาหลัก</a>
 {header('th', path)}
 <main id="top">
@@ -364,13 +442,11 @@ def service_page(s, svc):
       </div>
     </div>
   </section>
-  <section style="padding-top:0">
+{extra}  <section style="padding-top:0">
     <div class="wrap">
       <div class="panel faq-mini">
         <h2>คำถามเกี่ยวกับ{s['th']}</h2>
-        <details><summary>{s['th']}ราคาเท่าไร?</summary><p>{" · ".join(f"{m} นาที {p:,} บาท" for m, p in s["prices"])} ราคาต่อท่าน</p></details>
-        <details><summary>ต้องจองคิวก่อนไหม?</summary><p>ร้านมีหมอนวดประจำ 2 ท่าน แนะนำให้โทร {PHONE} หรือทัก LINE @288ojpuq สอบถามคิวก่อนเดินทาง</p></details>
-        <details><summary>ร้านอยู่ตรงไหน จอดรถได้ไหม?</summary><p>อยู่ภายในโรงแรม Luka House ต.บึงคำพร้อย อ.ลำลูกกา ขับรถเข้ามาจอดภายในโรงแรมได้ฟรี</p></details>
+{faq_items}
       </div>
       <h2 style="margin:28px 0 12px;font-size:1.3rem">บริการอื่นของร้าน</h2>
       <ul class="other-services">{others}</ul>
