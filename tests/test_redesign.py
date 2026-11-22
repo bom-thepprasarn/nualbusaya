@@ -50,8 +50,8 @@ class RedesignTests(unittest.TestCase):
         for key, card in articles(NEW).items():
             elements = Elements(card).elements
             images = [a for t, a in elements if t == 'img']
-            # One illustration per card; the Thai massage card is an owner-supplied photo gallery.
-            self.assertEqual(len(images), 3 if key == 'thai-massage' else 1, key)
+            # One illustration per card; Thai, foot and head/neck/shoulder cards are owner photo galleries.
+            self.assertEqual(len(images), {'thai-massage': 3, 'foot-massage': 3, 'head-neck-shoulder': 2}.get(key, 1), key)
             for image in images:
                 self.assertTrue(image['alt'])
                 self.assertEqual(image['loading'], 'lazy')

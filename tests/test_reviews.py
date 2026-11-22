@@ -11,6 +11,9 @@ PROOF = json.loads((ROOT/'docs/reviews-verification.json').read_text(encoding='u
 DATA = json.loads((ROOT/'data/google-reviews.json').read_text(encoding='utf-8'))
 SECTION = re.search(r'  <section id="reviews".*?  </section>', HTML, re.S)[0]
 
+GALLERY_LABELS = {'thai-massage': 'นวดไทย', 'foot-massage': 'นวดเท้า', 'head-neck-shoulder': 'นวดศีรษะ คอ บ่า ไหล่'}
+
+
 class ReviewsTests(unittest.TestCase):
     def test_verified_snapshot_matches_evidence(self):
         self.assertIn(f'data-verified-rating="{PROOF["rating"]:.1f}"', SECTION)
@@ -49,9 +52,10 @@ class ReviewsTests(unittest.TestCase):
     def test_only_reviews_and_requested_line_asset_changed(self):
         def normalize(s):
             s = re.sub(r'<!-- Google Tag Manager( \(noscript\))? -->.*?<!-- End Google Tag Manager( \(noscript\))? -->\s*', '', s, flags=re.S)
-            # Thai massage card photo gallery (owner photos, 22 Nov 2026) replaces its illustration.
-            s = re.sub(r'<div class="service-visual service-gallery" data-service-gallery>.*?(<span class="service-number" aria-hidden="true">01</span>)',
-                       r'<div class="service-visual"> <img src="img/services/thai-massage.svg" alt="ภาพประกอบนวดไทย" width="720" height="440" loading="lazy" decoding="async"> \1', s, flags=re.S)
+            # Owner photo galleries (22 Nov 2026) replace these cards' illustrations.
+            s = re.sub(r'<div class="service-visual service-gallery" data-service-gallery>.*?src="img/([a-z-]+)/.*?(<span class="service-number" aria-hidden="true">\d+</span>)',
+                       lambda m: '<div class="service-visual"> <img src="img/services/%s.svg" alt="ภาพประกอบ%s" width="720" height="440" loading="lazy" decoding="async"> %s'
+                       % (m[1], GALLERY_LABELS[m[1]], m[2]), s, flags=re.S)
             s = re.sub(r'  <section id="reviews".*?  </section>', 'REVIEWS', s, flags=re.S)
             s = re.sub(r'<link rel="stylesheet" href="styles/reviews.css">\s*', '', s)
             s = re.sub(r'<script src="scripts/reviews.js" defer></script>\s*', '', s)
