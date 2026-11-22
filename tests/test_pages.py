@@ -56,6 +56,20 @@ class PagesTests(unittest.TestCase):
             service = [n for n in schema['@graph'] if n['@type'] == 'Service'][0]
             self.assertEqual([str(o['price']) for o in service['offers']], card_prices(s))
 
+    def test_thai_massage_page_reuses_homepage_photo_gallery(self):
+        src = page('thai-massage')
+        home = re.findall(r'src="img/(thai-massage/[^"]+)"', INDEX)
+        self.assertEqual(len(home), 4)
+        self.assertEqual(re.findall(r'src="/img/(thai-massage/[^"]+)"', src), home)
+        for name in home:
+            self.assertTrue((ROOT / 'img' / name).is_file(), name)
+        self.assertEqual(src.count('data-service-gallery'), 1)
+        self.assertIn('service-gallery-prev', src)
+        self.assertIn('service-gallery-next', src)
+        self.assertIn('<script src="/scripts/services.js" defer></script>', src)
+        for s in SERVICES[1:] + ['outcall', 'en']:
+            self.assertNotIn('data-service-gallery', page(s), s)
+
     def test_promotion_excludes_thai_massage(self):
         self.assertNotIn('โปรลูกค้าเว็บไซต์', page('thai-massage'))
         for s in SERVICES[1:]:

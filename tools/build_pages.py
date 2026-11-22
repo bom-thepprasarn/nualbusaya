@@ -90,6 +90,17 @@ COPY = {
 }
 
 
+def gallery_from_card(card):
+    """Reuse a homepage card's photo gallery (track, arrows, counter) on its service page."""
+    m = re.search(r'<div class="service-visual service-gallery" data-service-gallery>\s*'
+                  r'(.*?<span class="service-gallery-count"[^>]*>.*?</span>)', card, re.S)
+    if not m:
+        return ""
+    inner = m[1].replace('src="img/', 'src="/img/')
+    lines = "\n".join("        " + line.strip() for line in inner.splitlines())
+    return '<div class="service-gallery page-gallery" data-service-gallery>\n' + lines + "\n      </div>"
+
+
 def services():
     out = []
     for m in re.finditer(r'<article class="item service-card" id="([^"]+)".*?</article>', INDEX, re.S):
@@ -98,7 +109,7 @@ def services():
         desc = re.search(r'<p class="service-description">(.*?)</p>', card, re.S)[1]
         prices = re.findall(r'<small>(\d+) นาที</small><span class="price-amount"><b>([\d,]+)</b>', card)
         out.append({"key": key, "th": html.unescape(title[2]).strip(), "en": html.unescape(title[1]).strip(),
-                    "desc": html.unescape(desc).strip(),
+                    "desc": html.unescape(desc).strip(), "gallery": gallery_from_card(card),
                     "prices": [(int(mn), int(p.replace(",", ""))) for mn, p in prices],
                     **COPY[key]})
     assert len(out) == 7 and all(len(s["prices"]) == 3 for s in out), "service cards changed shape"
@@ -131,6 +142,8 @@ def site_css():
 .footer-links{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.9rem}
 .footer-links a{color:var(--muted)}
 .lang-switch{font-size:.9rem;color:var(--muted)}
+.page-gallery{max-width:760px;border-radius:var(--radius)}
+.page-gallery .service-gallery-slide img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
 """
     services_css = (ROOT / "styles/services.css").read_text(encoding="utf-8")
     extra += services_css[services_css.index("/* language dropdown"):]
@@ -307,6 +320,13 @@ def service_page(s, svc):
     points = "\n".join(f"            <li>{html.escape(x)}</li>" for x in s["points"])
     promo = ('<p class="promo-note"><strong>โปรลูกค้าเว็บไซต์:</strong> นวด 2 ชั่วโมง ลด 100 บาท (ทุกบริการ ยกเว้นนวดไทย) แจ้งพนักงานว่า “มาจากเว็บไซต์”</p>'
              if s["promo"] else "")
+    gallery = (f"""  <section style="padding:8px 0 0" aria-label="รูป{s['th']}ที่ร้าน">
+    <div class="wrap">
+      {s['gallery']}
+      <script src="/scripts/services.js" defer></script>
+    </div>
+  </section>
+""" if s.get("gallery") else "")
     others = "".join(f'<li><a href="/{o["slug"]}/">{o["th"]}</a></li>' for o in svc if o["key"] != s["key"]) + '<li><a href="/outcall/">รับนวดนอกสถานที่</a></li>'
     body = f"""<a class="skip-link" href="#top">ข้ามไปเนื้อหาหลัก</a>
 {header('th', path)}
@@ -320,7 +340,7 @@ def service_page(s, svc):
       {contact_buttons()}
     </div>
   </section>
-  <section style="padding-top:20px">
+{gallery}  <section style="padding-top:20px">
     <div class="wrap page-grid">
       <div class="panel">
         <h2>ราคา{s['th']}</h2>
