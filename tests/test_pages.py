@@ -83,7 +83,8 @@ class PagesTests(unittest.TestCase):
     def test_expanded_landing_pages_follow_seo_brief(self):
         # SEO brief / content calendar, 22 Nov 2026: expanded pages, FAQ mirrored in FAQPage schema.
         expanded = {'deep-tissue': ('ขายดี', ['thai-massage', 'deep-tissue', 'head-neck-shoulder']),
-                    'aromatherapy': ('', ['aromatherapy', 'oil-massage', 'thai-oil'])}
+                    'aromatherapy': ('', ['aromatherapy', 'oil-massage', 'thai-oil']),
+                    'head-neck-shoulder': ('', ['head-neck-shoulder', 'deep-tissue', 'thai-massage'])}
         for slug, (title_word, compared) in expanded.items():
             src = page(slug)
             title = re.search(r'<title>(.*?)</title>', src)[1]
@@ -107,6 +108,10 @@ class PagesTests(unittest.TestCase):
         # the promo answer is computed from the 120-minute card price
         p120 = int(card_prices('aromatherapy')[-1])
         self.assertIn(f"จาก {p120:,} บาท เหลือ {p120 - 100:,} บาท", page('aromatherapy'))
+        # owner answers, 22 Nov 2026: sitting or lying, no oil, most customers book 120 minutes
+        neck = page('head-neck-shoulder')
+        for fact in ('ท่านั่งหรือท่านอน', 'ไม่ใช้น้ำมัน', 'ลูกค้าส่วนใหญ่ของร้านเลือก 120 นาที'):
+            self.assertIn(fact, neck)
         # other service pages keep the short template until their own brief
         self.assertNotIn('FAQPage', page('thai-massage'))
 
