@@ -341,3 +341,9 @@
   border-radius: 999px;
   background: rgb(253 249 238 / 85%);
 }
+
+/* Entrance photo card in #photos: portrait 3:4 frame like its neighbours, whole photo visible. */
+.shop-photos .service-gallery-slide img { aspect-ratio: 3 / 4; object-fit: contain; background: rgb(0 0 0 / 14%); }
+.shop-photos .service-gallery .service-gallery-btn { width: 34px; height: 34px; }
+.shop-photos .service-gallery .service-gallery-prev { left: 6px; }
+.shop-photos .service-gallery .service-gallery-next { right: 6px; }

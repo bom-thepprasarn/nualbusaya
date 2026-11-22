@@ -106,8 +106,10 @@ class RedesignTests(unittest.TestCase):
         self.assertTrue((old_ids - {'rv-attr'}) <= set(ids))
         old_urls = {a['href'] for t, a in old_el if t == 'a'}
         new_urls = {a['href'] for t, a in new_el if t == 'a'}
-        # Owner replaced this gallery link with the new hotel-entrance photo.
-        self.assertTrue((old_urls - {'img/shop-sign-luka-house.jpg'}) <= new_urls)
+        # Owner replaced these photo links: hotel-entrance photo (16 Nov), then the hotel and
+        # shop-front galleries (22 Nov 2026), which show every photo uncropped.
+        replaced = {'img/shop-sign-luka-house.jpg', 'img/luka-house-entrance-sign.jpg', 'img/shop-entrance-luka-house.jpg'}
+        self.assertTrue((old_urls - replaced) <= new_urls)
         for url in new_urls:
             if url.startswith('#'):
                 self.assertIn(url[1:], ids)
@@ -158,9 +160,19 @@ class RedesignTests(unittest.TestCase):
 
     def test_entrance_and_parking_photos_follow_owner_instructions(self):
         photos = NEW.split('<section id="photos">')[1].split('</section>')[0]
-        self.assertIn('src="img/luka-house-entrance-sign.jpg"', photos)
-        self.assertIn('src="img/shop-entrance-luka-house.jpg"', photos)
-        self.assertIn('หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา', photos)
+        # 22 Nov 2026 owner photos: hotel/street-sign gallery, then the real shop-front gallery.
+        cards = re.findall(r'<figure class="shop-gallery-card">(.*?)</figcaption>', photos, re.S)
+        self.assertEqual(len(cards), 2)
+        expected = [(['hotel-1', 'hotel-2', 'hotel-3'], 'ร้านอยู่ด้านในโรงแรม'),
+                    (['shop-1', 'shop-2'], 'หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา')]
+        for card, (names, caption) in zip(cards, expected):
+            self.assertEqual(re.findall(r'src="img/entrance/([a-z]+-\d)\.jpg"', card), names)
+            self.assertIn('<figcaption>' + caption, card)
+            self.assertIn('1 / %d' % len(names), card)
+            for name in names:
+                self.assertTrue((ROOT / 'img/entrance' / (name + '.jpg')).is_file(), name)
+        self.assertNotIn('สังเกตป้ายโรงแรมลูก้าเฮาส์ แล้วขับรถเข้ามาจอดได้เลย', photos)
+        self.assertNotIn('src="img/shop-entrance-luka-house.jpg"', photos)
         self.assertNotIn('src="img/shop-sign-luka-house.jpg"', photos)
 
 if __name__ == '__main__':

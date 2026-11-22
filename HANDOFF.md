@@ -66,7 +66,7 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 
 - Header language switch is a `<details class="lang-menu">` dropdown with SVG flags (`img/flag-th.svg`, `img/flag-gb.svg`) always paired with a text label (ภาษาไทย / English). Emoji flags are not used because they do not render on Windows. Markup comes from `lang_menu()` in `tools/build_pages.py`; styles live in `styles/services.css` (copied into `styles/site.css` on build); `scripts/lang-menu.js` only closes it on outside click / Escape.
 - `img/luka-house-entrance-sign.jpg` was replaced with the owner's new photo (orange Luka House sign + arrow + shop standee), 900×1200.
-- **Pending:** the photo for “หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา” (`img/shop-entrance-luka-house.jpg`) stays as is. A proposed replacement was declined because its door text showed the banned former service term and its text looked AI-generated (garbled words). Use only a **real** photo of the shop front from the car park; do not publish generated images as real storefront photos.
+- ~~Pending shop-front photo~~ resolved 22 Nov 2026: the owner supplied real photos (see below).
 
 ## 17 Nov 2026 — Canva cream / light-blue theme
 - Look follows the owner's Canva template "Spa Website in Cream Light Blue Beige". All visual changes live in `styles/theme.css`, loaded last on every page (homepage `<head>` and `tools/build_pages.py` `head()`). Remove that link to roll back the look. HTML structure, links, prices and tracking hooks are unchanged.
@@ -86,3 +86,9 @@ Validation completed before pushing: 15 Python checks; actual outcall script tes
 - Markup is `[data-service-gallery]` in `index.html`; styles are at the end of `styles/services.css` (rerun `python tools/build_pages.py` so `styles/site.css` stays in sync); arrow logic is the second block in `scripts/services.js`. Without JS the photos still scroll by swipe/trackpad and the arrows stay hidden.
 - `/thai-massage/` shows the same gallery under the contact buttons. `tools/build_pages.py` (`gallery_from_card`) copies it from the homepage card on build, so edit photos only in `index.html` and rerun the build. Gallery CSS is generic (`.service-gallery …`); page sizing is `.page-gallery` in the build's generated-pages CSS. Other service cards and pages still use the illustration.
 - Foot massage (3 photos; the last is portrait and shows with side bars) and head/neck/shoulder (2 photos) cards got the same gallery on 22 Nov 2026, and their service pages pick it up on build. Add a gallery to another card with `python tools/add_service_gallery.py <slug> "<Thai label>" "path.jpg::alt" ...` (resizes to 900 px, strips EXIF), then `python tools/build_pages.py`, and add the slug/count to the gallery maps in `tests/test_pages.py`, `tests/test_redesign.py` and `GALLERY_LABELS` in `tests/test_reviews.py`.
+
+## 22 Nov 2026 — entrance photo galleries (#photos)
+- First card is now a 3-photo gallery captioned “ร้านอยู่ด้านในโรงแรม” (was a single sign photo captioned “สังเกตป้ายโรงแรมลูก้าเฮาส์ แล้วขับรถเข้ามาจอดได้เลย”): `img/entrance/hotel-1..3.jpg` = Luka House building and car park, orange street sign with arrow, street view of the entrance.
+- Second card “หลังจอดรถ มองเข้ามาที่ตัวอาคารจะเห็นร้านนวลบุษยา” is now a 2-photo gallery of the real shop front (`img/entrance/shop-1..2.jpg`), replacing `img/shop-entrance-luka-house.jpg`.
+- Photos are 720 px max, EXIF stripped, shown uncropped in the card's 3:4 frame (landscape photos get bars). Same gallery markup and arrows as the service cards; extra sizing is the `.shop-photos .service-gallery…` rules at the end of `styles/services.css`.
+- `img/luka-house-entrance-sign.jpg` and `img/shop-entrance-luka-house.jpg` are no longer referenced by any page.
